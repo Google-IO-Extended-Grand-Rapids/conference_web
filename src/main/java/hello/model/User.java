@@ -2,10 +2,6 @@ package hello.model;
 
 import javax.persistence.*;
 
-/**
- * Created by dan90374 on 7/7/14.
- */
-
 @Entity
 @Table(name = "user_xyz")
 public class User {
