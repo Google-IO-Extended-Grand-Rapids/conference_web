@@ -11,6 +11,7 @@ Vagrant.configure(2) do |config|
         d.image = "postgres:latest"
         d.name = "postgres"
         d.env = {"POSTGRES_PASSWORD" => "postgres"}
+        d.vagrant_vagrantfile = "./DockerHostVagrantfile"
       end
     end
 
@@ -19,6 +20,7 @@ Vagrant.configure(2) do |config|
         d.build_dir = "."
         d.link "postgres:postgres"
         d.ports = ["8080:8080"]
+        d.vagrant_vagrantfile = "./DockerHostVagrantfile"
       end
     end
 
