@@ -1,0 +1,4 @@
+language: java
+
+after_success:
+  - mvn -Ptravis surefire-report:report jacoco:report coveralls:jacoco
