@@ -73,4 +73,62 @@
             <url>http://repo.spring.io/libs-release</url>
         </pluginRepository>
     </pluginRepositories>
+
+  <profiles>
+    <profile>
+      <!-- that profile is used only for coveralls.io banner that show coverage at ReadMe.md  -->
+      <id>travis</id>
+      <build>
+        <plugins>
+
+          <!-- Used to set custom properties by means of ${argLine}, that is required for jacoco -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>2.9</version>
+            <configuration>
+              <argLine>${argLine} -Duser.language=en -Duser.country=US -XX:-UseSplitVerifier</argLine>
+            </configuration>
+          </plugin>
+
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.7.1.201405082137</version>
+            <configuration>
+              <excludes>
+                <exclude>com/puppycrawl/tools/checkstyle/CheckStyleTask*.class</exclude>
+                <exclude>com/puppycrawl/tools/checkstyle/doclets/*.class</exclude>
+                <exclude>com/puppycrawl/tools/checkstyle/grammars/*.class</exclude>
+                <exclude>com/puppycrawl/tools/checkstyle/grammars/javadoc/*.class</exclude>
+                <exclude>com/puppycrawl/tools/checkstyle/gui/*.class</exclude>
+              </excludes>
+            </configuration>
+            <executions>
+              <execution>
+                <id>prepare-agent</id>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>report</id>
+                <goals>
+                  <goal>report</goal>
+                </goals>
+                <phase>prepare-package</phase>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <groupId>org.eluder.coveralls</groupId>
+            <artifactId>coveralls-maven-plugin</artifactId>
+            <version>2.2.0</version>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
 </project>
