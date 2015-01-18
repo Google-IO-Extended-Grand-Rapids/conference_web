@@ -2,4 +2,4 @@
 [![Coverage Status](https://coveralls.io/repos/Google-IO-Extended-Grand-Rapids/conference_web/badge.svg?branch=develop)](https://coveralls.io/r/Google-IO-Extended-Grand-Rapids/conference_web?branch=develop)
 
 # Command to run the application locally
-java -jar target/*.jar --spring.config.location=classpath:/application-local.properties
+vagrant up --no-parallel
