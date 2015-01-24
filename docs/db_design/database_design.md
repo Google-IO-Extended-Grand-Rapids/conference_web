@@ -35,6 +35,7 @@
 - full_desc
 - create_dttm
 - last_update_dttm
+- parking_information
 
 # Location Address
 - id
@@ -44,33 +45,68 @@
 - city
 - state
 - zip
+- latitude
+- longitude
 - create_dttm
 - last_update_dttm
 
-# Event
+# Conference_Session 
 - id
 - name
 - short_desc
 - full_desc
 - conference_id (FK)
-- event_type_id (FK)
-- facilitator_id (FK)
+- conference_session_type_id (FK)
+- conference_session_presenter (FK)
+- room_id (FK)
 - start_dttm
 - end_dttm
 - create_dttm
 - last_update_dttm
 
-# Event Registration
+# Conference Session Presenter
+- id
+- conference_session_id (FK)
+- presenter_id (FK)
+
+# Presenter 
+- id
+- user_id
+- short_bio
+- company_affiliation_id (FK)
+- job_title
+
+# Conference Session Registration
 - id
 - user_id (FK)
-- event_id (FK)
+- conference_session_id (FK)
 
-# Event Type
+# Conference Session Type
 - id
 - name
 - desc
 
-# Facilitator
+# Sponsor
 - id
-- user_id
-- short_bio
+- name
+- logo_path
+- home_page_url
+- sponsor_level (FK)
+
+# Sponsor Level
+- id
+- conference_id (FK)
+- description
+
+# Company
+- id
+- name
+- short description
+- long description
+- logo path
+
+# Room
+- id
+- short desc
+- long desc
+- conference_id (FK)
