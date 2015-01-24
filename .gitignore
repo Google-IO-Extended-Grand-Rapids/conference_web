@@ -2,3 +2,7 @@ target
 .idea
 *.iml
 .vagrant
+.DS_Store
+.classpath
+.project
+.settings
