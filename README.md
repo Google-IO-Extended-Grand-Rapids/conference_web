@@ -7,4 +7,4 @@ vagrant up --no-parallel
 # Connecting to the database from host machine
 - Host: localhost
 - Port: 5432
-- username: 5432
+- username: postgres
