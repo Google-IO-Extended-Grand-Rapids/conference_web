@@ -6,3 +6,4 @@ target
 .classpath
 .project
 .settings
+vagrant_config.yml
