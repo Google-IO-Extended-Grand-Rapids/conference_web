@@ -5,6 +5,18 @@ ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker'
 
 Vagrant.configure(2) do |config|
 
+    def load_vagrant_config()
+      require 'yaml'
+      vagrant_config = {"start-web" => "true"}
+      begin
+    	  vagrant_config = YAML.load_file("./vagrant_config.yml")
+      rescue
+          puts "./vagrant_config.yml not available. Resorting to defaults"
+      end
+      vagrant_config
+    end
+
+    vagrant_config = load_vagrant_config()
 
     config.vm.define "db" do |db|
       db.vm.provider "docker" do |d|
@@ -15,6 +27,7 @@ Vagrant.configure(2) do |config|
         d.vagrant_vagrantfile = "./DockerHostVagrantfile"
       end
     end
+
 
 =begin
     config.vm.define "web" do |web|
