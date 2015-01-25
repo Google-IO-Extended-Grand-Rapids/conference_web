@@ -28,15 +28,14 @@ Vagrant.configure(2) do |config|
       end
     end
 
-
-=begin
-    config.vm.define "web" do |web|
-      web.vm.provider "docker" do |d|
-        d.build_dir = "."
-        d.link "postgres:postgres"
-        d.ports = ["8080:8080"]
-        d.vagrant_vagrantfile = "./DockerHostVagrantfile"
+    if vagrant_config["start-web"] == "true"
+      config.vm.define "web" do |web|
+        web.vm.provider "docker" do |d|
+          d.build_dir = "."
+          d.link "postgres:postgres"
+          d.ports = ["8080:8080"]
+          d.vagrant_vagrantfile = "./DockerHostVagrantfile"
+        end
       end
     end
-=end
 end
