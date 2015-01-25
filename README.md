@@ -8,3 +8,9 @@ vagrant up --no-parallel
 - Host: localhost
 - Port: 5432
 - username: postgres
+
+# Vagrant Startup
+If you do not want to run the web docker container, and instead would prefer to only startup the database container, then please follow the instructions below
+- Copy the vagrant_config.yml.template to vagrant_config.yml
+- adjust the "start-web" to be false
+Now, when you perform the vagrant commands (up, halt), it will only be for the db
