@@ -1,0 +1,18 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    
+    <changeSet id="001_data_stage" author="Carlus">
+        <comment>Create user_xyz table</comment>
+        
+        <createTable tableName="user_xyz">
+        	<column name="id" type="BIGINT" />
+        	<column name="first_name" type="VARCHAR(100)" />
+        	<column name="last_name" type="VARCHAR(100)" />
+        	<column name="user_name" type="VARCHAR(100)" />
+        	<column name="password" type="VARCHAR(100)" />
+        </createTable>
+    </changeSet>
+    
+</databaseChangeLog>
