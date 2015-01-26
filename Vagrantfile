@@ -18,6 +18,7 @@ Vagrant.configure(2) do |config|
 
     vagrant_config = load_vagrant_config()
 
+    # port forward syntax ["host_machine":"vm"]
     config.vm.define "db" do |db|
       db.vm.provider "docker" do |d|
         d.image = "postgres:9.4"
