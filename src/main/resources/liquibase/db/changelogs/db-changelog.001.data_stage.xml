@@ -3,10 +3,17 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     
+    <changeSet id="001_create_schema" author="Carlus">
+        <comment>Create schema conf_admin</comment>
+        
+        <sql>CREATE SCHEMA conf_admin AUTHORIZATION postgres</sql>
+        <rollback>DROP SCHEMA conf_adming</rollback>
+        
+    </changeSet>
     <changeSet id="001_create_user_xyz_table" author="Carlus">
         <comment>Create user_xyz table</comment>
         
-        <createTable tableName="user_xyz">
+        <createTable tableName="user_xyz" schemaName="conf_admin">
         	<column name="id" type="BIGINT" />
         	<column name="first_name" type="VARCHAR(100)" />
         	<column name="last_name" type="VARCHAR(100)" />
@@ -18,7 +25,8 @@
     <changeSet id="001_create_user_xyz_seq" author="Carlus">
         <comment>Create user_xyz sequence</comment>
 
-		<createSequence sequenceName="USER_XYZ_SEQ" cycle="false" incrementBy="1"/>        
+		<createSequence sequenceName="USER_XYZ_SEQ" schemaName="conf_admin" cycle="false" incrementBy="1"/>        
+		
     </changeSet>
     
 </databaseChangeLog>
