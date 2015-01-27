@@ -5,15 +5,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user_xyz")
+@Table(schema="conf_admin", name = "user_xyz")
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="USER_XYZ_SEQ")
-    private Long id;
+	@Id
+	@Column(name = "id", unique = true, nullable = false, insertable=false)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_xyz_seq_generator")
+	@SequenceGenerator(name = "user_xyz_seq_generator", sequenceName = "conf_admin.user_xyz_seq", allocationSize = 1)	
+	private Long id;
 
     @Column(nullable = false)
     private String firstName;

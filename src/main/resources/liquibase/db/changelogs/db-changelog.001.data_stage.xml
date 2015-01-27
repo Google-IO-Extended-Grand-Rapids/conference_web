@@ -7,7 +7,7 @@
         <comment>Create schema conf_admin</comment>
         
         <sql>CREATE SCHEMA conf_admin AUTHORIZATION postgres</sql>
-        <rollback>DROP SCHEMA conf_adming</rollback>
+        <rollback>DROP SCHEMA conf_admin</rollback>
         
     </changeSet>
     <changeSet id="001_create_user_xyz_table" author="Carlus">
