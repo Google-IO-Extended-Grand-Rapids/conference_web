@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     
-    <changeSet id="001_data_stage" author="Carlus">
+    <changeSet id="001_create_user_xyz_table" author="Carlus">
         <comment>Create user_xyz table</comment>
         
         <createTable tableName="user_xyz">
@@ -13,6 +13,12 @@
         	<column name="user_name" type="VARCHAR(100)" />
         	<column name="password" type="VARCHAR(100)" />
         </createTable>
+    </changeSet>
+    
+    <changeSet id="001_create_user_xyz_seq" author="Carlus">
+        <comment>Create user_xyz sequence</comment>
+
+		<createSequence sequenceName="USER_XYZ_SEQ" cycle="false" incrementBy="1"/>        
     </changeSet>
     
 </databaseChangeLog>
