@@ -1,14 +1,20 @@
 package hello.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-@Table(name = "user_xyz")
+@Table(schema="conf_admin", name = "user_xyz")
 public class User {
 
-    @Id
-    @GeneratedValue
-    private Long id;
+	@Id
+	@Column(name = "id", unique = true, nullable = false, insertable=false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
     @Column(nullable = false)
     private String firstName;
@@ -48,11 +54,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
