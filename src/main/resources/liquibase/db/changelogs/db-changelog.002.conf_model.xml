@@ -186,4 +186,46 @@
 			baseTableSchemaName="conf_admin" referencedTableSchemaName="conf_admin" />
 	</changeSet>
 
+	<changeSet id="002_create_company" author="Carlus">
+		<comment>Create company table</comment>
+
+		<createTable tableName="company" schemaName="conf_admin">
+			<column name="id" type="SERIAL" />
+			<column name="name" type="VARCHAR(100)" />
+			<column name="short_desc" type="VARCHAR(100)" />
+			<column name="full_desc" type="VARCHAR(100)" />
+			<column name="logo_path" type="VARCHAR(100)" />
+		</createTable>
+
+	</changeSet>
+	
+	<changeSet id="002_company_pk" author="Carlus">
+		<comment>Create company pk</comment>
+		<addPrimaryKey tableName="company" columnNames="id" schemaName="conf_admin"/>
+	</changeSet>
+	
+	<changeSet id="002_room_table" author="Carlus">
+		<comment>Create room table</comment>
+
+		<createTable tableName="room" schemaName="conf_admin">
+			<column name="id" type="SERIAL" />
+			<column name="short_desc" type="VARCHAR(100)" />
+			<column name="full_desc" type="VARCHAR(100)" />
+			<column name="conference_id" type="BIGINT" />
+		</createTable>
+
+	</changeSet>
+	
+	<changeSet id="002_room_pk" author="Carlus">
+		<comment>Create room pk</comment>
+		<addPrimaryKey tableName="room" columnNames="id" schemaName="conf_admin"/>
+	</changeSet>
+	
+	<changeSet id="002_fk_room_conf" author="Carlus">
+		<addForeignKeyConstraint constraintName="FK_ROOM_CONF"
+			baseTableName="room" baseColumnNames="conference_id" 
+			referencedTableName="conference" referencedColumnNames="id" 
+			baseTableSchemaName="conf_admin" referencedTableSchemaName="conf_admin" />
+	</changeSet>
+
 </databaseChangeLog>
