@@ -1,0 +1,132 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<changeSet id="002_create_user_table" author="Carlus">
+		<comment>Create user table</comment>
+
+		<createTable tableName="user" schemaName="conf_admin">
+			<column name="id" type="SERIAL" />
+			<column name="login_id" type="VARCHAR(100)" />
+			<column name="first_name" type="VARCHAR(100)" />
+			<column name="last_name" type="VARCHAR(100)" />
+			<column name="email_address" type="VARCHAR(100)" />
+			<column name="create_dttm" type="timestamp" />
+			<column name="last_update_dttm" type="timestamp" />
+		</createTable>
+	</changeSet>
+
+	<changeSet id="002_user_pk" author="Carlus">
+		<comment>Create user pk</comment>
+		<addPrimaryKey tableName="user" columnNames="id" schemaName="conf_admin"/>
+	</changeSet>
+	
+	<changeSet id="002_create_user_cred" author="Carlus">
+		<comment>Create user_cred table</comment>
+
+		<createTable tableName="user_cred" schemaName="conf_admin">
+			<column name="id" type="SERIAL" />
+			<column name="user_id" type="BIGINT" />
+			<column name="password" type="VARCHAR(100)" />
+			<column name="active_ind" type="VARCHAR(100)" />
+			<column name="create_dttm" type="timestamp" />
+			<column name="last_update_dttm" type="timestamp" />
+		</createTable>
+
+	</changeSet>
+	
+	<changeSet id="002_user_cred_pk" author="Carlus">
+		<comment>Create user pk</comment>
+		<addPrimaryKey tableName="user_cred" columnNames="id" schemaName="conf_admin"/>
+	</changeSet>
+	
+	<changeSet id="002_fk_user_cred_user" author="Carlus">
+		<addForeignKeyConstraint constraintName="FK_USER_CRED_USER"
+			referencedTableName="user" baseColumnNames="user_id" baseTableName="user_cred"
+			referencedColumnNames="id" baseTableSchemaName="conf_admin" referencedTableSchemaName="conf_admin" />
+	</changeSet>
+
+	<changeSet id="002_create_location_table" author="Carlus">
+		<comment>Create location table</comment>
+
+		<createTable tableName="location" schemaName="conf_admin">
+			<column name="id" type="SERIAL" />
+			<column name="name" type="VARCHAR(100)" />
+			<column name="short_desc" type="VARCHAR(100)" />
+			<column name="full_desc" type="VARCHAR(100)" />
+			<column name="parking_info" type="VARCHAR(100)" />
+			<column name="create_dttm" type="timestamp" />
+			<column name="last_update_dttm" type="timestamp" />
+		</createTable>
+
+	</changeSet>
+	
+	<changeSet id="002_location_pk" author="Carlus">
+		<comment>Create location pk</comment>
+		<addPrimaryKey tableName="location" columnNames="id" schemaName="conf_admin"/>
+	</changeSet>
+	
+	<changeSet id="002_create_conference" author="Carlus">
+		<comment>Create user_cred table</comment>
+
+		<createTable tableName="conference" schemaName="conf_admin">
+			<column name="id" type="SERIAL" />
+			<column name="name" type="VARCHAR(100)" />
+			<column name="short_desc" type="VARCHAR(100)" />
+			<column name="full_desc" type="VARCHAR(100)" />
+			<column name="start_date" type="timestamp" />
+			<column name="end_date" type="timestamp" />
+			<column name="location_id" type="BIGINT" />
+			<column name="create_dttm" type="timestamp" />
+			<column name="last_update_dttm" type="timestamp" />
+		</createTable>
+
+	</changeSet>
+	
+	<changeSet id="002_conference_pk" author="Carlus">
+		<comment>Create conference pk</comment>
+		<addPrimaryKey tableName="conference" columnNames="id" schemaName="conf_admin"/>
+	</changeSet>
+	
+	<changeSet id="002_fk_conference_location" author="Carlus">
+		<addForeignKeyConstraint constraintName="FK_CONF_LOCATION"
+			baseTableName="conference" baseColumnNames="location_id" 
+			referencedTableName="location" referencedColumnNames="id" 
+			baseTableSchemaName="conf_admin" referencedTableSchemaName="conf_admin" />
+	</changeSet>
+
+	
+	<changeSet id="002_create_location_address" author="Carlus">
+		<comment>Create location_address table</comment>
+
+		<createTable tableName="location_address" schemaName="conf_admin">
+			<column name="id" type="SERIAL" />
+			<column name="location_id" type="BIGINT" />
+			<column name="address_1" type="VARCHAR(100)" />
+			<column name="address_2" type="VARCHAR(100)" />
+			<column name="city" type="VARCHAR(100)" />
+			<column name="state" type="VARCHAR(100)" />
+			<column name="zip_code" type="VARCHAR(100)" />
+			<column name="latitude" type="VARCHAR(100)" />
+			<column name="longitude" type="VARCHAR(100)" />
+			<column name="create_dttm" type="timestamp" />
+			<column name="last_update_dttm" type="timestamp" />
+		</createTable>
+
+	</changeSet>
+	
+	<changeSet id="002_location_address_pk" author="Carlus">
+		<comment>Create conference pk</comment>
+		<addPrimaryKey tableName="location_address" columnNames="id" schemaName="conf_admin"/>
+	</changeSet>
+	
+	<changeSet id="002_fk_location_address_location" author="Carlus">
+		<addForeignKeyConstraint constraintName="FK_CONF_LOCATION"
+			baseTableName="location_address" baseColumnNames="location_id" 
+			referencedTableName="location" referencedColumnNames="id" 
+			baseTableSchemaName="conf_admin" referencedTableSchemaName="conf_admin" />
+	</changeSet>
+
+	
+</databaseChangeLog>
