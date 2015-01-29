@@ -22,7 +22,7 @@ Vagrant.configure(2) do |config|
       db.vm.provider "docker" do |d|
         d.image = "postgres:9.4"
         d.name = "postgres"
-        d.ports = ["5433:5432"]
+        d.ports = ["5432:5432"]
         d.env = {"POSTGRES_PASSWORD" => "postgres"}
         d.vagrant_vagrantfile = "./DockerHostVagrantfile"
       end
