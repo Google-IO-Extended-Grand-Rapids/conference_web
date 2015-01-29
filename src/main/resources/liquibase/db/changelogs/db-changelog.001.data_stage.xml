@@ -22,4 +22,17 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="001_load_user_data_1" author="Carlus" runOnChange="true">
+        <comment>Load user data</comment>
+        
+        <sql>insert into conf_admin.user_xyz (first_name, last_name, user_name, password) values ('Carlus', 'Henry', 'chenry', '1111')</sql>
+        <sql>insert into conf_admin.user_xyz (first_name, last_name, user_name, password) values ('Dan', 'Mikita', 'dmikita', '2222')</sql>
+        <sql>insert into conf_admin.user_xyz (first_name, last_name, user_name, password) values ('Eric', 'Fox', 'foxefj', '3333')</sql>
+        <rollback>
+        	<sql>delete from conf_admin.user_xyz where user_name = 'chenry'</sql>
+        	<sql>delete from conf_admin.user_xyz where user_name = 'dmikita'</sql>
+        	<sql>delete from conf_admin.user_xyz where user_name = 'foxefj'</sql>
+        </rollback>
+    </changeSet>
+
 </databaseChangeLog>
