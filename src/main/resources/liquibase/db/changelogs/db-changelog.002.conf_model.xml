@@ -251,4 +251,114 @@
 			baseTableSchemaName="conf_admin" referencedTableSchemaName="conf_admin" />
 	</changeSet>
 
+	<changeSet id="002_sponsor_table" author="Carlus">
+		<comment>Create sponsor table</comment>
+
+		<createTable tableName="sponsor" schemaName="conf_admin">
+			<column name="id" type="SERIAL" />
+			<column name="name" type="VARCHAR(100)" />
+			<column name="logo_path" type="VARCHAR(100)" />
+			<column name="home_page_url" type="VARCHAR(100)" />
+			<column name="sponsor_level" type="BIGINT" />
+		</createTable>
+
+	</changeSet>
+	
+	<changeSet id="002_sponsor_pk" author="Carlus">
+		<comment>Create sponsor pk</comment>
+		<addPrimaryKey tableName="sponsor" columnNames="id" schemaName="conf_admin"/>
+	</changeSet>
+	
+	<changeSet id="002_fk_sponsor" author="Carlus">
+		<addForeignKeyConstraint constraintName="FK_SPONSOR_SPONSOR_LEVEL"
+			baseTableName="sponsor" baseColumnNames="sponsor_level" 
+			referencedTableName="sponsor_level" referencedColumnNames="id" 
+			baseTableSchemaName="conf_admin" referencedTableSchemaName="conf_admin" />
+	</changeSet>
+
+	<changeSet id="002_conf_session_registration_table" author="Carlus">
+		<comment>Create conference_session_registration table</comment>
+
+		<createTable tableName="conference_session_registration" schemaName="conf_admin">
+			<column name="id" type="SERIAL" />
+			<column name="user_id" type="BIGINT" />
+			<column name="conference_session_id" type="BIGINT" />
+		</createTable>
+
+	</changeSet>
+	
+	<changeSet id="002_conf_session_registration_pk" author="Carlus">
+		<comment>Create 002_conf_session_registration_table pk</comment>
+		<addPrimaryKey tableName="conference_session_registration" columnNames="id" schemaName="conf_admin"/>
+	</changeSet>
+	
+	<changeSet id="002_conf_session_registration_user_fk" author="Carlus">
+		<addForeignKeyConstraint constraintName="FK_CONF_SESSION_REG_USER"
+			baseTableName="conference_session_registration" baseColumnNames="user_id" 
+			referencedTableName="user" referencedColumnNames="id" 
+			baseTableSchemaName="conf_admin" referencedTableSchemaName="conf_admin" />
+	</changeSet>
+
+	<changeSet id="002_conf_session_registration_conf_session_fk" author="Carlus">
+		<addForeignKeyConstraint constraintName="FK_CONF_SESSION_REG_SESSION"
+			baseTableName="conference_session_registration" baseColumnNames="conference_session_id" 
+			referencedTableName="conference_session" referencedColumnNames="id" 
+			baseTableSchemaName="conf_admin" referencedTableSchemaName="conf_admin" />
+	</changeSet>
+
+	<changeSet id="002_presenter_table" author="Carlus">
+		<comment>Create presenter table</comment>
+
+		<createTable tableName="presenter" schemaName="conf_admin">
+			<column name="id" type="SERIAL" />
+			<column name="user_id" type="BIGINT" />
+			<column name="short_bio" type="VARCHAR(100)" />
+			<column name="job_title" type="VARCHAR(100)" />
+			<column name="company_affiliation_id" type="BIGINT" />
+		</createTable>
+
+	</changeSet>
+	
+	<changeSet id="002_presenter_pk" author="Carlus">
+		<comment>Create 002_presenter_table pk</comment>
+		<addPrimaryKey tableName="presenter" columnNames="id" schemaName="conf_admin"/>
+	</changeSet>
+	
+	<changeSet id="002_presenter_company_fk" author="Carlus">
+		<addForeignKeyConstraint constraintName="FK_PRESENTER_COMPANY"
+			baseTableName="presenter" baseColumnNames="company_affiliation_id" 
+			referencedTableName="company" referencedColumnNames="id" 
+			baseTableSchemaName="conf_admin" referencedTableSchemaName="conf_admin" />
+	</changeSet>
+
+	<changeSet id="002_conference_session_presenter_table" author="Carlus">
+		<comment>Create conference_session_presenter table</comment>
+
+		<createTable tableName="conference_session_presenter" schemaName="conf_admin">
+			<column name="id" type="SERIAL" />
+			<column name="conference_session_id" type="BIGINT" />
+			<column name="presenter_id" type="BIGINT" />
+		</createTable>
+
+	</changeSet>
+	
+	<changeSet id="002_conference_session_presenter_pk" author="Carlus">
+		<comment>Create conference_session_presenter pk</comment>
+		<addPrimaryKey tableName="conference_session_presenter" columnNames="id" schemaName="conf_admin"/>
+	</changeSet>
+	
+	<changeSet id="002_conference_session_presenter_session_fk" author="Carlus">
+		<addForeignKeyConstraint constraintName="FK_CONF_SESSION_PRESENTER_SESSION"
+			baseTableName="conference_session_presenter" baseColumnNames="conference_session_id" 
+			referencedTableName="conference_session" referencedColumnNames="id" 
+			baseTableSchemaName="conf_admin" referencedTableSchemaName="conf_admin" />
+	</changeSet>
+
+	<changeSet id="002_conference_session_presenter_presenter_fk" author="Carlus">
+		<addForeignKeyConstraint constraintName="FK_CONF_SESSION_PRESENTER_PRESENTER"
+			baseTableName="conference_session_presenter" baseColumnNames="presenter_id" 
+			referencedTableName="presenter" referencedColumnNames="id" 
+			baseTableSchemaName="conf_admin" referencedTableSchemaName="conf_admin" />
+	</changeSet>
+
 </databaseChangeLog>
