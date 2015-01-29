@@ -228,4 +228,27 @@
 			baseTableSchemaName="conf_admin" referencedTableSchemaName="conf_admin" />
 	</changeSet>
 
+	<changeSet id="002_sponsor_level_table" author="Carlus">
+		<comment>Create sponsor_level table</comment>
+
+		<createTable tableName="sponsor_level" schemaName="conf_admin">
+			<column name="id" type="SERIAL" />
+			<column name="conference_id" type="BIGINT" />
+			<column name="full_desc" type="VARCHAR(100)" />
+		</createTable>
+
+	</changeSet>
+	
+	<changeSet id="002_sponsor_level_pk" author="Carlus">
+		<comment>Create sponsor_level pk</comment>
+		<addPrimaryKey tableName="sponsor_level" columnNames="id" schemaName="conf_admin"/>
+	</changeSet>
+	
+	<changeSet id="002_fk_sponsor_level" author="Carlus">
+		<addForeignKeyConstraint constraintName="FK_SPONSOR_CONF"
+			baseTableName="sponsor_level" baseColumnNames="conference_id" 
+			referencedTableName="conference" referencedColumnNames="id" 
+			baseTableSchemaName="conf_admin" referencedTableSchemaName="conf_admin" />
+	</changeSet>
+
 </databaseChangeLog>
