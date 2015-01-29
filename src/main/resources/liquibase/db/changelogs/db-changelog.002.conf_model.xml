@@ -361,4 +361,18 @@
 			baseTableSchemaName="conf_admin" referencedTableSchemaName="conf_admin" />
 	</changeSet>
 
+	<changeSet id="002_fk_conference_session_room" author="Carlus">
+		<addForeignKeyConstraint constraintName="FK_CONF_SESS_ROOM"
+			baseTableName="conference_session" baseColumnNames="room_id" 
+			referencedTableName="room" referencedColumnNames="id" 
+			baseTableSchemaName="conf_admin" referencedTableSchemaName="conf_admin" />
+	</changeSet>
+
+	<changeSet id="002_fk_conference_session_presenter" author="Carlus">
+		<addForeignKeyConstraint constraintName="FK_CONF_SESS_PRESENTER"
+			baseTableName="conference_session" baseColumnNames="conference_session_presenter" 
+			referencedTableName="conference_session_presenter" referencedColumnNames="id" 
+			baseTableSchemaName="conf_admin" referencedTableSchemaName="conf_admin" />
+	</changeSet>
+
 </databaseChangeLog>
