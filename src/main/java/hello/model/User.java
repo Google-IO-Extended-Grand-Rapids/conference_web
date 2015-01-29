@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -14,9 +13,8 @@ public class User {
 
 	@Id
 	@Column(name = "id", unique = true, nullable = false, insertable=false)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_xyz_seq_generator")
-	@SequenceGenerator(name = "user_xyz_seq_generator", sequenceName = "conf_admin.user_xyz_seq", allocationSize = 1)	
-	private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
     @Column(nullable = false)
     private String firstName;
@@ -56,11 +54,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
