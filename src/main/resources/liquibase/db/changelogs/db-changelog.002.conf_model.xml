@@ -129,4 +129,61 @@
 	</changeSet>
 
 	
+
+	<changeSet id="002_create_conference_session_type" author="Carlus">
+		<comment>Create conference_session table</comment>
+
+		<createTable tableName="conference_session_type" schemaName="conf_admin">
+			<column name="id" type="SERIAL" />
+			<column name="name" type="VARCHAR(100)" />
+			<column name="desc" type="VARCHAR(100)" />
+		</createTable>
+
+	</changeSet>
+	
+	<changeSet id="002_conference_session_type_pk" author="Carlus">
+		<comment>Create conference_session_type pk</comment>
+		<addPrimaryKey tableName="conference_session_type" columnNames="id" schemaName="conf_admin"/>
+	</changeSet>
+	
+	
+	<changeSet id="002_create_conference_session" author="Carlus">
+		<comment>Create conference_session table</comment>
+
+		<createTable tableName="conference_session" schemaName="conf_admin">
+			<column name="id" type="SERIAL" />
+			<column name="name" type="VARCHAR(100)" />
+			<column name="short_desc" type="VARCHAR(100)" />
+			<column name="full_desc" type="VARCHAR(100)" />
+			<column name="conference_id" type="BIGINT" />
+			<column name="conference_session_type_id" type="BIGINT" />
+			<column name="conference_session_presenter" type="BIGINT" />
+			<column name="room_id" type="BIGINT" />
+			<column name="start_dttm" type="timestamp" />
+			<column name="duration" type="interval" />
+			<column name="create_dttm" type="timestamp" />
+			<column name="last_update_dttm" type="timestamp" />
+		</createTable>
+
+	</changeSet>
+	
+	<changeSet id="002_conference_session_pk" author="Carlus">
+		<comment>Create conference_session pk</comment>
+		<addPrimaryKey tableName="conference_session" columnNames="id" schemaName="conf_admin"/>
+	</changeSet>
+	
+	<changeSet id="002_fk_conference_session" author="Carlus">
+		<addForeignKeyConstraint constraintName="FK_CONF_SESS_CONF"
+			baseTableName="conference_session" baseColumnNames="conference_id" 
+			referencedTableName="conference" referencedColumnNames="id" 
+			baseTableSchemaName="conf_admin" referencedTableSchemaName="conf_admin" />
+	</changeSet>
+
+	<changeSet id="002_fk_conference_session_type" author="Carlus">
+		<addForeignKeyConstraint constraintName="FK_CONF_SESS_TYPE"
+			baseTableName="conference_session" baseColumnNames="conference_session_type_id" 
+			referencedTableName="conference_session_type" referencedColumnNames="id" 
+			baseTableSchemaName="conf_admin" referencedTableSchemaName="conf_admin" />
+	</changeSet>
+
 </databaseChangeLog>
