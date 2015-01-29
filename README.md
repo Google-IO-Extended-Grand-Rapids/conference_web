@@ -5,6 +5,7 @@
 vagrant up --no-parallel
 
 # Connecting to the database from host machine
+In order to allow this, you must destroy the Vagrant container so the appropriate ports are forwarded
 - Host: localhost
 - Port: 5432
 - username: postgres
