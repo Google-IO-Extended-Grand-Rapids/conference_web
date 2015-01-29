@@ -21,4 +21,5 @@
         	<column name="password" type="VARCHAR(100)" />
         </createTable>
     </changeSet>
+
 </databaseChangeLog>
