@@ -23,6 +23,9 @@ Here is a list of database commands that can be ran as maven
 - mvn liquibase:rollback -Dliquibase.rollbackCount=1
 
 # Command to do a maven build of the webapp after vagrant/docker is setup
+By default, install is being used by our DockerFile during build.  Right now it's rigged to point at a specific IP address in the vagrant machine, which isn't ideal.  But hey, it works for now.
+
+To run stuff locally and hit the postgres container in vagrant, use the 'travis' profile that has a config setup to hit localhost.
 
 ```
 $ mvn clean install -Ptravis
