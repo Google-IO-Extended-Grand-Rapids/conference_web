@@ -2,7 +2,7 @@ language: java
 after_success:
 - mvn -Ptravis surefire-report:report jacoco:report coveralls:jacoco
 install:
-- mvn install -DskipTests=true -Ptravis
+- mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V -Ptravis
 notifications:
   slack:
     secure: bD+V/2CKtNsYz3UWWZbgrUFpe2d6KQMGRngBaZh6ll8VKJVMS6aIGOge3RfNDOwlp+XDstB/q6MWmhU0sYLZ3NA4xSc62cu7H5i28+uTcx6L4S2Q84f4rMUX2wgDPFaQaRJWb07qC81y0WnuMnnDA7w3+LCCxmP0nmGbcLnyMmg=
