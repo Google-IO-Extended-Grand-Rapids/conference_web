@@ -3,7 +3,7 @@ after_success:
 - mvn -Ptravis surefire-report:report jacoco:report coveralls:jacoco
 install:
 - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V -Ptravis
-test:
+script:
 - mvn test -B -Ptravis
 notifications:
   slack:
