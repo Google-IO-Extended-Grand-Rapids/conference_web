@@ -75,6 +75,9 @@
 				<executions>
 					<execution>
 						<phase>process-resources</phase>
+						<configuration>
+							<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+						</configuration>
 						<goals>
 							<goal>update</goal>
 						</goals>
@@ -98,13 +101,13 @@
 
 	<profiles>
 		<profile>
-			<!-- that profile is used only for coveralls.io banner that show coverage 
+			<!-- that profile is used only for coveralls.io banner that show coverage
 				at ReadMe.md -->
 			<id>travis</id>
 			<build>
 				<plugins>
 
-					<!-- Used to set custom properties by means of ${argLine}, that is required 
+					<!-- Used to set custom properties by means of ${argLine}, that is required
 						for jacoco -->
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
