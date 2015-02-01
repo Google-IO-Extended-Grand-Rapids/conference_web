@@ -21,3 +21,9 @@ After making these modifications, when you perform the vagrant commands (up, hal
 Here is a list of database commands that can be ran as maven
 ## Rollback
 - mvn liquibase:rollback -Dliquibase.rollbackCount=1
+
+# Command to do a maven build of the webapp after vagrant/docker is setup
+
+```
+$ mvn clean install -Ptravis
+```
