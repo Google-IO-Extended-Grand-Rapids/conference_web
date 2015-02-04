@@ -1,4 +1,4 @@
-FROM maven:3.2-jdk-7-onbuild
+FROM maven:3.2-jdk-7
 MAINTAINER danmikita@gmail.com
 EXPOSE 8080
 COPY . /opt/conference_web
