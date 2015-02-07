@@ -2,10 +2,13 @@ Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/trusty64"
 
   # web port
-  config.vm.provision "docker"
+  config.vm.provision "docker" do |d|
+      d.version = "1.4.1"
+  end
+
   config.vm.provision "shell", inline:
     "ps aux | grep 'sshd:' | awk '{print $2}' | xargs kill"
 
   config.vm.network :forwarded_port, host: 8080, guest: 8080
-  config.vm.network :forwarded_port, host: 5432, guest: 5432 
+  config.vm.network :forwarded_port, host: 5432, guest: 5432
 end
