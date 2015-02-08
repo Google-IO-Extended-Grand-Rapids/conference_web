@@ -186,11 +186,6 @@
 
 				</plugins>
 			</build>
-
-			<properties>
-				<liquibase.property.file>src/main/resources/liquibase/liquibase.travis.properties</liquibase.property.file>
-			</properties>
-			
 		</profile>
 
 		<profile>
