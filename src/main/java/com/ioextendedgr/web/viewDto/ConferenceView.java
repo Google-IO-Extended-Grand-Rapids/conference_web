@@ -2,6 +2,9 @@ package com.ioextendedgr.web.viewDto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.ioextendedgr.web.util.DateTimeISO8601Serializer;
+
 public class ConferenceView {
 	
 	private Long id;
@@ -38,6 +41,8 @@ public class ConferenceView {
 	public void setFullDesc(String fullDesc) {
 		this.fullDesc = fullDesc;
 	}
+	
+	@JsonSerialize(using=DateTimeISO8601Serializer.class)
 	public Date getStartDate() {
 		return startDate;
 	}
