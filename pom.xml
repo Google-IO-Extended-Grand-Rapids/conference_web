@@ -57,6 +57,11 @@
 		<jdbc.url>jdbc:postgresql://postgres:5432/postgres</jdbc.url>
 	</properties>
 	<build>
+	<!-- 
+	This resources block was taken from the Spring parent project.
+	The only change that wanted to make was to include the liquibase.properties file.
+	I carried the others forward just in case I ran into issues.
+	 -->
     <resources>
       <resource>
         <filtering>true</filtering>
@@ -64,6 +69,7 @@
         <includes>
           <include>**/application.yml</include>
           <include>**/application.properties</include>
+          <include>**/application-no-web.properties</include>
           <include>**/liquibase.properties</include>
         </includes>
       </resource>
