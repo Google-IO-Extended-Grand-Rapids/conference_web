@@ -13,11 +13,12 @@ public class DateTimeISO8601Serializer extends JsonSerializer<Date> {
 
 	@Override
 	public void serialize(Date value, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonProcessingException {
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		if (value == null) {
 			jgen.writeString("");
 			return;
 		}
+
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		String formattedDate = formatter.format(value);
 		jgen.writeString(formattedDate);
 	}
