@@ -9,6 +9,7 @@ import com.ioextendedgr.web.util.StubFactory;
 import com.ioextendedgr.web.viewDto.ConferenceView;
 
 @RestController
+@RequestMapping("/api")
 public class ConferenceController {
 
     @RequestMapping("/conference")
