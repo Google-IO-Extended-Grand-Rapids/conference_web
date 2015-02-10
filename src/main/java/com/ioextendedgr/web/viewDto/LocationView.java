@@ -2,6 +2,9 @@ package com.ioextendedgr.web.viewDto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.ioextendedgr.web.util.DateTimeISO8601Serializer;
+
 public class LocationView {
 
 	private Long id;
@@ -41,12 +44,14 @@ public class LocationView {
 	public void setParkingInfo(String parkingInfo) {
 		this.parkingInfo = parkingInfo;
 	}
+	@JsonSerialize(using=DateTimeISO8601Serializer.class)
 	public Date getCreateDttm() {
 		return createDttm;
 	}
 	public void setCreateDttm(Date createDttm) {
 		this.createDttm = createDttm;
 	}
+	@JsonSerialize(using=DateTimeISO8601Serializer.class)
 	public Date getLastUpdateDttm() {
 		return lastUpdateDttm;
 	}

@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/Google-IO-Extended-Grand-Rapids/conference_web.svg?branch=develop)](https://travis-ci.org/Google-IO-Extended-Grand-Rapids/conference_web)
 [![Coverage Status](https://coveralls.io/repos/Google-IO-Extended-Grand-Rapids/conference_web/badge.svg?branch=develop)](https://coveralls.io/r/Google-IO-Extended-Grand-Rapids/conference_web?branch=develop)
 
+
 # Development Environment
 * [VirtualBox v4.3.20+](https://www.virtualbox.org/wiki/Downloads)
 * [Vagrant v1.7.2+](https://www.vagrantup.com/downloads.html)
