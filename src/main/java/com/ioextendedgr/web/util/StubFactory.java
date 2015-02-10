@@ -1,13 +1,38 @@
 package com.ioextendedgr.web.util;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Component;
 
 import com.ioextendedgr.web.viewDto.ConferenceView;
 import com.ioextendedgr.web.viewDto.LocationView;
 
+@Component
 public class StubFactory {
+	
+	Map<Long, ConferenceView> conferenceViewsByIdMap = new HashMap<Long, ConferenceView>();
+	public StubFactory() {
+		init();
+	}
+
+	public Collection<ConferenceView> findAllConferences() {
+		return conferenceViewsByIdMap.values();
+	}
+	private void init() {
+		List<ConferenceView> createConferenceViews = createConferenceViews();
+		for (ConferenceView currConferenceView : createConferenceViews) {
+			conferenceViewsByIdMap.put(currConferenceView.getId(), currConferenceView);
+		}
+	}
+
+	public ConferenceView findConferenceById(Long id) {
+		return conferenceViewsByIdMap.get(id);
+	}
 
 	public static List<ConferenceView> createConferenceViews() {
 		int conferenceListSize = 10;
@@ -50,4 +75,5 @@ public class StubFactory {
 		
 		return dto;
 	}
+
 }
