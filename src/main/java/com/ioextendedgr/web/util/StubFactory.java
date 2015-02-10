@@ -9,13 +9,19 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
+import com.ioextendedgr.web.viewDto.CompanyView;
 import com.ioextendedgr.web.viewDto.ConferenceView;
 import com.ioextendedgr.web.viewDto.LocationView;
+import com.ioextendedgr.web.viewDto.PresenterView;
+
+import static java.lang.String.format;
 
 @Component
 public class StubFactory {
 	
 	Map<Long, ConferenceView> conferenceViewsByIdMap = new HashMap<Long, ConferenceView>();
+	Map<Long, PresenterView> presenterViewsByIdMap = new HashMap<Long, PresenterView>();
+	
 	public StubFactory() {
 		init();
 	}
@@ -23,18 +29,75 @@ public class StubFactory {
 	public Collection<ConferenceView> findAllConferences() {
 		return conferenceViewsByIdMap.values();
 	}
+	public ConferenceView findConferenceById(Long id) {
+		return conferenceViewsByIdMap.get(id);
+	}
+	
+	public Collection<PresenterView> findAllPresenters() {
+		return presenterViewsByIdMap.values();
+	}
+
+	public PresenterView findPresenterById(Long id) {
+		return presenterViewsByIdMap.get(id);
+	}
+
+
+	/* ====================================================================== */
+
 	private void init() {
+		initializeConferenceViews();
+		initializePresenterViews();
+	}
+	
+	private void initializePresenterViews() {
+		List<PresenterView> presenterViews = createPresenterViews();
+		for (PresenterView currPresenterView : presenterViews) {
+			presenterViewsByIdMap.put(currPresenterView.getId(), currPresenterView);
+		}
+		
+	}
+
+	private void initializeConferenceViews() {
 		List<ConferenceView> createConferenceViews = createConferenceViews();
 		for (ConferenceView currConferenceView : createConferenceViews) {
 			conferenceViewsByIdMap.put(currConferenceView.getId(), currConferenceView);
 		}
 	}
 
-	public ConferenceView findConferenceById(Long id) {
-		return conferenceViewsByIdMap.get(id);
+
+	private List<PresenterView> createPresenterViews() {
+		int presenterListSize = 10;
+		List<PresenterView> presenterList = new ArrayList<PresenterView>();
+		
+		for (int i = 0; i < presenterListSize; i++) {
+			presenterList.add(toPresenterView(i));
+		}
+		
+		return presenterList;
 	}
 
-	public static List<ConferenceView> createConferenceViews() {
+	private PresenterView toPresenterView(int index) {
+		PresenterView presenterView = new PresenterView();
+		presenterView.setCompanyView(toCompanyView(index));
+		presenterView.setId(Long.valueOf(index + 100));
+		presenterView.setJobTitle(format("Job Title: %d", presenterView.getId()));
+		presenterView.setShortBio(format("This is the short bio for Presenter: %d", presenterView.getId()));
+		presenterView.setUserId(format("userId_%d", presenterView.getId()));
+		
+		return presenterView;
+	}
+
+	private CompanyView toCompanyView(int index) {
+		CompanyView companyView = new CompanyView();
+		companyView.setId(Long.valueOf(index + 50));
+		companyView.setFullDesc(format("Company full description of blah,blah,blah: %d", companyView.getId()));
+		companyView.setLogoPath("http://some.url.logo.");
+		companyView.setName(format("Company #%d", companyView.getId()));
+		companyView.setShortDesc(format("Short description: %d", companyView.getId()));
+		return companyView;
+	}
+
+	public List<ConferenceView> createConferenceViews() {
 		int conferenceListSize = 10;
 		List<ConferenceView> conferenceList = new ArrayList<ConferenceView>();
 		
@@ -46,7 +109,7 @@ public class StubFactory {
 		
 	}
 
-	private static ConferenceView toConferenceView(int index) {
+	private ConferenceView toConferenceView(int index) {
 		
 		ConferenceView conferenceView = new ConferenceView();
 		conferenceView.setCreateDttm(new Date());
@@ -62,7 +125,7 @@ public class StubFactory {
 		return conferenceView;
 	}
 
-	private static LocationView toLocationView(int index) {
+	private LocationView toLocationView(int index) {
 		LocationView dto = new LocationView();
 		
 		dto.setCreateDttm(new Date());

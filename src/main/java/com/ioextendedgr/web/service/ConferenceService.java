@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.ioextendedgr.web.util.StubFactory;
 import com.ioextendedgr.web.viewDto.ConferenceView;
+import com.ioextendedgr.web.viewDto.PresenterView;
 
 @Component
 public class ConferenceService {
@@ -18,8 +19,16 @@ public class ConferenceService {
 		return stubFactory.findAllConferences();
 	}
 
-	public ConferenceView findAllConferencesById(Long id) {
+	public ConferenceView findConferenceById(Long id) {
 		return stubFactory.findConferenceById(id);
+	}
+
+	public Collection<PresenterView> findAllPresenters() {
+		return stubFactory.findAllPresenters();
+	}
+
+	public PresenterView findPresenterById(Long id) {
+		return stubFactory.findPresenterById(id);
 	}
 
 }

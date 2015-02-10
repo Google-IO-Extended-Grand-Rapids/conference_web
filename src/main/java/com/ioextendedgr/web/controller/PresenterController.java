@@ -8,24 +8,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ioextendedgr.web.service.ConferenceService;
-import com.ioextendedgr.web.viewDto.ConferenceView;
+import com.ioextendedgr.web.viewDto.PresenterView;
 
 @RestController
 @RequestMapping("/api")
-public class ConferenceController {
-	
+public class PresenterController {
+
 	@Autowired
 	private ConferenceService conferenceService;
 
-    @RequestMapping("/conference")
-    public Collection<ConferenceView> findAllConferences() {
-    	return conferenceService.findAllConferences();
+    @RequestMapping("/presenter")
+    public Collection<PresenterView> findAllPresenters() {
+    	return conferenceService.findAllPresenters();
     }
 
-    @RequestMapping("/conference/{id}")
-    public ConferenceView findConferenceById(@PathVariable("id") Long id) {
-    	return conferenceService.findConferenceById(id);
+    @RequestMapping("/presenter/{id}")
+    public PresenterView findPresenterById(@PathVariable("id") Long id) {
+    	return conferenceService.findPresenterById(id);
     }
-
-	
 }
