@@ -49,6 +49,7 @@ public class ConferenceView {
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
+	@JsonSerialize(using=DateTimeISO8601Serializer.class)
 	public Date getEndDate() {
 		return endDate;
 	}
@@ -56,12 +57,14 @@ public class ConferenceView {
 		this.endDate = endDate;
 	}
 	
+	@JsonSerialize(using=DateTimeISO8601Serializer.class)
 	public Date getCreateDttm() {
 		return createDttm;
 	}
 	public void setCreateDttm(Date createDttm) {
 		this.createDttm = createDttm;
 	}
+	@JsonSerialize(using=DateTimeISO8601Serializer.class)
 	public Date getLastUpdateDttm() {
 		return lastUpdateDttm;
 	}
