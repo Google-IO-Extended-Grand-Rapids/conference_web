@@ -10,6 +10,7 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 
 import com.ioextendedgr.web.viewDto.CompanyView;
+import com.ioextendedgr.web.viewDto.ConferenceSessionView;
 import com.ioextendedgr.web.viewDto.ConferenceView;
 import com.ioextendedgr.web.viewDto.LocationView;
 import com.ioextendedgr.web.viewDto.PresenterView;
@@ -21,6 +22,7 @@ public class StubFactory {
 	
 	Map<Long, ConferenceView> conferenceViewsByIdMap = new HashMap<Long, ConferenceView>();
 	Map<Long, PresenterView> presenterViewsByIdMap = new HashMap<Long, PresenterView>();
+	Map<Long, ConferenceSessionView> conferenceSessionByIdMap = new HashMap<Long, ConferenceSessionView>();
 	
 	public StubFactory() {
 		init();
@@ -47,8 +49,16 @@ public class StubFactory {
 	private void init() {
 		initializeConferenceViews();
 		initializePresenterViews();
+		initializeConferenceSessions();
 	}
 	
+	private void initializeConferenceSessions() {
+		List<ConferenceSessionView> conferenceSessionViews = createPresenterViews();
+		for (ConferenceSessionView currConferenceSessionView : conferenceSessionViews) {
+			conferenceSessionByIdMap.put(currConferenceSessionView.getId(), currConferenceSessionView);
+		}
+	}
+
 	private void initializePresenterViews() {
 		List<PresenterView> presenterViews = createPresenterViews();
 		for (PresenterView currPresenterView : presenterViews) {
@@ -62,6 +72,17 @@ public class StubFactory {
 		for (ConferenceView currConferenceView : createConferenceViews) {
 			conferenceViewsByIdMap.put(currConferenceView.getId(), currConferenceView);
 		}
+	}
+
+	private List<ConferenceSessionView> createConferenceSessionViews() {
+		int conferenceSessionListSize = 10;
+		List<PresenterView> presenterList = new ArrayList<PresenterView>();
+		
+		for (int i = 0; i < conferenceSessionListSize; i++) {
+			presenterList.add(toPresenterView(i));
+		}
+		
+		return presenterList;
 	}
 
 
