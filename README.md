@@ -45,3 +45,13 @@ To run stuff locally and hit the postgres container in vagrant, use the 'travis'
 ```
 $ mvn clean install -Ptravis
 ```
+
+# Available API
+Here is a list of the available apis in the system
+
+- /api/conference - will retrieve all conferences
+- /api/conference/{id} - will retrieve conference by id
+- /api/conferenceSession - will retrieve all conference sessions
+- /api/conferenceSession/{id} - will retrieve conference session by id
+- /api/presenter - will retrieve all presenters
+- /api/presenter/{id} - will retrieve presenter by id
