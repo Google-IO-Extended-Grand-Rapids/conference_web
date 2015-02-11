@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ioextendedgr.web.util.StubFactory;
+import com.ioextendedgr.web.viewDto.ConferenceSessionView;
 import com.ioextendedgr.web.viewDto.ConferenceView;
 import com.ioextendedgr.web.viewDto.PresenterView;
 
@@ -29,6 +30,14 @@ public class ConferenceService {
 
 	public PresenterView findPresenterById(Long id) {
 		return stubFactory.findPresenterById(id);
+	}
+
+	public Collection<ConferenceSessionView> findAllConferenceSessions() {
+		return stubFactory.findAllConferenceSessions();
+	}
+
+	public ConferenceSessionView findConferenceSessionById(Long id) {
+		return stubFactory.findConferenceSessionById(id);
 	}
 
 }

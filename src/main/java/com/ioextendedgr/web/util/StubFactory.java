@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
@@ -42,6 +45,14 @@ public class StubFactory {
 	public PresenterView findPresenterById(Long id) {
 		return presenterViewsByIdMap.get(id);
 	}
+	
+	public Collection<ConferenceSessionView> findAllConferenceSessions() {
+		return conferenceSessionByIdMap.values();
+	}
+
+	public ConferenceSessionView findConferenceSessionById(Long id) {
+		return conferenceSessionByIdMap.get(id);
+	}
 
 
 	/* ====================================================================== */
@@ -53,7 +64,7 @@ public class StubFactory {
 	}
 	
 	private void initializeConferenceSessions() {
-		List<ConferenceSessionView> conferenceSessionViews = createPresenterViews();
+		List<ConferenceSessionView> conferenceSessionViews = createConferenceSessionViews();
 		for (ConferenceSessionView currConferenceSessionView : conferenceSessionViews) {
 			conferenceSessionByIdMap.put(currConferenceSessionView.getId(), currConferenceSessionView);
 		}
@@ -76,13 +87,13 @@ public class StubFactory {
 
 	private List<ConferenceSessionView> createConferenceSessionViews() {
 		int conferenceSessionListSize = 10;
-		List<PresenterView> presenterList = new ArrayList<PresenterView>();
+		List<ConferenceSessionView> conferenceSessionList = new ArrayList<ConferenceSessionView>();
 		
 		for (int i = 0; i < conferenceSessionListSize; i++) {
-			presenterList.add(toPresenterView(i));
+			conferenceSessionList.add(toConferenceSessionView(i));
 		}
 		
-		return presenterList;
+		return conferenceSessionList;
 	}
 
 
@@ -95,6 +106,51 @@ public class StubFactory {
 		}
 		
 		return presenterList;
+	}
+
+	private ConferenceSessionView toConferenceSessionView(int index) {
+		ConferenceSessionView dto = new ConferenceSessionView();
+		
+		List<Long> conferenceIds = new ArrayList<Long>(conferenceViewsByIdMap.keySet());
+		List<Long> presenterIds = new ArrayList<Long>(presenterViewsByIdMap.keySet());
+		
+		Random random = new Random();
+		
+		dto.setId(Long.valueOf(50 + index));
+		dto.setConferenceId(conferenceIds.get(random.nextInt(conferenceIds.size())));
+		dto.setCreateDttm(new Date());
+		dto.setDurationMinutes((index % 2 == 0) ? 30 : 60);
+		dto.setFullDesc(format("Full description of the session talk for session: %d", dto.getId()));
+		dto.setLastUpdateDttm(new Date());
+		dto.setName(format("Name of Session for %d", dto.getId()));
+		
+		List<Long> selectedPresenterIds = null;
+		if (index % 2 == 0) {
+			selectedPresenterIds = toSinglePresenterIdList(random, presenterIds);
+		} else {
+			selectedPresenterIds = toMultiplePresenterIdsList(random, presenterIds);
+		}
+		dto.setPresenterIds(selectedPresenterIds);
+		dto.setRoomId(-1L);
+		dto.setShortDesc(format("Short Description Session: %d", dto.getId()));
+		dto.setStartDttm(new Date());
+		
+		return dto;
+	}
+
+	private List<Long> toMultiplePresenterIdsList(Random random, List<Long> presenterIds) {
+		Set<Long> presenterIdSet = new HashSet<Long>();
+		presenterIdSet.add(presenterIds.get(random.nextInt(presenterIds.size())));
+		presenterIdSet.add(presenterIds.get(random.nextInt(presenterIds.size())));
+		presenterIdSet.add(presenterIds.get(random.nextInt(presenterIds.size())));
+		presenterIdSet.add(presenterIds.get(random.nextInt(presenterIds.size())));
+		return new ArrayList<Long>(presenterIdSet);
+	}
+
+	private List<Long> toSinglePresenterIdList(Random random, List<Long> presenterIds) {
+		List<Long> presenterIdList = new ArrayList<Long>();
+		presenterIdList.add(presenterIds.get(random.nextInt(presenterIds.size())));
+		return presenterIdList;
 	}
 
 	private PresenterView toPresenterView(int index) {
