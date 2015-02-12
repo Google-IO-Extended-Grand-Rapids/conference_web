@@ -377,12 +377,20 @@
 
 	<changeSet id="002_conf_session_drop_conference_session_presenter" author="Carlus">
 		<dropColumn schemaName="conf_admin" tableName="conference_session" columnName="conference_session_presenter"/>
+		<rollback></rollback>
 	</changeSet>
 
 	<changeSet id="002_conf_session_add_conference_session_presenter_id" author="Carlus">
 		<addColumn tableName="conference_session" schemaName="conf_admin">
 			<column name="conference_session_presenter_id" type="BIGINT" />
 		</addColumn>
+	</changeSet>
+
+	<changeSet id="002_fk_conference_session_presenter_id" author="Carlus">
+		<addForeignKeyConstraint constraintName="FK_CONF_SESS_PRESENTER"
+			baseTableName="conference_session" baseColumnNames="conference_session_presenter_id" 
+			referencedTableName="conference_session_presenter" referencedColumnNames="id" 
+			baseTableSchemaName="conf_admin" referencedTableSchemaName="conf_admin" />
 	</changeSet>
 
 </databaseChangeLog>
