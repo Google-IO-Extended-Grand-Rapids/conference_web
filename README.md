@@ -51,6 +51,7 @@ Here is a list of the available apis in the system
 
 - /api/conference - will retrieve all conferences
 - /api/conference/{id} - will retrieve conference by id
+- /api/conference/{id}/conferenceSessions - will retrieve the sessions by conference id
 - /api/conferenceSession - will retrieve all conference sessions
 - /api/conferenceSession/{id} - will retrieve conference session by id
 - /api/presenter - will retrieve all presenters
