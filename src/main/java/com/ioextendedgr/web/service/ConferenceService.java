@@ -40,4 +40,8 @@ public class ConferenceService {
 		return stubFactory.findConferenceSessionById(id);
 	}
 
+	public Collection<ConferenceSessionView> findConferenceSessionsByConferenceId(Long id) {
+		return stubFactory.findConferenceSessionsByConferenceId(id);
+	}
+
 }

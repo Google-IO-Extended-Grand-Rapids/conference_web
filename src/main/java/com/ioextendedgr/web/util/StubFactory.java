@@ -53,7 +53,18 @@ public class StubFactory {
 	public ConferenceSessionView findConferenceSessionById(Long id) {
 		return conferenceSessionByIdMap.get(id);
 	}
-
+	
+	public Collection<ConferenceSessionView> findConferenceSessionsByConferenceId(Long id) {
+		Collection<ConferenceSessionView> conferenceSessionViews = conferenceSessionByIdMap.values();
+		Collection<ConferenceSessionView> matches = new ArrayList<ConferenceSessionView>();
+		for (ConferenceSessionView currConferenceSessionView : conferenceSessionViews) {
+			if (id.equals(currConferenceSessionView.getConferenceId())) {
+				matches.add(currConferenceSessionView);
+			}
+		}
+		
+		return matches;
+	}
 
 	/* ====================================================================== */
 
