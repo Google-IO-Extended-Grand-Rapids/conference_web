@@ -1,19 +1,23 @@
 package com.ioextendedgr.web.viewDto;
 
 import java.util.Date;
+import java.util.List;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.ioextendedgr.web.util.DateTimeISO8601Serializer;
-
-public class LocationView {
+public class ConferenceSessionView {
 
 	private Long id;
 	private String name;
 	private String shortDesc;
 	private String fullDesc;
-	private String parkingInfo;
+	private Long conferenceId;
+	private List<Long> presenterIds;
+	private Long roomId;
+	private Date startDttm;
+	private Integer durationMinutes;
 	private Date createDttm;
 	private Date lastUpdateDttm;
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -38,20 +42,42 @@ public class LocationView {
 	public void setFullDesc(String fullDesc) {
 		this.fullDesc = fullDesc;
 	}
-	public String getParkingInfo() {
-		return parkingInfo;
+	public Long getConferenceId() {
+		return conferenceId;
 	}
-	public void setParkingInfo(String parkingInfo) {
-		this.parkingInfo = parkingInfo;
+	public void setConferenceId(Long conferenceId) {
+		this.conferenceId = conferenceId;
 	}
-	@JsonSerialize(using=DateTimeISO8601Serializer.class)
+	public List<Long> getPresenterIds() {
+		return presenterIds;
+	}
+	public void setPresenterIds(List<Long> presenterIds) {
+		this.presenterIds = presenterIds;
+	}
+	public Long getRoomId() {
+		return roomId;
+	}
+	public void setRoomId(Long roomId) {
+		this.roomId = roomId;
+	}
+	public Date getStartDttm() {
+		return startDttm;
+	}
+	public void setStartDttm(Date startDttm) {
+		this.startDttm = startDttm;
+	}
+	public Integer getDurationMinutes() {
+		return durationMinutes;
+	}
+	public void setDurationMinutes(Integer durationMinutes) {
+		this.durationMinutes = durationMinutes;
+	}
 	public Date getCreateDttm() {
 		return createDttm;
 	}
 	public void setCreateDttm(Date createDttm) {
 		this.createDttm = createDttm;
 	}
-	@JsonSerialize(using=DateTimeISO8601Serializer.class)
 	public Date getLastUpdateDttm() {
 		return lastUpdateDttm;
 	}
@@ -60,5 +86,4 @@ public class LocationView {
 	}
 	
 	
-
 }
