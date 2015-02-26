@@ -17,7 +17,7 @@ public class Presenter implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private Integer id;
+	private Long id;
 
 	@Column(name="job_title")
 	private String jobTitle;
@@ -40,11 +40,11 @@ public class Presenter implements Serializable {
 	public Presenter() {
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

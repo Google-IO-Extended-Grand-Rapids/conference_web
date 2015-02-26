@@ -15,7 +15,7 @@ public class LocationAddress implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private Integer id;
+	private Long id;
 
 	@Column(name="address_1")
 	private String address1;
@@ -47,11 +47,11 @@ public class LocationAddress implements Serializable {
 	public LocationAddress() {
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

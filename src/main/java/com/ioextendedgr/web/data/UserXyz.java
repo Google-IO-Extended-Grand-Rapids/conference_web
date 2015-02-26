@@ -16,7 +16,7 @@ public class UserXyz implements Serializable {
 	@Column(name="first_name")
 	private String firstName;
 
-	private Integer id;
+	private Long id;
 
 	@Column(name="last_name")
 	private String lastName;
@@ -37,11 +37,11 @@ public class UserXyz implements Serializable {
 		this.firstName = firstName;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
