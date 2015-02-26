@@ -1,9 +1,19 @@
 package com.ioextendedgr.web.data;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
 
 /**
@@ -12,6 +22,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="conference_session")
+@TypeDef(name="interval", typeClass = Interval.class)
 public class ConferenceSession implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -21,7 +32,8 @@ public class ConferenceSession implements Serializable {
 	@Column(name="create_dttm")
 	private Timestamp createDttm;
 
-	private Object duration;
+	@Type(type="interval") 
+	private Long duration;
 
 	@Column(name="full_desc")
 	private String fullDesc;
@@ -85,8 +97,10 @@ public class ConferenceSession implements Serializable {
 	public Object getDuration() {
 		return this.duration;
 	}
-
-	public void setDuration(Object duration) {
+	
+	
+	@Type(type = "interval") 
+	public void setDuration(Long duration) {
 		this.duration = duration;
 	}
 

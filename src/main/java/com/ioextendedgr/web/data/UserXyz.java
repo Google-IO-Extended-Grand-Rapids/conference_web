@@ -1,7 +1,11 @@
 package com.ioextendedgr.web.data;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 
 /**
@@ -16,6 +20,7 @@ public class UserXyz implements Serializable {
 	@Column(name="first_name")
 	private String firstName;
 
+	@Id
 	private Integer id;
 
 	@Column(name="last_name")

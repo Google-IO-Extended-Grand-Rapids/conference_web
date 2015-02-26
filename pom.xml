@@ -44,6 +44,8 @@
 			<artifactId>postgresql</artifactId>
 			<version>9.3-1101-jdbc41</version>
 		</dependency>
+		
+		
 	</dependencies>
 	<properties>
 		<start-class>com.ioextendedgr.web.Application</start-class>
