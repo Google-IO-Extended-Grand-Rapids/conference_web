@@ -7,53 +7,54 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 
-
 /**
  * The persistent class for the conference database table.
  * 
  */
 @Entity
-@Table(name="conference")
+@Table(name = "conference")
+@SequenceGenerator(name = "conference_id_seq", sequenceName = "conference_id_seq", allocationSize = 1)
 public class Conference implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "conference_id_seq")
 	private Integer id;
 
-	@Column(name="create_dttm")
+	@Column(name = "create_dttm")
 	private Timestamp createDttm;
 
-	@Column(name="end_date")
+	@Column(name = "end_date")
 	private Timestamp endDate;
 
-	@Column(name="full_desc")
+	@Column(name = "full_desc")
 	private String fullDesc;
 
-	@Column(name="last_update_dttm")
+	@Column(name = "last_update_dttm")
 	private Timestamp lastUpdateDttm;
 
 	private String name;
 
-	@Column(name="short_desc")
+	@Column(name = "short_desc")
 	private String shortDesc;
 
-	@Column(name="start_date")
+	@Column(name = "start_date")
 	private Timestamp startDate;
 
-	//bi-directional many-to-one association to Location
+	// bi-directional many-to-one association to Location
 	@ManyToOne
 	private Location location;
 
-	//bi-directional many-to-one association to ConferenceSession
-	@OneToMany(mappedBy="conference")
+	// bi-directional many-to-one association to ConferenceSession
+	@OneToMany(mappedBy = "conference")
 	private List<ConferenceSession> conferenceSessions;
 
-	//bi-directional many-to-one association to Room
-	@OneToMany(mappedBy="conference")
+	// bi-directional many-to-one association to Room
+	@OneToMany(mappedBy = "conference")
 	private List<Room> rooms;
 
-	//bi-directional many-to-one association to SponsorLevel
-	@OneToMany(mappedBy="conference")
+	// bi-directional many-to-one association to SponsorLevel
+	@OneToMany(mappedBy = "conference")
 	private List<SponsorLevel> sponsorLevels;
 
 	public Conference() {
@@ -139,14 +140,16 @@ public class Conference implements Serializable {
 		this.conferenceSessions = conferenceSessions;
 	}
 
-	public ConferenceSession addConferenceSession(ConferenceSession conferenceSession) {
+	public ConferenceSession addConferenceSession(
+			ConferenceSession conferenceSession) {
 		getConferenceSessions().add(conferenceSession);
 		conferenceSession.setConference(this);
 
 		return conferenceSession;
 	}
 
-	public ConferenceSession removeConferenceSession(ConferenceSession conferenceSession) {
+	public ConferenceSession removeConferenceSession(
+			ConferenceSession conferenceSession) {
 		getConferenceSessions().remove(conferenceSession);
 		conferenceSession.setConference(null);
 

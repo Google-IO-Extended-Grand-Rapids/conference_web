@@ -6,10 +6,13 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -23,10 +26,12 @@ import org.hibernate.annotations.TypeDef;
 @Entity
 @Table(name="conference_session")
 @TypeDef(name="interval", typeClass = Interval.class)
+@SequenceGenerator(name = "conference_session_id_seq", sequenceName = "conference_session_id_seq", allocationSize = 1)
 public class ConferenceSession implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "conference_session_id_seq")
 	private Integer id;
 
 	@Column(name="create_dttm")
@@ -51,6 +56,7 @@ public class ConferenceSession implements Serializable {
 
 	//bi-directional many-to-one association to Conference
 	@ManyToOne
+	@JoinColumn(name="conference_id")
 	private Conference conference;
 
 	//bi-directional many-to-one association to ConferenceSessionPresenter

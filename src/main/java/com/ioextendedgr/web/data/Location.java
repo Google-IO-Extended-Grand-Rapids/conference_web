@@ -14,10 +14,12 @@ import java.util.List;
  */
 @Entity
 @Table(name="conference_session_type")
+@SequenceGenerator(name = "location_id_seq", sequenceName = "location_id_seq", allocationSize = 1)
 public class Location implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "location_id_seq")
 	private Long id;
 
 	@Column(name="create_dttm")
