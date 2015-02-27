@@ -68,7 +68,7 @@
     </changeSet>
 
     <changeSet id="002_create_user_role_table" author="Scott">
-        <comment>Create role table</comment>
+        <comment>Create user_role table</comment>
 
         <createTable tableName="user_role" schemaName="conf_admin">
             <column name="id" type="SERIAL" >
