@@ -40,7 +40,7 @@ public class Application implements CommandLineRunner{
         c.setFullDesc("Jonas' SQL Blowout");
         //c.setId(Integer.valueOf(1));
         c.setLastUpdateDttm(new Timestamp(new Date().getTime()));
-         c.setLocation(location );
+         c.setLocation(null);
          c.setName("Blue 35");
          c.setShortDesc("Why not to use postgres");
          c.setStartDate(new Timestamp(new Date().getTime()));

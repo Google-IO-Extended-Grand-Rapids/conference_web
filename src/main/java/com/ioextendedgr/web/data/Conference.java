@@ -44,17 +44,17 @@ public class Conference implements Serializable {
 	@ManyToOne
 	private Location location;
 
-	// bi-directional many-to-one association to ConferenceSession
-	@OneToMany(mappedBy = "conference")
-	private List<ConferenceSession> conferenceSessions;
-
-	// bi-directional many-to-one association to Room
-	@OneToMany(mappedBy = "conference")
-	private List<Room> rooms;
-
-	// bi-directional many-to-one association to SponsorLevel
-	@OneToMany(mappedBy = "conference")
-	private List<SponsorLevel> sponsorLevels;
+//	// bi-directional many-to-one association to ConferenceSession
+//	@OneToMany(mappedBy = "conference")
+//	private List<ConferenceSession> conferenceSessions;
+//
+//	// bi-directional many-to-one association to Room
+//	@OneToMany(mappedBy = "conference")
+//	private List<Room> rooms;
+//
+//	// bi-directional many-to-one association to SponsorLevel
+//	@OneToMany(mappedBy = "conference")
+//	private List<SponsorLevel> sponsorLevels;
 
 	public Conference() {
 	}
@@ -130,73 +130,73 @@ public class Conference implements Serializable {
 	public void setLocation(Location location) {
 		this.location = location;
 	}
+//
+//	public List<ConferenceSession> getConferenceSessions() {
+//		return this.conferenceSessions;
+//	}
+//
+//	public void setConferenceSessions(List<ConferenceSession> conferenceSessions) {
+//		this.conferenceSessions = conferenceSessions;
+//	}
+//
+//	public ConferenceSession addConferenceSession(
+//			ConferenceSession conferenceSession) {
+//		getConferenceSessions().add(conferenceSession);
+//		conferenceSession.setConference(this);
+//
+//		return conferenceSession;
+//	}
+//
+//	public ConferenceSession removeConferenceSession(
+//			ConferenceSession conferenceSession) {
+//		getConferenceSessions().remove(conferenceSession);
+//		conferenceSession.setConference(null);
+//
+//		return conferenceSession;
+//	}
 
-	public List<ConferenceSession> getConferenceSessions() {
-		return this.conferenceSessions;
-	}
+//	public List<Room> getRooms() {
+//		return this.rooms;
+//	}
+//
+//	public void setRooms(List<Room> rooms) {
+//		this.rooms = rooms;
+//	}
+//
+//	public Room addRoom(Room room) {
+//		getRooms().add(room);
+//		room.setConference(this);
+//
+//		return room;
+//	}
+//
+//	public Room removeRoom(Room room) {
+//		getRooms().remove(room);
+//		room.setConference(null);
+//
+//		return room;
+//	}
 
-	public void setConferenceSessions(List<ConferenceSession> conferenceSessions) {
-		this.conferenceSessions = conferenceSessions;
-	}
-
-	public ConferenceSession addConferenceSession(
-			ConferenceSession conferenceSession) {
-		getConferenceSessions().add(conferenceSession);
-		conferenceSession.setConference(this);
-
-		return conferenceSession;
-	}
-
-	public ConferenceSession removeConferenceSession(
-			ConferenceSession conferenceSession) {
-		getConferenceSessions().remove(conferenceSession);
-		conferenceSession.setConference(null);
-
-		return conferenceSession;
-	}
-
-	public List<Room> getRooms() {
-		return this.rooms;
-	}
-
-	public void setRooms(List<Room> rooms) {
-		this.rooms = rooms;
-	}
-
-	public Room addRoom(Room room) {
-		getRooms().add(room);
-		room.setConference(this);
-
-		return room;
-	}
-
-	public Room removeRoom(Room room) {
-		getRooms().remove(room);
-		room.setConference(null);
-
-		return room;
-	}
-
-	public List<SponsorLevel> getSponsorLevels() {
-		return this.sponsorLevels;
-	}
-
-	public void setSponsorLevels(List<SponsorLevel> sponsorLevels) {
-		this.sponsorLevels = sponsorLevels;
-	}
-
-	public SponsorLevel addSponsorLevel(SponsorLevel sponsorLevel) {
-		getSponsorLevels().add(sponsorLevel);
-		sponsorLevel.setConference(this);
-
-		return sponsorLevel;
-	}
-
-	public SponsorLevel removeSponsorLevel(SponsorLevel sponsorLevel) {
-		getSponsorLevels().remove(sponsorLevel);
-		sponsorLevel.setConference(null);
-
-		return sponsorLevel;
-	}
+//	public List<SponsorLevel> getSponsorLevels() {
+//		return this.sponsorLevels;
+//	}
+//
+//	public void setSponsorLevels(List<SponsorLevel> sponsorLevels) {
+//		this.sponsorLevels = sponsorLevels;
+//	}
+//
+//	public SponsorLevel addSponsorLevel(SponsorLevel sponsorLevel) {
+//		getSponsorLevels().add(sponsorLevel);
+//		sponsorLevel.setConference(this);
+//
+//		return sponsorLevel;
+//	}
+//
+//	public SponsorLevel removeSponsorLevel(SponsorLevel sponsorLevel) {
+//		getSponsorLevels().remove(sponsorLevel);
+//		sponsorLevel.setConference(null);
+//
+//		return sponsorLevel;
+//	}
 
 }
