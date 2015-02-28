@@ -47,64 +47,6 @@
 			referencedColumnNames="id" baseTableSchemaName="conf_admin" referencedTableSchemaName="conf_admin" />
 	</changeSet>
 
-    <changeSet id="002_create_role_table" author="Scott">
-        <comment>Create role table</comment>
-
-        <createTable tableName="role" schemaName="conf_admin">
-            <column name="id" type="SERIAL" >
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="name" type="VARCHAR(20)" >
-                <constraints nullable="false"/>
-            </column>
-            <column name="description" type="VARCHAR(100)" />
-        </createTable>
-        <sql>insert into conf_admin.role (name, description) values ('USER', 'Role for users')</sql>
-        <sql>insert into conf_admin.role (name, description) values ('ADMIN', 'Role for admins')</sql>
-        <rollback>
-            <sql>delete from conf_admin.role where name = 'USER'</sql>
-            <sql>delete from conf_admin.role where name = 'ADMIN'</sql>
-        </rollback>
-    </changeSet>
-
-    <changeSet id="002_create_user_role_table" author="Scott">
-        <comment>Create user_role table</comment>
-
-        <createTable tableName="user_role" schemaName="conf_admin">
-            <column name="id" type="SERIAL" >
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="user_id" type="BIGINT" >
-                <constraints nullable="false"/>
-            </column>
-            <column name="role_id" type="BIGINT" >
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-
-    <changeSet author="Scott" id="002_fk_user_role_user">
-        <addForeignKeyConstraint
-                baseColumnNames="user_id"
-                baseTableName="user_role"
-                constraintName="FK_USER_ROLE_USER"
-                referencedColumnNames="id"
-                referencedTableName="user"
-                baseTableSchemaName="conf_admin"
-                referencedTableSchemaName="conf_admin" />
-    </changeSet>
-
-    <changeSet author="Scott" id="002_fk_user_role_role">
-        <addForeignKeyConstraint
-                baseColumnNames="role_id"
-                baseTableName="user_role"
-                constraintName="FK_USER_ROLE_ROLE"
-                referencedColumnNames="id"
-                referencedTableName="role"
-                baseTableSchemaName="conf_admin"
-                referencedTableSchemaName="conf_admin" />
-    </changeSet>
-
     <changeSet id="002_create_location_table" author="Carlus">
 		<comment>Create location table</comment>
 
@@ -454,5 +396,66 @@
 	<changeSet id="002_tagging_database" author="Carlus">
 		<tagDatabase tag="version_1.0"/>
 	</changeSet>
+	
+    <changeSet id="002_create_role_table" author="Scott">
+        <comment>Create role table</comment>
+
+        <createTable tableName="role" schemaName="conf_admin">
+            <column name="id" type="SERIAL" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(20)" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(100)" />
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="002_create_default_roles" author="Carlus">
+        <sql>insert into conf_admin.role (name, description) values ('USER', 'Role for users')</sql>
+        <sql>insert into conf_admin.role (name, description) values ('ADMIN', 'Role for admins')</sql>
+        <rollback>
+            <sql>delete from conf_admin.role where name = 'USER'</sql>
+            <sql>delete from conf_admin.role where name = 'ADMIN'</sql>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="002_create_user_role_table" author="Scott">
+        <comment>Create user_role table</comment>
+
+        <createTable tableName="user_role" schemaName="conf_admin">
+            <column name="id" type="SERIAL" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="BIGINT" >
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Scott" id="002_fk_user_role_user">
+        <addForeignKeyConstraint
+                baseColumnNames="user_id"
+                baseTableName="user_role"
+                constraintName="FK_USER_ROLE_USER"
+                referencedColumnNames="id"
+                referencedTableName="user"
+                baseTableSchemaName="conf_admin"
+                referencedTableSchemaName="conf_admin" />
+    </changeSet>
+
+    <changeSet author="Scott" id="002_fk_user_role_role">
+        <addForeignKeyConstraint
+                baseColumnNames="role_id"
+                baseTableName="user_role"
+                constraintName="FK_USER_ROLE_ROLE"
+                referencedColumnNames="id"
+                referencedTableName="role"
+                baseTableSchemaName="conf_admin"
+                referencedTableSchemaName="conf_admin" />
+    </changeSet>
 
 </databaseChangeLog>
