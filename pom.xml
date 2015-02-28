@@ -44,7 +44,12 @@
 			<artifactId>postgresql</artifactId>
 			<version>9.3-1101-jdbc41</version>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<scope>test</scope>
+		</dependency>
 		
 	</dependencies>
 	<properties>
@@ -59,30 +64,28 @@
 		<jdbc.url>jdbc:postgresql://postgres:5432/postgres</jdbc.url>
 	</properties>
 	<build>
-	<!-- 
-	This resources block was taken from the Spring parent project.
-	The only change that wanted to make was to include the liquibase.properties file.
-	I carried the others forward just in case I ran into issues.
-	 -->
-    <resources>
-      <resource>
-        <filtering>true</filtering>
-        <directory>src/main/resources</directory>
-        <includes>
-          <include>**/application.yml</include>
-          <include>**/application.properties</include>
-          <include>**/application-no-web.properties</include>
-          <include>**/liquibase.properties</include>
-        </includes>
-      </resource>
-      <resource>
-        <directory>src/main/resources</directory>
-        <excludes>
-          <exclude>**/application.yml</exclude>
-          <exclude>**/application.properties</exclude>
-        </excludes>
-      </resource>
-    </resources>
+		<!-- This resources block was taken from the Spring parent project. The 
+			only change that wanted to make was to include the liquibase.properties file. 
+			I carried the others forward just in case I ran into issues. -->
+		<resources>
+			<resource>
+				<filtering>true</filtering>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/application.yml</include>
+					<include>**/application.properties</include>
+					<include>**/application-no-web.properties</include>
+					<include>**/liquibase.properties</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>**/application.yml</exclude>
+					<exclude>**/application.properties</exclude>
+				</excludes>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -117,7 +120,8 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
@@ -164,13 +168,13 @@
 
 	<profiles>
 		<profile>
-			<!-- that profile is used only for coveralls.io banner that show coverage
+			<!-- that profile is used only for coveralls.io banner that show coverage 
 				at ReadMe.md -->
 			<id>travis</id>
 			<build>
 				<plugins>
 
-					<!-- Used to set custom properties by means of ${argLine}, that is required
+					<!-- Used to set custom properties by means of ${argLine}, that is required 
 						for jacoco -->
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>

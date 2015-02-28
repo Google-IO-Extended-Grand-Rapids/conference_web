@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.ioextendedgr.web.data.Conference;
 
-public interface ConferenceRepository extends JpaRepository<Conference, Long>{
+public interface ConferenceRepository extends JpaRepository<Conference, Integer>{
 	
 }

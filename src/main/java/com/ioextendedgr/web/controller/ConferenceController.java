@@ -20,8 +20,6 @@ public class ConferenceController {
 	
 	@Autowired
 	private ConferenceService conferenceService;
-	
-	
 
     @RequestMapping("/conference")
     public Collection<ConferenceView> findAllConferences() {
@@ -29,7 +27,7 @@ public class ConferenceController {
     }
 
     @RequestMapping("/conference/{id}")
-    public ConferenceView findConferenceById(@PathVariable("id") Long id) {
+    public ConferenceView findConferenceById(@PathVariable("id") Integer id) {
     	return conferenceService.findConferenceById(id);
     }
 
@@ -37,6 +35,4 @@ public class ConferenceController {
     public Collection<ConferenceSessionView> findConferenceSessionsByConferenceId(@PathVariable("id") Long id) {
     	return conferenceService.findConferenceSessionsByConferenceId(id);
     }
-
-	
 }

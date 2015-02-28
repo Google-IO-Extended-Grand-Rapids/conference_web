@@ -25,8 +25,8 @@ public class ConferenceService {
 		return ConferenceViewBuilder.build(conferenceRepository.findAll());
 	}
 
-	public ConferenceView findConferenceById(Long id) {
-		return stubFactory.findConferenceById(id);
+	public ConferenceView findConferenceById(Integer id) {
+		return ConferenceViewBuilder.build(conferenceRepository.findOne(id));
 	}
 
 	public Collection<PresenterView> findAllPresenters() {
