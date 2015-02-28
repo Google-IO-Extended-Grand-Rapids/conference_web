@@ -29,8 +29,11 @@ public class ConferenceViewBuilder {
 	}
 
 	public static ConferenceView build(Conference data) {
+		if (data == null)
+			return null;
+		
 		ConferenceView view = new ConferenceView();
-
+		
 		view.setId(Long.valueOf(data.getId()));
 
 		view.setName(data.getName());

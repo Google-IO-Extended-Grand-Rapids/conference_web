@@ -2,9 +2,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-    
-    <include relativeToChangelogFile="true" file="db/changelogs/db-changelog.001.data_stage.xml" />
-    <include relativeToChangelogFile="true" file="db/changelogs/db-changelog.002.conf_model.xml" />
-    <include relativeToChangelogFile="true" file="db/changelogs/db-changelog.003.alter_id_types.xml" />
-    <include relativeToChangelogFile="true" file="db/changelogs/db-changelog.004.alter_duration.xml" />
+
+	<changeSet id="004_alter_conference_session_table" author="Adam">
+		<comment>Alter user cred table</comment>
+
+		<dropColumn columnName="duration" schemaName="conf_admin"
+			tableName="conference_session" />
+
+		<addColumn schemaName="conf_admin" tableName="conference_session">
+			<column name="duration" type="integer" />
+		</addColumn>
+	</changeSet>
 </databaseChangeLog>

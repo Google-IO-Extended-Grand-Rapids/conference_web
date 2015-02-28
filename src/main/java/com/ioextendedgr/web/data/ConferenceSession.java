@@ -12,20 +12,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
-
 
 /**
  * The persistent class for the conference_session database table.
  * 
  */
 @Entity
-@Table(name="conference_session")
-//@TypeDef(name="interval", typeClass = Interval.class)
+@Table(name = "conference_session")
 public class ConferenceSession implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -33,52 +27,52 @@ public class ConferenceSession implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(name="create_dttm")
+	@Column(name = "create_dttm")
 	private Timestamp createDttm;
 
-//	@Type(type="interval") 
-//	private Long duration;
+	@Column(name = "duration")
+	private Integer duration;
 
-	@Column(name="full_desc")
+	@Column(name = "full_desc")
 	private String fullDesc;
 
-	@Column(name="last_update_dttm")
+	@Column(name = "last_update_dttm")
 	private Timestamp lastUpdateDttm;
 
 	private String name;
 
-	@Column(name="short_desc")
+	@Column(name = "short_desc")
 	private String shortDesc;
 
-	@Column(name="start_dttm")
+	@Column(name = "start_dttm")
 	private Timestamp startDttm;
 
-	//bi-directional many-to-one association to Conference
+	// bi-directional many-to-one association to Conference
 	@ManyToOne
-	@JoinColumn(name="conference_id")
+	@JoinColumn(name = "conference_id")
 	private Conference conference;
 
-	//bi-directional many-to-one association to ConferenceSessionPresenter
+	// bi-directional many-to-one association to ConferenceSessionPresenter
 	@ManyToOne
-	@JoinColumn(name="conference_session_presenter_id")
+	@JoinColumn(name = "conference_session_presenter_id")
 	private ConferenceSessionPresenter conferenceSessionPresenter;
 
-	//bi-directional many-to-one association to ConferenceSessionType
+	// bi-directional many-to-one association to ConferenceSessionType
 	@ManyToOne
-	@JoinColumn(name="conference_session_type_id")
+	@JoinColumn(name = "conference_session_type_id")
 	private ConferenceSessionType conferenceSessionType;
 
-	//bi-directional many-to-one association to Room
+	// bi-directional many-to-one association to Room
 	@ManyToOne
-	@JoinColumn(name="room_id")
+	@JoinColumn(name = "room_id")
 	private Room room;
 
-	//bi-directional many-to-one association to ConferenceSessionPresenter
-	@OneToMany(mappedBy="conferenceSession")
+	// bi-directional many-to-one association to ConferenceSessionPresenter
+	@OneToMany(mappedBy = "conferenceSession")
 	private List<ConferenceSessionPresenter> conferenceSessionPresenters;
 
-	//bi-directional many-to-one association to ConferenceSessionRegistration
-	@OneToMany(mappedBy="conferenceSession")
+	// bi-directional many-to-one association to ConferenceSessionRegistration
+	@OneToMany(mappedBy = "conferenceSession")
 	private List<ConferenceSessionRegistration> conferenceSessionRegistrations;
 
 	public ConferenceSession() {
@@ -100,15 +94,13 @@ public class ConferenceSession implements Serializable {
 		this.createDttm = createDttm;
 	}
 
-//	public Object getDuration() {
-//		return this.duration;
-//	}
-//	
-//	
-//	@Type(type = "interval") 
-//	public void setDuration(Long duration) {
-//		this.duration = duration;
-//	}
+	 public Integer getDuration() {
+	 return this.duration;
+	 }
+		
+	 public void setDuration(Integer duration) {
+	 this.duration = duration;
+	 }
 
 	public String getFullDesc() {
 		return this.fullDesc;
@@ -162,7 +154,8 @@ public class ConferenceSession implements Serializable {
 		return this.conferenceSessionPresenter;
 	}
 
-	public void setConferenceSessionPresenter(ConferenceSessionPresenter conferenceSessionPresenter) {
+	public void setConferenceSessionPresenter(
+			ConferenceSessionPresenter conferenceSessionPresenter) {
 		this.conferenceSessionPresenter = conferenceSessionPresenter;
 	}
 
@@ -170,7 +163,8 @@ public class ConferenceSession implements Serializable {
 		return this.conferenceSessionType;
 	}
 
-	public void setConferenceSessionType(ConferenceSessionType conferenceSessionType) {
+	public void setConferenceSessionType(
+			ConferenceSessionType conferenceSessionType) {
 		this.conferenceSessionType = conferenceSessionType;
 	}
 
@@ -186,18 +180,21 @@ public class ConferenceSession implements Serializable {
 		return this.conferenceSessionPresenters;
 	}
 
-	public void setConferenceSessionPresenters(List<ConferenceSessionPresenter> conferenceSessionPresenters) {
+	public void setConferenceSessionPresenters(
+			List<ConferenceSessionPresenter> conferenceSessionPresenters) {
 		this.conferenceSessionPresenters = conferenceSessionPresenters;
 	}
 
-	public ConferenceSessionPresenter addConferenceSessionPresenter(ConferenceSessionPresenter conferenceSessionPresenter) {
+	public ConferenceSessionPresenter addConferenceSessionPresenter(
+			ConferenceSessionPresenter conferenceSessionPresenter) {
 		getConferenceSessionPresenters().add(conferenceSessionPresenter);
 		conferenceSessionPresenter.setConferenceSession(this);
 
 		return conferenceSessionPresenter;
 	}
 
-	public ConferenceSessionPresenter removeConferenceSessionPresenter(ConferenceSessionPresenter conferenceSessionPresenter) {
+	public ConferenceSessionPresenter removeConferenceSessionPresenter(
+			ConferenceSessionPresenter conferenceSessionPresenter) {
 		getConferenceSessionPresenters().remove(conferenceSessionPresenter);
 		conferenceSessionPresenter.setConferenceSession(null);
 
@@ -208,19 +205,23 @@ public class ConferenceSession implements Serializable {
 		return this.conferenceSessionRegistrations;
 	}
 
-	public void setConferenceSessionRegistrations(List<ConferenceSessionRegistration> conferenceSessionRegistrations) {
+	public void setConferenceSessionRegistrations(
+			List<ConferenceSessionRegistration> conferenceSessionRegistrations) {
 		this.conferenceSessionRegistrations = conferenceSessionRegistrations;
 	}
 
-	public ConferenceSessionRegistration addConferenceSessionRegistration(ConferenceSessionRegistration conferenceSessionRegistration) {
+	public ConferenceSessionRegistration addConferenceSessionRegistration(
+			ConferenceSessionRegistration conferenceSessionRegistration) {
 		getConferenceSessionRegistrations().add(conferenceSessionRegistration);
 		conferenceSessionRegistration.setConferenceSession(this);
 
 		return conferenceSessionRegistration;
 	}
 
-	public ConferenceSessionRegistration removeConferenceSessionRegistration(ConferenceSessionRegistration conferenceSessionRegistration) {
-		getConferenceSessionRegistrations().remove(conferenceSessionRegistration);
+	public ConferenceSessionRegistration removeConferenceSessionRegistration(
+			ConferenceSessionRegistration conferenceSessionRegistration) {
+		getConferenceSessionRegistrations().remove(
+				conferenceSessionRegistration);
 		conferenceSessionRegistration.setConferenceSession(null);
 
 		return conferenceSessionRegistration;
