@@ -1,7 +1,9 @@
 package com.ioextendedgr.web.data;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -15,6 +17,7 @@ public class ConferenceSessionType implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	private String desc;

@@ -1,11 +1,18 @@
 package com.ioextendedgr.web.data;
 
 import java.io.Serializable;
-
-import javax.persistence.*;
-
 import java.sql.Timestamp;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the conference database table.
@@ -42,12 +49,13 @@ public class Conference implements Serializable {
 
 	// bi-directional many-to-one association to Location
 	@ManyToOne
+	@JoinColumn(name="location_id")
 	private Location location;
 
 	// bi-directional many-to-one association to ConferenceSession
 	@OneToMany(mappedBy = "conference")
 	private List<ConferenceSession> conferenceSessions;
-
+	
 	// bi-directional many-to-one association to Room
 	@OneToMany(mappedBy = "conference")
 	private List<Room> rooms;

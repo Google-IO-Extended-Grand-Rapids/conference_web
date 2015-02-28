@@ -1,6 +1,7 @@
 package com.ioextendedgr.web;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
 import com.ioextendedgr.web.data.Conference;
 import com.ioextendedgr.web.data.Location;
 import com.ioextendedgr.web.repository.ConferenceRepository;
+import com.ioextendedgr.web.repository.LocationRepository;
 
 @ComponentScan(basePackages = {"com.ioextendedgr.web"})
 @EnableAutoConfiguration
@@ -22,6 +24,9 @@ public class Application implements CommandLineRunner{
     
     @Autowired
     ConferenceRepository cr;
+    
+    @Autowired
+    LocationRepository lr;
     
     @Override
     public void run(String... strings) {
@@ -34,18 +39,24 @@ public class Application implements CommandLineRunner{
         location.setParkingInfo("Parking on the street");
         location.setShortDesc("MySQL");
         
+        
+        
         Conference c = new Conference();
         c.setCreateDttm(new Timestamp(new Date().getTime()));
         c.setEndDate(new Timestamp(new Date().getTime()));
         c.setFullDesc("Jonas' SQL Blowout");
         //c.setId(Integer.valueOf(1));
         c.setLastUpdateDttm(new Timestamp(new Date().getTime()));
-         c.setLocation(location );
          c.setName("Blue 35");
          c.setShortDesc("Why not to use postgres");
          c.setStartDate(new Timestamp(new Date().getTime()));
          
-         cr.save(c);
+         location.setConferences(new ArrayList<Conference>());     
+         location.addConference(c);
+         
+         //lr.save(location);
+         
+         
     }
 
 }

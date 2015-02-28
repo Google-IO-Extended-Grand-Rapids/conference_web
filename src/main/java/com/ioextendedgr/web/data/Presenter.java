@@ -17,6 +17,7 @@ public class Presenter implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	@Column(name="job_title")
@@ -26,7 +27,7 @@ public class Presenter implements Serializable {
 	private String shortBio;
 
 	@Column(name="user_id")
-	private Long userId;
+	private Integer userId;
 
 	//bi-directional many-to-one association to ConferenceSessionPresenter
 	@OneToMany(mappedBy="presenter")
@@ -64,11 +65,11 @@ public class Presenter implements Serializable {
 		this.shortBio = shortBio;
 	}
 
-	public Long getUserId() {
+	public Integer getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(Long userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 
