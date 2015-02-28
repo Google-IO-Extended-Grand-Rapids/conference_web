@@ -1,6 +1,7 @@
 package com.ioextendedgr.web.data;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -14,6 +15,7 @@ public class ConferenceSessionRegistration implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	//bi-directional many-to-one association to ConferenceSession
@@ -23,6 +25,7 @@ public class ConferenceSessionRegistration implements Serializable {
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
+	@JoinColumn(name="user_id")
 	private User user;
 
 	public ConferenceSessionRegistration() {

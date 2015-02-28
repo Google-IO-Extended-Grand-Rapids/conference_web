@@ -25,20 +25,19 @@ import org.hibernate.annotations.TypeDef;
  */
 @Entity
 @Table(name="conference_session")
-@TypeDef(name="interval", typeClass = Interval.class)
-@SequenceGenerator(name = "conference_session_id_seq", sequenceName = "conference_session_id_seq", allocationSize = 1)
+//@TypeDef(name="interval", typeClass = Interval.class)
 public class ConferenceSession implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "conference_session_id_seq")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	@Column(name="create_dttm")
 	private Timestamp createDttm;
 
-	@Type(type="interval") 
-	private Long duration;
+//	@Type(type="interval") 
+//	private Long duration;
 
 	@Column(name="full_desc")
 	private String fullDesc;
@@ -71,6 +70,7 @@ public class ConferenceSession implements Serializable {
 
 	//bi-directional many-to-one association to Room
 	@ManyToOne
+	@JoinColumn(name="room_id")
 	private Room room;
 
 	//bi-directional many-to-one association to ConferenceSessionPresenter
@@ -100,15 +100,15 @@ public class ConferenceSession implements Serializable {
 		this.createDttm = createDttm;
 	}
 
-	public Object getDuration() {
-		return this.duration;
-	}
-	
-	
-	@Type(type = "interval") 
-	public void setDuration(Long duration) {
-		this.duration = duration;
-	}
+//	public Object getDuration() {
+//		return this.duration;
+//	}
+//	
+//	
+//	@Type(type = "interval") 
+//	public void setDuration(Long duration) {
+//		this.duration = duration;
+//	}
 
 	public String getFullDesc() {
 		return this.fullDesc;
@@ -225,5 +225,4 @@ public class ConferenceSession implements Serializable {
 
 		return conferenceSessionRegistration;
 	}
-
 }
