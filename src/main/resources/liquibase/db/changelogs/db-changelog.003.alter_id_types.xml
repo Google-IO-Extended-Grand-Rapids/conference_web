@@ -1,0 +1,144 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<changeSet id="003_add_user_xyz_pk" author="Adam">
+		<comment>Add primary key to user xyz table</comment>
+
+	    <addPrimaryKey
+	            columnNames="id"
+	            schemaName="conf_admin"
+	            tableName="user_xyz"/>
+	</changeSet>
+
+	<changeSet id="003_alter_conference_table" author="Adam">
+		<comment>Alter conference table</comment>
+
+	    <modifyDataType
+	            columnName="location_id"
+	            newDataType="integer"
+	            schemaName="conf_admin"
+	            tableName="conference"/>
+	</changeSet>
+
+	<changeSet id="003_alter_conference_session_table" author="Adam">
+		<comment>Alter conference session table</comment>
+
+	    <modifyDataType
+	            columnName="conference_id"
+	            newDataType="integer"
+	            schemaName="conf_admin"
+	            tableName="conference_session"/>
+
+	    <modifyDataType
+	            columnName="conference_session_type_id"
+	            newDataType="integer"
+	            schemaName="conf_admin"
+	            tableName="conference_session"/>
+
+	    <modifyDataType
+	            columnName="conference_session_presenter_id"
+	            newDataType="integer"
+	            schemaName="conf_admin"
+	            tableName="conference_session"/>
+	</changeSet>
+
+	<changeSet id="003_alter_conference_session__presenter_table" author="Adam">
+		<comment>Alter conference session presenter table</comment>
+
+	    <modifyDataType
+	            columnName="conference_session_id"
+	            newDataType="integer"
+	            schemaName="conf_admin"
+	            tableName="conference_session_presenter"/>
+
+	    <modifyDataType
+	            columnName="presenter_id"
+	            newDataType="integer"
+	            schemaName="conf_admin"
+	            tableName="conference_session_presenter"/>
+	</changeSet>
+
+	<changeSet id="003_alter_conference_session_registration_table" author="Adam">
+		<comment>Alter conference session registration table</comment>
+
+	    <modifyDataType
+	            columnName="user_id"
+	            newDataType="integer"
+	            schemaName="conf_admin"
+	            tableName="conference_session_registration"/>
+
+	    <modifyDataType
+	            columnName="conference_session_id"
+	            newDataType="integer"
+	            schemaName="conf_admin"
+	            tableName="conference_session_registration"/>
+	</changeSet>
+
+	<changeSet id="003_alter_location_address_table" author="Adam">
+		<comment>Alter location address table</comment>
+
+	    <modifyDataType
+	            columnName="location_id"
+	            newDataType="integer"
+	            schemaName="conf_admin"
+	            tableName="location_address"/>
+	</changeSet>
+
+	<changeSet id="003_alter_presenter_table" author="Adam">
+		<comment>Alter presenter table</comment>
+
+	    <modifyDataType
+	            columnName="user_id"
+	            newDataType="integer"
+	            schemaName="conf_admin"
+	            tableName="presenter"/>
+
+	    <modifyDataType
+	            columnName="company_affiliation_id"
+	            newDataType="integer"
+	            schemaName="conf_admin"
+	            tableName="presenter"/>
+	</changeSet>
+
+	<changeSet id="003_alter_room_table" author="Adam">
+		<comment>Alter room table</comment>
+
+	    <modifyDataType
+	            columnName="conference_id"
+	            newDataType="integer"
+	            schemaName="conf_admin"
+	            tableName="room"/>
+	</changeSet>
+
+	<changeSet id="003_alter_sponsor_table" author="Adam">
+		<comment>Alter sponsor table</comment>
+
+	    <modifyDataType
+	            columnName="sponsor_level"
+	            newDataType="integer"
+	            schemaName="conf_admin"
+	            tableName="sponsor"/>
+	</changeSet>
+
+	<changeSet id="003_alter_sponsor_level_table" author="Adam">
+		<comment>Alter sponsor level table</comment>
+
+	    <modifyDataType
+	            columnName="conference_id"
+	            newDataType="integer"
+	            schemaName="conf_admin"
+	            tableName="sponsor_level"/>
+	</changeSet>
+
+	<changeSet id="003_alter_user_cred_table" author="Adam">
+		<comment>Alter user cred table</comment>
+
+	    <modifyDataType
+	            columnName="user_id"
+	            newDataType="integer"
+	            schemaName="conf_admin"
+	            tableName="user_cred"/>
+	</changeSet>
+</databaseChangeLog>

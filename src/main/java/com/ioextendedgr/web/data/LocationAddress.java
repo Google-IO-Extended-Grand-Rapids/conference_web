@@ -1,7 +1,9 @@
 package com.ioextendedgr.web.data;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.sql.Timestamp;
 
 
@@ -15,7 +17,8 @@ public class LocationAddress implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
 	@Column(name="address_1")
 	private String address1;
@@ -42,18 +45,20 @@ public class LocationAddress implements Serializable {
 
 	//bi-directional many-to-one association to Location
 	@ManyToOne
+	@JoinColumn(name="location_id")
 	private Location location;
 
 	public LocationAddress() {
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
+
 
 	public String getAddress1() {
 		return this.address1;

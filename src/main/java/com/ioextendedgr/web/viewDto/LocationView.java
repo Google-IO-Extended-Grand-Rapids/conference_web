@@ -7,17 +7,17 @@ import com.ioextendedgr.web.util.DateTimeISO8601Serializer;
 
 public class LocationView {
 
-	private Long id;
+	private Integer id;
 	private String name;
 	private String shortDesc;
 	private String fullDesc;
 	private String parkingInfo;
 	private Date createDttm;
 	private Date lastUpdateDttm;
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getName() {

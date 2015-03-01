@@ -5,6 +5,8 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ioextendedgr.web.builder.ConferenceViewBuilder;
+import com.ioextendedgr.web.repository.ConferenceRepository;
 import com.ioextendedgr.web.util.StubFactory;
 import com.ioextendedgr.web.viewDto.ConferenceSessionView;
 import com.ioextendedgr.web.viewDto.ConferenceView;
@@ -15,13 +17,16 @@ public class ConferenceService {
 	
 	@Autowired
 	private StubFactory stubFactory;
+	
+	@Autowired
+	private ConferenceRepository conferenceRepository;
 
 	public Collection<ConferenceView> findAllConferences() {
-		return stubFactory.findAllConferences();
+		return ConferenceViewBuilder.build(conferenceRepository.findAll());
 	}
 
-	public ConferenceView findConferenceById(Long id) {
-		return stubFactory.findConferenceById(id);
+	public ConferenceView findConferenceById(Integer id) {
+		return ConferenceViewBuilder.build(conferenceRepository.findOne(id));
 	}
 
 	public Collection<PresenterView> findAllPresenters() {

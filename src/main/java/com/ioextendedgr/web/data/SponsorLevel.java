@@ -1,7 +1,9 @@
 package com.ioextendedgr.web.data;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -15,29 +17,32 @@ public class SponsorLevel implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
 	@Column(name="full_desc")
 	private String fullDesc;
 
 	//bi-directional many-to-one association to Sponsor
-	@OneToMany(mappedBy="sponsorLevelBean")
+	@OneToMany(mappedBy="sponsorLevel")
 	private List<Sponsor> sponsors;
 
 	//bi-directional many-to-one association to Conference
 	@ManyToOne
+	@JoinColumn(name="conference_id")
 	private Conference conference;
 
 	public SponsorLevel() {
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
+
 
 	public String getFullDesc() {
 		return this.fullDesc;

@@ -1,7 +1,13 @@
 package com.ioextendedgr.web.data;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 
 /**
@@ -16,7 +22,9 @@ public class UserXyz implements Serializable {
 	@Column(name="first_name")
 	private String firstName;
 
-	private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
 	@Column(name="last_name")
 	private String lastName;
@@ -37,11 +45,11 @@ public class UserXyz implements Serializable {
 		this.firstName = firstName;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

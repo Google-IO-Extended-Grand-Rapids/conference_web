@@ -218,7 +218,7 @@ public class StubFactory {
 		
 		dto.setCreateDttm(new Date());
 		dto.setFullDesc(String.format("Full Description Location: %d", index));
-		dto.setId(Long.valueOf(index));
+		dto.setId(index);
 		dto.setLastUpdateDttm(new Date());
 		dto.setName(String.format("Location %d", index));
 		dto.setParkingInfo(String.format("The parking information for Location: %d is the following....", index));

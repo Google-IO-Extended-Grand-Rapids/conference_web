@@ -1,7 +1,9 @@
 package com.ioextendedgr.web.data;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -15,7 +17,8 @@ public class ConferenceSessionPresenter implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
 	//bi-directional many-to-one association to ConferenceSession
 	@OneToMany(mappedBy="conferenceSessionPresenter")
@@ -33,13 +36,14 @@ public class ConferenceSessionPresenter implements Serializable {
 	public ConferenceSessionPresenter() {
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
+
 
 	public List<ConferenceSession> getConferenceSessions() {
 		return this.conferenceSessions;

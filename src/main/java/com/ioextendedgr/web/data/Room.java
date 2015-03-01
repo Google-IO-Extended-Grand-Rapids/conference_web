@@ -17,7 +17,8 @@ public class Room implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
 	@Column(name="full_desc")
 	private String fullDesc;
@@ -36,13 +37,14 @@ public class Room implements Serializable {
 	public Room() {
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
+
 
 	public String getFullDesc() {
 		return this.fullDesc;

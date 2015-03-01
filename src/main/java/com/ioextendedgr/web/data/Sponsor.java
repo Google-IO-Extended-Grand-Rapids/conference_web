@@ -15,7 +15,8 @@ public class Sponsor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
 	@Column(name="home_page_url")
 	private String homePageUrl;
@@ -28,16 +29,16 @@ public class Sponsor implements Serializable {
 	//bi-directional many-to-one association to SponsorLevel
 	@ManyToOne
 	@JoinColumn(name="sponsor_level")
-	private SponsorLevel sponsorLevelBean;
+	private SponsorLevel sponsorLevel;
 
 	public Sponsor() {
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -66,11 +67,11 @@ public class Sponsor implements Serializable {
 	}
 
 	public SponsorLevel getSponsorLevelBean() {
-		return this.sponsorLevelBean;
+		return this.sponsorLevel;
 	}
 
 	public void setSponsorLevelBean(SponsorLevel sponsorLevelBean) {
-		this.sponsorLevelBean = sponsorLevelBean;
+		this.sponsorLevel = sponsorLevelBean;
 	}
 
 }
