@@ -7,4 +7,5 @@
     <include relativeToChangelogFile="true" file="db/changelogs/db-changelog.002.conf_model.xml" />
     <include relativeToChangelogFile="true" file="db/changelogs/db-changelog.003.alter_id_types.xml" />
     <include relativeToChangelogFile="true" file="db/changelogs/db-changelog.004.alter_duration.xml" />
+    <include relativeToChangelogFile="true" file="db/changelogs/db-changelog.005.alter_conference_session_.xml" />
 </databaseChangeLog>
