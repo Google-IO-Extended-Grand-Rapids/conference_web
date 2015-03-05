@@ -34,6 +34,11 @@ public class PresenterBuilder {
 	}
 
 	private static CompanyView toCompanyView(Company dto) {
+		
+		if (null == dto) {
+			return null;
+		}
+		
 		CompanyView companyView = new CompanyView();
 		
 		companyView.setFullDesc(dto.getFullDesc());
