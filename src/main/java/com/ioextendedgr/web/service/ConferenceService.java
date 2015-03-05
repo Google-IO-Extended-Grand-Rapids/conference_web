@@ -2,13 +2,15 @@ package com.ioextendedgr.web.service;
 
 import java.util.Collection;
 
-import com.ioextendedgr.web.builder.ConferenceSessionBuilder;
-import com.ioextendedgr.web.repository.ConferenceSessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ioextendedgr.web.builder.ConferenceSessionBuilder;
 import com.ioextendedgr.web.builder.ConferenceViewBuilder;
+import com.ioextendedgr.web.builder.PresenterBuilder;
 import com.ioextendedgr.web.repository.ConferenceRepository;
+import com.ioextendedgr.web.repository.ConferenceSessionRepository;
+import com.ioextendedgr.web.repository.PresenterRepository;
 import com.ioextendedgr.web.util.StubFactory;
 import com.ioextendedgr.web.viewDto.ConferenceSessionView;
 import com.ioextendedgr.web.viewDto.ConferenceView;
@@ -26,6 +28,9 @@ public class ConferenceService {
     @Autowired
     private ConferenceSessionRepository conferenceSessionRepository;
 
+    @Autowired
+    private PresenterRepository presenterRepository;
+
 	public Collection<ConferenceView> findAllConferences() {
 		return ConferenceViewBuilder.build(conferenceRepository.findAll());
 	}
@@ -35,11 +40,11 @@ public class ConferenceService {
 	}
 
 	public Collection<PresenterView> findAllPresenters() {
-		return stubFactory.findAllPresenters();
+		return PresenterBuilder.build(presenterRepository.findAll());
 	}
 
-	public PresenterView findPresenterById(Long id) {
-		return stubFactory.findPresenterById(id);
+	public PresenterView findPresenterById(Integer id) {
+		return PresenterBuilder.build(presenterRepository.findOne(id));
 	}
 
 	public Collection<ConferenceSessionView> findAllConferenceSessions() {
