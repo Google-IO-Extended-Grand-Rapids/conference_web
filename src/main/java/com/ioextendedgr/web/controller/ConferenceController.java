@@ -32,7 +32,7 @@ public class ConferenceController {
     }
 
     @RequestMapping("/conference/{id}/conferenceSessions")
-    public Collection<ConferenceSessionView> findConferenceSessionsByConferenceId(@PathVariable("id") Long id) {
+    public Collection<ConferenceSessionView> findConferenceSessionsByConferenceId(@PathVariable("id") Integer id) {
     	return conferenceService.findConferenceSessionsByConferenceId(id);
     }
 }

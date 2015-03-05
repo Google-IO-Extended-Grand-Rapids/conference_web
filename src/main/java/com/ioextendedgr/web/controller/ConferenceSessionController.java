@@ -11,19 +11,19 @@ import com.ioextendedgr.web.service.ConferenceService;
 import com.ioextendedgr.web.viewDto.ConferenceSessionView;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/conferenceSession")
 public class ConferenceSessionController {
 
 	@Autowired
 	private ConferenceService conferenceService;
 
-    @RequestMapping("/conferenceSession")
+    @RequestMapping("")
     public Collection<ConferenceSessionView> findAllConferenceSessions() {
     	return conferenceService.findAllConferenceSessions();
     }
 
-    @RequestMapping("/conferenceSession/{id}")
-    public ConferenceSessionView findConferenceSessionById(@PathVariable("id") Long id) {
+    @RequestMapping("/{id}")
+    public ConferenceSessionView findConferenceSessionById(@PathVariable("id") Integer id) {
     	return conferenceService.findConferenceSessionById(id);
     }
 }
