@@ -2,6 +2,8 @@ package com.ioextendedgr.web.service;
 
 import java.util.Collection;
 
+import com.ioextendedgr.web.builder.ConferenceSessionBuilder;
+import com.ioextendedgr.web.repository.ConferenceSessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +23,9 @@ public class ConferenceService {
 	@Autowired
 	private ConferenceRepository conferenceRepository;
 
+    @Autowired
+    private ConferenceSessionRepository conferenceSessionRepository;
+
 	public Collection<ConferenceView> findAllConferences() {
 		return ConferenceViewBuilder.build(conferenceRepository.findAll());
 	}
@@ -38,15 +43,15 @@ public class ConferenceService {
 	}
 
 	public Collection<ConferenceSessionView> findAllConferenceSessions() {
-		return stubFactory.findAllConferenceSessions();
+        return ConferenceSessionBuilder.build(conferenceSessionRepository.findAll());
 	}
 
-	public ConferenceSessionView findConferenceSessionById(Long id) {
-		return stubFactory.findConferenceSessionById(id);
+	public ConferenceSessionView findConferenceSessionById(Integer id) {
+        return ConferenceSessionBuilder.build(conferenceSessionRepository.findOne(id));
 	}
 
-	public Collection<ConferenceSessionView> findConferenceSessionsByConferenceId(Long id) {
-		return stubFactory.findConferenceSessionsByConferenceId(id);
+	public Collection<ConferenceSessionView> findConferenceSessionsByConferenceId(Integer id) {
+		return ConferenceSessionBuilder.build(conferenceSessionRepository.findByConferenceId(id));
 	}
 
 }
