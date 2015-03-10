@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import com.ioextendedgr.web.builder.ConferenceSessionBuilder;
 import com.ioextendedgr.web.builder.LocationBuilder;
+import com.ioextendedgr.web.data.Conference;
 import com.ioextendedgr.web.data.Location;
 import com.ioextendedgr.web.repository.ConferenceSessionRepository;
 import com.ioextendedgr.web.repository.LocationRepository;
@@ -64,5 +65,9 @@ public class ConferenceService {
 	public Collection<ConferenceSessionView> findConferenceSessionsByConferenceId(Integer id) {
 		return ConferenceSessionBuilder.build(conferenceSessionRepository.findByConferenceId(id));
 	}
+
+    public void addConference(Conference conference){
+          conferenceRepository.save(conference);
+    }
 
 }
