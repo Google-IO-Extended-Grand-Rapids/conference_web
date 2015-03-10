@@ -3,7 +3,11 @@ package com.ioextendedgr.web.service;
 import java.util.Collection;
 
 import com.ioextendedgr.web.builder.ConferenceSessionBuilder;
+import com.ioextendedgr.web.builder.LocationBuilder;
+import com.ioextendedgr.web.data.Location;
 import com.ioextendedgr.web.repository.ConferenceSessionRepository;
+import com.ioextendedgr.web.repository.LocationRepository;
+import com.ioextendedgr.web.viewDto.LocationView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +26,9 @@ public class ConferenceService {
 	
 	@Autowired
 	private ConferenceRepository conferenceRepository;
+
+    @Autowired
+    private LocationRepository locationRepository;
 
     @Autowired
     private ConferenceSessionRepository conferenceSessionRepository;
@@ -45,6 +52,10 @@ public class ConferenceService {
 	public Collection<ConferenceSessionView> findAllConferenceSessions() {
         return ConferenceSessionBuilder.build(conferenceSessionRepository.findAll());
 	}
+
+    public Collection<LocationView> findAllLocations() {
+        return LocationBuilder.build(locationRepository.findAll());
+    }
 
 	public ConferenceSessionView findConferenceSessionById(Integer id) {
         return ConferenceSessionBuilder.build(conferenceSessionRepository.findOne(id));
