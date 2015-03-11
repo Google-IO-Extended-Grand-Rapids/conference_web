@@ -18,6 +18,9 @@ import com.ioextendedgr.web.util.StubFactory;
 import com.ioextendedgr.web.viewDto.ConferenceSessionView;
 import com.ioextendedgr.web.viewDto.ConferenceView;
 import com.ioextendedgr.web.viewDto.PresenterView;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class ConferenceService {
@@ -66,8 +69,14 @@ public class ConferenceService {
 		return ConferenceSessionBuilder.build(conferenceSessionRepository.findByConferenceId(id));
 	}
 
+
     public void addConference(Conference conference){
           conferenceRepository.save(conference);
     }
+
+    public void deleteConference(Integer id){
+        conferenceRepository.delete(id);
+    }
+
 
 }

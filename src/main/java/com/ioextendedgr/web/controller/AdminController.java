@@ -49,7 +49,14 @@ public class AdminController {
             logger.info(result.getAllErrors().toString());
         }
         conferenceService.addConference(conference);
-        return getConferenceView(model);
+        return "redirect:" + CONFERENCE_VIEW;
+    }
+
+    @RequestMapping(value = "/conference", method = RequestMethod.DELETE)
+    public String deleteConference(@RequestParam Integer id) {
+
+        conferenceService.deleteConference(id);
+        return "redirect:" + CONFERENCE_VIEW;
     }
 
 

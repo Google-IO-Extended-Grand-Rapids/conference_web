@@ -25,6 +25,8 @@
         <th>End Date</th>
         <th>Last Update Dttm</th>
         <th>Location ID - Location Short Desc</th>
+        <th>DELETE</th>
+
     </tr>
     <tr th:each="conference : ${conferences}">
         <td th:text="${conference.id}"></td>
@@ -36,6 +38,7 @@
         <td th:text="${conference.endDate}"></td>
         <td th:text="${conference.lastUpdateDttm}"></td>
         <td th:text="${conference.locationView.id} + ' - ' + ${conference.locationView.shortDesc}"></td>
+        <td>  <form th:action="@{/admin/conference}" th:method="delete"><input type="hidden" name="id"  th:value="${conference.id}" /><input type="submit" value="Delete" /></form></td>
     </tr>
 </table>
 
