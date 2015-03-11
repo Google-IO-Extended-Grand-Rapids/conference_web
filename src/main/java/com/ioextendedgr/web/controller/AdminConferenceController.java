@@ -28,7 +28,7 @@ public class AdminConferenceController {
 
     private static final Logger logger = LoggerFactory.getLogger(AdminConferenceController.class);
 
-    public static String CONFERENCE_VIEW = "conference";
+    public static final String CONFERENCE_VIEW = "conference";
 
     @Autowired
     private ConferenceService conferenceService;
@@ -42,9 +42,7 @@ public class AdminConferenceController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String addConference(Conference conference, BindingResult result, @RequestParam Map<String,String> params) {
-
-        logger.info("PARAMS:\n\n\n " + params.toString());
+    public String addConference(Conference conference, BindingResult result) {
         if(result.hasErrors()){
             logger.info(result.getAllErrors().toString());
         }
@@ -54,7 +52,6 @@ public class AdminConferenceController {
 
     @RequestMapping(method = RequestMethod.DELETE)
     public String deleteConference(@RequestParam Integer id) {
-
         conferenceService.deleteConference(id);
         return "redirect:" + CONFERENCE_VIEW;
     }
