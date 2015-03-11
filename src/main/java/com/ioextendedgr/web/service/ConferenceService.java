@@ -2,6 +2,7 @@ package com.ioextendedgr.web.service;
 
 import java.util.Collection;
 
+import com.google.common.base.Strings;
 import com.ioextendedgr.web.builder.ConferenceSessionBuilder;
 import com.ioextendedgr.web.builder.LocationBuilder;
 import com.ioextendedgr.web.data.Conference;
@@ -77,6 +78,38 @@ public class ConferenceService {
     public void deleteConference(Integer id){
         conferenceRepository.delete(id);
     }
+
+    public void updateConference(Conference inputConference){
+        Conference managedConference =conferenceRepository.findOne(inputConference.getId());
+        if(!Strings.isNullOrEmpty(inputConference.getName())){
+            managedConference.setName(inputConference.getName());
+        }
+
+        if(!Strings.isNullOrEmpty(inputConference.getShortDesc())){
+            managedConference.setShortDesc(inputConference.getShortDesc());
+        }
+
+        if(!Strings.isNullOrEmpty(inputConference.getFullDesc())){
+            managedConference.setFullDesc(inputConference.getFullDesc());
+        }
+
+        if(inputConference.getStartDate() != null){
+            managedConference.setStartDate(inputConference.getStartDate());
+        }
+
+        if(inputConference.getEndDate() != null){
+            managedConference.setEndDate(inputConference.getEndDate());
+        }
+
+        if(inputConference.getLocation() != null){
+            Location location = new Location();
+            location.setId(inputConference.getLocation().getId());
+            managedConference.setLocation(location);
+        }
+
+        conferenceRepository.save(managedConference);
+    }
+
 
 
 }

@@ -60,6 +60,30 @@
     <input type="submit" value="Add" /><br/>
 </form>
 
+<h3>Edit an Existing Conference</h3>
+
+<form th:action="@{/admin/conference}" th:method="put">
+    <select name="id">
+        <option th:each="conference : ${conferences}"
+                th:value="${conference.id}"
+                th:text="${conference.name}"></option>
+    </select>
+    Name:<input type="text" name="name" /><br/>
+    Short Desc:<input type="text" name="shortDesc" /><br/>
+    Full Desc:<input type="text" name="fullDesc" /><br/>
+    Start Date (MM-dd-yyyy) :<input type="date" name="startDate"/><br/>
+    End Date (MM-dd-yyyy):<input type="date" name="endDate"/><br/>
+    Location:
+    <select name="location.id">
+        <option th:each="location : ${locations}"
+                th:value="${location.id}"
+                th:text="${location.shortDesc}"></option>
+    </select>
+    <br/>
+    <input type="submit" value="Add" /><br/>
+</form>
+
+
 
 </body>
 </html>

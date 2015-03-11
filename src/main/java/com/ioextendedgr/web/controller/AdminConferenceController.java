@@ -23,10 +23,10 @@ import java.util.Date;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/admin")
-public class AdminController {
+@RequestMapping("/admin/conference")
+public class AdminConferenceController {
 
-    private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
+    private static final Logger logger = LoggerFactory.getLogger(AdminConferenceController.class);
 
     public static String CONFERENCE_VIEW = "conference";
 
@@ -34,15 +34,15 @@ public class AdminController {
     private ConferenceService conferenceService;
 
 
-    @RequestMapping(value = "/conference", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public String getConferenceView(ModelMap model) {
         model.addAttribute("conferences", conferenceService.findAllConferences());
         model.addAttribute("locations", conferenceService.findAllLocations());
         return CONFERENCE_VIEW;
     }
 
-    @RequestMapping(value = "/conference", method = RequestMethod.POST)
-    public String addConference(ModelMap model, Conference conference, BindingResult result,@RequestParam Map<String,String> params) {
+    @RequestMapping(method = RequestMethod.POST)
+    public String addConference(Conference conference, BindingResult result, @RequestParam Map<String,String> params) {
 
         logger.info("PARAMS:\n\n\n " + params.toString());
         if(result.hasErrors()){
@@ -52,10 +52,16 @@ public class AdminController {
         return "redirect:" + CONFERENCE_VIEW;
     }
 
-    @RequestMapping(value = "/conference", method = RequestMethod.DELETE)
+    @RequestMapping(method = RequestMethod.DELETE)
     public String deleteConference(@RequestParam Integer id) {
 
         conferenceService.deleteConference(id);
+        return "redirect:" + CONFERENCE_VIEW;
+    }
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public String updateConference(Conference conference, BindingResult result) {
+        conferenceService.updateConference(conference);
         return "redirect:" + CONFERENCE_VIEW;
     }
 
