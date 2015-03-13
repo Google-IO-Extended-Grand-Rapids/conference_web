@@ -1,4 +1,4 @@
-INSERT INTO conf_admin.location(
+﻿INSERT INTO conf_admin.location(
              name, short_desc, full_desc, parking_info, create_dttm, last_update_dttm)
     VALUES ('Sample Location', 'short', 'full', 'no parking', CURRENT_DATE, CURRENT_DATE);
 
@@ -14,9 +14,12 @@ INSERT INTO conf_admin.room(
     select 'Short Description', 'Full Description', conference.id
                from conf_admin.conference where conference.name = 'Sample Conference';
 
+insert into conf_admin.company
+(name, short_desc, full_desc, logo_path) values ('GFS', 'Gordon Food Service', 'Food distribution', 'http://logo_path/gfs.png');
+
 INSERT INTO conf_admin.presenter(
             user_id, short_bio, job_title, company_affiliation_id)
-    VALUES (null, 'short bio', 'sample title', null);
+    VALUES (null, 'short bio', 'sample title', 1);
 
 INSERT INTO conf_admin.conference_session(
             name, short_desc, full_desc, conference_id, conference_session_type_id,
@@ -33,6 +36,10 @@ INSERT INTO conf_admin.conference_session_presenter(
     from conf_admin.presenter, conf_admin.conference_session
     where presenter.job_title = 'sample title' and conference_session.name = 'Session name';
 
+
+
+
+select * from conf_admin.company;
 
 
 /*
@@ -52,4 +59,3 @@ delete from conf_admin.location cascade;
 delete from conf_admin.presenter cascade;
 delete from conf_admin.conference cascade;
 */
-

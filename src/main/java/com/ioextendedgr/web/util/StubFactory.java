@@ -167,17 +167,17 @@ public class StubFactory {
 	private PresenterView toPresenterView(int index) {
 		PresenterView presenterView = new PresenterView();
 		presenterView.setCompanyView(toCompanyView(index));
-		presenterView.setId(Long.valueOf(index + 100));
+		presenterView.setId(index + 100);
 		presenterView.setJobTitle(format("Job Title: %d", presenterView.getId()));
 		presenterView.setShortBio(format("This is the short bio for Presenter: %d", presenterView.getId()));
-		presenterView.setUserId(format("userId_%d", presenterView.getId()));
+		presenterView.setUserId(presenterView.getId());
 		
 		return presenterView;
 	}
 
 	private CompanyView toCompanyView(int index) {
 		CompanyView companyView = new CompanyView();
-		companyView.setId(Long.valueOf(index + 50));
+		companyView.setId(index + 50);
 		companyView.setFullDesc(format("Company full description of blah,blah,blah: %d", companyView.getId()));
 		companyView.setLogoPath("http://some.url.logo.");
 		companyView.setName(format("Company #%d", companyView.getId()));

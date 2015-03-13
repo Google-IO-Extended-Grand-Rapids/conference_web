@@ -2,21 +2,21 @@ package com.ioextendedgr.web.viewDto;
 
 public class PresenterView {
 
-	private Long id;
-	private String userId;
+	private Integer id;
+	private Integer userId;
 	private String shortBio;
 	private String jobTitle;
 	private CompanyView companyView;
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
-	public void setUserId(String userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 	public String getShortBio() {
