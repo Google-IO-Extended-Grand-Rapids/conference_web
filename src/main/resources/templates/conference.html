@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Conference</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<h1>Admin Conference</h1>
+
+<h3>All Conferences</h3>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Short Desc</th>
+        <th>Full Desc</th>
+        <th>Create Dttm</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Last Update Dttm</th>
+        <th>Location ID - Location Short Desc</th>
+        <th>DELETE</th>
+
+    </tr>
+    <tr th:each="conference : ${conferences}">
+        <td th:text="${conference.id}"></td>
+        <td th:text="${conference.name}"></td>
+        <td th:text="${conference.shortDesc}"></td>
+        <td th:text="${conference.fullDesc}"></td>
+        <td th:text="${conference.createDttm}"></td>
+        <td th:text="${conference.startDate}"></td>
+        <td th:text="${conference.endDate}"></td>
+        <td th:text="${conference.lastUpdateDttm}"></td>
+        <td th:text="${conference.locationView.id} + ' - ' + ${conference.locationView.shortDesc}"></td>
+        <td>  <form th:action="@{/admin/conference}" th:method="delete"><input type="hidden" name="id"  th:value="${conference.id}" /><input type="submit" value="Delete" /></form></td>
+    </tr>
+</table>
+
+<h3>Add a New Conference</h3>
+
+<form th:action="@{/admin/conference}" th:method="post">
+    Name:<input type="text" name="name" /><br/>
+    Short Desc:<input type="text" name="shortDesc" /><br/>
+    Full Desc:<input type="text" name="fullDesc" /><br/>
+    Start Date (MM-dd-yyyy) :<input type="date" name="startDate"/><br/>
+    End Date (MM-dd-yyyy):<input type="date" name="endDate"/><br/>
+    Location:
+    <select name="location.id">
+        <option th:each="location : ${locations}"
+                th:value="${location.id}"
+                th:text="${location.shortDesc}"></option>
+    </select>
+    <br/>
+    <input type="submit" value="Add" /><br/>
+</form>
+
+<h3>Edit an Existing Conference</h3>
+
+<form th:action="@{/admin/conference}" th:method="put">
+    <select name="id">
+        <option th:each="conference : ${conferences}"
+                th:value="${conference.id}"
+                th:text="${conference.name}"></option>
+    </select>
+    <br/>
+    Name:<input type="text" name="name" /><br/>
+    Short Desc:<input type="text" name="shortDesc" /><br/>
+    Full Desc:<input type="text" name="fullDesc" /><br/>
+    Start Date (mm-dd-yyyy) :<input type="date" name="startDate"/><br/>
+    End Date (mm-dd-yyyy):<input type="date" name="endDate"/><br/>
+    Location:
+    <select name="location.id">
+        <option th:each="location : ${locations}"
+                th:value="${location.id}"
+                th:text="${location.shortDesc}"></option>
+    </select>
+    <br/>
+    <input type="submit" value="Edit" /><br/>
+</form>
+
+
+
+</body>
+</html>

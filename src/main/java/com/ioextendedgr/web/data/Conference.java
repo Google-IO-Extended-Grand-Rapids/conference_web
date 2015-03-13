@@ -2,17 +2,10 @@ package com.ioextendedgr.web.data;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * The persistent class for the conference database table.
@@ -206,5 +199,15 @@ public class Conference implements Serializable {
 
 		return sponsorLevel;
 	}
+
+    @PreUpdate
+    public void onPreUpdate(){
+        this.lastUpdateDttm = new Timestamp(System.currentTimeMillis());
+    }
+
+    @PrePersist
+    public void onPrePersist(){
+        this.createDttm = new Timestamp(System.currentTimeMillis());
+    }
 
 }
