@@ -1,0 +1,17 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+
+    <changeSet id="006_default_data_location" author="Carlus">
+        <comment>Load default location</comment>
+        
+        <sql>insert into conf_admin.location (id, name, short_desc, full_desc) values (-100, 'UNKNOWN', 'UNKNOWN', 'UNKNOWN')</sql>
+        <rollback>
+        	<sql>delete from conf_admin.location where id = -100</sql>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

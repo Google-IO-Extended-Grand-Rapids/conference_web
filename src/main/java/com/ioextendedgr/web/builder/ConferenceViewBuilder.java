@@ -53,6 +53,9 @@ public class ConferenceViewBuilder {
 	private static LocationView toLocationView(Location data) {
 		LocationView view = new LocationView();
 
+		if (data == null) {
+			return null;
+		}
 		view.setId(data.getId());
 
 		view.setName(data.getName());
