@@ -15,6 +15,7 @@ import com.ioextendedgr.web.data.Conference;
 import com.ioextendedgr.web.data.Location;
 import com.ioextendedgr.web.repository.ConferenceRepository;
 import com.ioextendedgr.web.repository.ConferenceSessionRepository;
+import com.ioextendedgr.web.repository.LocationRepository;
 import com.ioextendedgr.web.repository.PresenterRepository;
 import com.ioextendedgr.web.repository.RoomRepository;
 import com.ioextendedgr.web.util.StubFactory;
