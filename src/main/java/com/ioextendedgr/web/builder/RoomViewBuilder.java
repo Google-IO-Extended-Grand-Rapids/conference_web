@@ -14,6 +14,7 @@ public class RoomViewBuilder {
 		view.setId(data.getId());
 		view.setShortDesc(data.getShortDesc());
 		view.setFullDesc(data.getFullDesc());
+		view.setConferenceId(data.getConference().getId());
 
 		return view;
 	}

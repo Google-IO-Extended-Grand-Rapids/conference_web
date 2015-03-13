@@ -3,6 +3,7 @@ package com.ioextendedgr.web.viewDto;
 public class RoomView {
 
 	private Integer id;
+	private Integer conferenceId;
 	private String shortDesc;
 	private String fullDesc;
 
@@ -28,5 +29,13 @@ public class RoomView {
 
 	public void setFullDesc(String fullDesc) {
 		this.fullDesc = fullDesc;
+	}
+
+	public Integer getConferenceId() {
+		return conferenceId;
+	}
+
+	public void setConferenceId(Integer conferenceId) {
+		this.conferenceId = conferenceId;
 	}
 }
