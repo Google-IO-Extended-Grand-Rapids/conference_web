@@ -2,6 +2,7 @@ package com.ioextendedgr.web.service;
 
 import java.util.Collection;
 
+import com.ioextendedgr.web.data.ConferenceSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -67,6 +68,48 @@ public class ConferenceService {
 				.findAll());
 	}
 
+    public void addConferenceSession(ConferenceSession conferenceSession){
+        conferenceSessionRepository.save(conferenceSession);
+    }
+
+    public void updateConferenceSession(ConferenceSession inputConferenceSession){
+        ConferenceSession managedConferenceSession = conferenceSessionRepository.findOne(inputConferenceSession.getId());
+
+        if(!Strings.isNullOrEmpty(inputConferenceSession.getName())){
+            managedConferenceSession.setName(inputConferenceSession.getName());
+        }
+
+        if(!Strings.isNullOrEmpty(inputConferenceSession.getShortDesc())){
+            managedConferenceSession.setShortDesc(inputConferenceSession.getShortDesc());
+        }
+
+        if(!Strings.isNullOrEmpty(inputConferenceSession.getFullDesc())){
+            managedConferenceSession.setFullDesc(inputConferenceSession.getFullDesc());
+        }
+
+        if(inputConferenceSession.getDuration() != null){
+            managedConferenceSession.setDuration(inputConferenceSession.getDuration());
+        }
+
+        if(inputConferenceSession.getStartDttm() != null){
+            managedConferenceSession.setStartDttm(inputConferenceSession.getStartDttm());
+        }
+
+        if(inputConferenceSession.getConference() != null && inputConferenceSession.getConference().getId() != null){
+            managedConferenceSession.setConference(inputConferenceSession.getConference());
+        }
+
+        if(inputConferenceSession.getRoom() != null && inputConferenceSession.getRoom().getId() != null){
+            managedConferenceSession.setRoom(inputConferenceSession.getRoom());
+        }
+
+        conferenceSessionRepository.save(managedConferenceSession);
+    }
+
+    public void deleteConferenceSession(Integer id){
+        conferenceSessionRepository.delete(id);
+    }
+
     public Collection<LocationView> findAllLocations() {
         return LocationBuilder.build(locationRepository.findAll());
     }
@@ -112,16 +155,16 @@ public class ConferenceService {
             managedConference.setEndDate(inputConference.getEndDate());
         }
 
-        if(inputConference.getLocation() != null){
-            Location location = new Location();
-            location.setId(inputConference.getLocation().getId());
-            managedConference.setLocation(location);
+        if(inputConference.getLocation() != null && inputConference.getLocation().getId() != null){
+            managedConference.setLocation(inputConference.getLocation());
         }
 
         conferenceRepository.save(managedConference);
     }
 
-
+    public Collection<RoomView> findAllRooms(){
+        return RoomViewBuilder.build(roomRepository.findAll());
+    }
 
 	public RoomView findRoomById(Integer id) {
 		return RoomViewBuilder.build(roomRepository.findOne(id));

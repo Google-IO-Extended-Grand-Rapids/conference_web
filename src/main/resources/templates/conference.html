@@ -10,6 +10,9 @@
     </style>
 </head>
 <body>
+
+<div th:include="fragments/navbar" th:remove="tag"></div>
+
 <h1>Admin Conference</h1>
 
 <h3>All Conferences</h3>
@@ -72,10 +75,11 @@
     Name:<input type="text" name="name" /><br/>
     Short Desc:<input type="text" name="shortDesc" /><br/>
     Full Desc:<input type="text" name="fullDesc" /><br/>
-    Start Date (mm-dd-yyyy) :<input type="date" name="startDate"/><br/>
+    Start Date (mm-dd-yyyy):<input type="date" name="startDate"/><br/>
     End Date (mm-dd-yyyy):<input type="date" name="endDate"/><br/>
     Location:
     <select name="location.id">
+        <option value="">NO CHANGE</option>
         <option th:each="location : ${locations}"
                 th:value="${location.id}"
                 th:text="${location.shortDesc}"></option>

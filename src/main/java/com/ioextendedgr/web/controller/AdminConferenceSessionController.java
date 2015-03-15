@@ -2,6 +2,7 @@ package com.ioextendedgr.web.controller;
 
 
 import com.ioextendedgr.web.data.Conference;
+import com.ioextendedgr.web.data.ConferenceSession;
 import com.ioextendedgr.web.service.ConferenceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,53 +24,52 @@ import java.util.Date;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/admin/conference")
-public class AdminConferenceController {
+@RequestMapping("/admin/conference_session")
+public class AdminConferenceSessionController {
 
-    private static final Logger logger = LoggerFactory.getLogger(AdminConferenceController.class);
+    private static final Logger logger = LoggerFactory.getLogger(AdminConferenceSessionController.class);
 
-    public static final String CONFERENCE_VIEW = "conference";
+    public static final String CONFERENCE_SESSION_VIEW = "conference_session";
 
     @Autowired
     private ConferenceService conferenceService;
 
 
     @RequestMapping(method = RequestMethod.GET)
-    public String getConferenceView(ModelMap model) {
+    public String getConferenceSessionView(ModelMap model) {
+        model.addAttribute("conferenceSessions", conferenceService.findAllConferenceSessions());
         model.addAttribute("conferences", conferenceService.findAllConferences());
-        model.addAttribute("locations", conferenceService.findAllLocations());
-        return CONFERENCE_VIEW;
+        model.addAttribute("rooms", conferenceService.findAllRooms());
+        return CONFERENCE_SESSION_VIEW;
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String addConference(Conference conference, BindingResult result) {
+    public String addConference(ConferenceSession conferenceSession, BindingResult result) {
         if(result.hasErrors()){
             logger.info(result.getAllErrors().toString());
         }
-        conferenceService.addConference(conference);
-        return "redirect:" + CONFERENCE_VIEW;
+        conferenceService.addConferenceSession(conferenceSession);
+        return "redirect:" + CONFERENCE_SESSION_VIEW;
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
     public String deleteConference(@RequestParam Integer id) {
-        conferenceService.deleteConference(id);
-        return "redirect:" + CONFERENCE_VIEW;
+        conferenceService.deleteConferenceSession(id);
+        return "redirect:" + CONFERENCE_SESSION_VIEW;
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public String updateConference(Conference conference, BindingResult result) {
-        conferenceService.updateConference(conference);
-        return "redirect:" + CONFERENCE_VIEW;
+    public String updateConference(ConferenceSession conferenceSession, BindingResult result) {
+        conferenceService.updateConferenceSession(conferenceSession);
+        return "redirect:" + CONFERENCE_SESSION_VIEW;
     }
 
-
     @InitBinder
-    public void binder(WebDataBinder binder) {
-        binder.registerCustomEditor(Timestamp.class,
+    public void binder(WebDataBinder binder) {binder.registerCustomEditor(Timestamp.class,
             new PropertyEditorSupport() {
                 public void setAsText(String value) {
                     try {
-                        Date parsedDate = new SimpleDateFormat("yyyy-MM-dd").parse(value);
+                        Date parsedDate = new SimpleDateFormat("yyyy-MM-dd kk:mm").parse(value);
                         setValue(new Timestamp(parsedDate.getTime()));
                     } catch (ParseException e) {
                         setValue(null);
