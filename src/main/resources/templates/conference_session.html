@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Conference Session</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+
+<div th:include="fragments/navbar" th:remove="tag"></div>
+
+<h1>Admin Conference Session</h1>
+
+<h3>All Conference Sessions</h3>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Short Desc</th>
+        <th>Full Desc</th>
+        <th>Duration Minutes</th>
+        <th>Start Date</th>
+        <th>Create Dttm</th>
+        <th>Last Update Dttm</th>
+        <th>Conference ID</th>
+        <th>Room ID</th>
+        <th>DELETE</th>
+
+    </tr>
+    <tr th:each="conferenceSession : ${conferenceSessions}">
+        <td th:text="${conferenceSession.id}"></td>
+        <td th:text="${conferenceSession.name}"></td>
+        <td th:text="${conferenceSession.shortDesc}"></td>
+        <td th:text="${conferenceSession.fullDesc}"></td>
+        <td th:text="${conferenceSession.durationMinutes}"></td>
+        <td th:text="${conferenceSession.startDttm}"></td>
+        <td th:text="${conferenceSession.createDttm}"></td>
+        <td th:text="${conferenceSession.lastUpdateDttm}"></td>
+        <td th:text="${conferenceSession.conferenceId}"></td>
+        <td th:text="${conferenceSession.roomId}"></td>
+        <td>  <form th:action="@{/admin/conference_session}" th:method="delete"><input type="hidden" name="id"  th:value="${conferenceSession.id}" /><input type="submit" value="Delete" /></form></td>
+    </tr>
+</table>
+
+<h3>Add a New Conference Session</h3>
+
+<form th:action="@{/admin/conference_session}" th:method="post">
+    Name:<input type="text" name="name" /><br/>
+    Short Desc:<input type="text" name="shortDesc" /><br/>
+    Full Desc:<input type="text" name="fullDesc" /><br/>
+    Duration Minutes:<input type="number" name="duration" /><br/>
+    Start Dttm (yyyy-MM-dd kk:mm) :<input type="text" name="startDttm"/><br/>
+    Conference:
+    <select name="conference.id">
+        <option th:each="conference : ${conferences}"
+                th:value="${conference.id}"
+                th:text="${conference.shortDesc}"></option>
+    </select>
+    <br/>
+    Room:
+    <select name="room.id">
+        <option th:each="room : ${rooms}"
+                th:value="${room.id}"
+                th:text="${room.shortDesc}"></option>
+    </select>
+    <br/>
+    <input type="submit" value="Add" /><br/>
+</form>
+
+<h3>Edit an Existing Conference Session</h3>
+
+<form th:action="@{/admin/conference_session}" th:method="put">
+    <select name="id">
+        <option th:each="conferenceSession : ${conferenceSessions}"
+                th:value="${conferenceSession.id}"
+                th:text="${conferenceSession.name}"></option>
+    </select>
+    <br/>
+    Name:<input type="text" name="name" /><br/>
+    Short Desc:<input type="text" name="shortDesc" /><br/>
+    Full Desc:<input type="text" name="fullDesc" /><br/>
+    Duration Minutes:<input type="number" name="duration" /><br/>
+    Start Dttm (yyyy-MM-dd kk:mm): <input type="text" name="startDttm"/><br/>
+
+    Conference:
+    <select name="conference.id">
+        <option value="">NO CHANGE</option>
+        <option th:each="conference : ${conferences}"
+                th:value="${conference.id}"
+                th:text="${conference.shortDesc}"></option>
+    </select>
+    <br/>
+    Room:
+    <select name="room.id">
+        <option value="">NO CHANGE</option>
+        <option th:each="room : ${rooms}"
+                th:value="${room.id}"
+                th:text="${room.shortDesc}"></option>
+    </select>
+    <br/>
+
+    <input type="submit" value="Edit" /><br/>
+</form>
+
+
+
+</body>
+</html>

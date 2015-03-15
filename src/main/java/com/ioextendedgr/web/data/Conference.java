@@ -208,6 +208,6 @@ public class Conference implements Serializable {
     @PrePersist
     public void onPrePersist(){
         this.createDttm = new Timestamp(System.currentTimeMillis());
+        this.lastUpdateDttm = new Timestamp(System.currentTimeMillis());
     }
-
 }
