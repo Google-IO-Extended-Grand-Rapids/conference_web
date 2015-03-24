@@ -51,10 +51,31 @@ select * from conf_admin.conference_session;
 select * from conf_admin.conference_session_presenter;
 select * from conf_admin.conference;
 
+SELECT *
+  FROM conf_admin.location;
+
+SELECT *
+  FROM conf_admin.company;
+
+SELECT *
+  FROM conf_admin.conference_session_type;
+
+SELECT *
+  FROM conf_admin.location_address;
+
+SELECT *
+  FROM conf_admin.room;
+
+SELECT *
+  FROM conf_admin.sponsor_level;
+*/
+/* Trying to delete stuff in the right order */
+/*
 delete from conf_admin.conference_session_presenter cascade;
 delete from conf_admin.conference_session cascade;
 delete from conf_admin.room cascade;
 delete from conf_admin.conference cascade;
+delete from conf_admin.location_address cascade;
 delete from conf_admin.location cascade;
 delete from conf_admin.presenter cascade;
 delete from conf_admin.conference cascade;
