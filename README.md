@@ -35,7 +35,7 @@ Here is a list of database commands that can be ran as maven
 ## Rollback
 
 ```
-$ mvn liquibase:rollback -Dliquibase.rollbackTag=version_1.0
+$ mvn liquibase:rollback -Dliquibase.rollbackTag=version_1.1
 ```
 Please be sure to always add to the end of the liquibase scripts.
 
