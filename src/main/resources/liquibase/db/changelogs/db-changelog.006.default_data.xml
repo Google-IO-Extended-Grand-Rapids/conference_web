@@ -82,4 +82,8 @@
         </rollback>
     </changeSet>
 
+    <changeSet id="006_tagging_database" author="Carlus">
+	<tagDatabase tag="version_1.1"/>
+    </changeSet>
+
 </databaseChangeLog>
