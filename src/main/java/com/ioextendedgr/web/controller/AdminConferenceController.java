@@ -1,11 +1,16 @@
 package com.ioextendedgr.web.controller;
 
 
-import com.ioextendedgr.web.data.Conference;
-import com.ioextendedgr.web.service.ConferenceService;
+import java.beans.PropertyEditorSupport;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -15,14 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.beans.PropertyEditorSupport;
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Map;
+import com.ioextendedgr.web.data.Conference;
+import com.ioextendedgr.web.service.ConferenceService;
 
 @Controller
+@PreAuthorize("hasAuthority('ADMIN')")
 @RequestMapping("/admin/conference")
 public class AdminConferenceController {
 
