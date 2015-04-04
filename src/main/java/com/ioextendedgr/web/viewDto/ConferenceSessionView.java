@@ -14,6 +14,7 @@ public class ConferenceSessionView {
 	private Integer roomId;
 	private Date startDttm;
 	private Integer durationMinutes;
+	private ConferenceSessionTypeView conferenceSessionType;
 	private Date createDttm;
 	private Date lastUpdateDttm;
 	
@@ -83,6 +84,12 @@ public class ConferenceSessionView {
 	}
 	public void setLastUpdateDttm(Date lastUpdateDttm) {
 		this.lastUpdateDttm = lastUpdateDttm;
+	}
+	public ConferenceSessionTypeView getConferenceSessionType() {
+		return conferenceSessionType;
+	}
+	public void setConferenceSessionType(ConferenceSessionTypeView conferenceSessionType) {
+		this.conferenceSessionType = conferenceSessionType;
 	}
 	
 	

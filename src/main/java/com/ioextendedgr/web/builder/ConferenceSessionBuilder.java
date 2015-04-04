@@ -1,13 +1,18 @@
 package com.ioextendedgr.web.builder;
 
-import com.ioextendedgr.web.data.Conference;
-import com.ioextendedgr.web.data.ConferenceSession;
-import com.ioextendedgr.web.data.ConferenceSessionPresenter;
-import com.ioextendedgr.web.viewDto.ConferenceSessionView;
-import com.ioextendedgr.web.viewDto.ConferenceView;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.util.CollectionUtils;
 
-import java.util.*;
+import com.ioextendedgr.web.data.ConferenceSession;
+import com.ioextendedgr.web.data.ConferenceSessionPresenter;
+import com.ioextendedgr.web.data.ConferenceSessionType;
+import com.ioextendedgr.web.viewDto.ConferenceSessionTypeView;
+import com.ioextendedgr.web.viewDto.ConferenceSessionView;
 
 /**
  * Created by Scott Williams on 3/4/2015.
@@ -45,12 +50,40 @@ public class ConferenceSessionBuilder {
         for(ConferenceSessionPresenter csp: data.getConferenceSessionPresenters()){
             cspIds.add(csp.getId());
         }
+        
+        view.setConferenceSessionType(toConferenceSessionTypeView(data.getConferenceSessionType()));
+        
         view.setPresenterIds(new ArrayList<>(cspIds));
         view.setRoomId(data.getRoom().getId());
         view.setStartDttm(data.getStartDttm());
 
         return view;
     }
+
+
+	private static ConferenceSessionTypeView toConferenceSessionTypeView(ConferenceSessionType conferenceSessionType) {
+		
+		if (conferenceSessionType == null) {
+			return toDefaultConferenceSessionTypeView();
+		}
+		ConferenceSessionTypeView confSessionTypeView = new ConferenceSessionTypeView();
+		
+		confSessionTypeView.setId(conferenceSessionType.getId());
+		confSessionTypeView.setName(conferenceSessionType.getName());
+		confSessionTypeView.setDescription(conferenceSessionType.getDesc());
+		return confSessionTypeView;
+	}
+
+
+	private static ConferenceSessionTypeView toDefaultConferenceSessionTypeView() {
+		ConferenceSessionTypeView confSessionTypeView = new ConferenceSessionTypeView();
+		
+		confSessionTypeView.setId(6);
+		confSessionTypeView.setName("Onsite");
+		confSessionTypeView.setDescription("Onsite");
+		
+		return confSessionTypeView;
+	}
 
 
 
