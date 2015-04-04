@@ -8,18 +8,22 @@ import org.springframework.stereotype.Component;
 import com.google.common.base.Strings;
 import com.ioextendedgr.web.builder.ConferenceSessionBuilder;
 import com.ioextendedgr.web.builder.ConferenceViewBuilder;
+import com.ioextendedgr.web.builder.LocationBuilder;
 import com.ioextendedgr.web.builder.PresenterBuilder;
+import com.ioextendedgr.web.builder.RoomViewBuilder;
 import com.ioextendedgr.web.data.Conference;
 import com.ioextendedgr.web.data.ConferenceSession;
 import com.ioextendedgr.web.repository.ConferenceRepository;
 import com.ioextendedgr.web.repository.ConferenceSessionRepository;
 import com.ioextendedgr.web.repository.LocationRepository;
 import com.ioextendedgr.web.repository.PresenterRepository;
+import com.ioextendedgr.web.repository.RoomRepository;
 import com.ioextendedgr.web.util.StubFactory;
 import com.ioextendedgr.web.viewDto.ConferenceSessionView;
 import com.ioextendedgr.web.viewDto.ConferenceView;
 import com.ioextendedgr.web.viewDto.LocationView;
 import com.ioextendedgr.web.viewDto.PresenterView;
+import com.ioextendedgr.web.viewDto.RoomView;
 
 @Component
 public class ConferenceService {
