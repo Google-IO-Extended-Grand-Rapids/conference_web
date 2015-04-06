@@ -2,7 +2,6 @@ package com.ioextendedgr.web.service;
 
 import java.util.Collection;
 
-import com.ioextendedgr.web.data.ConferenceSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +12,7 @@ import com.ioextendedgr.web.builder.LocationBuilder;
 import com.ioextendedgr.web.builder.PresenterBuilder;
 import com.ioextendedgr.web.builder.RoomViewBuilder;
 import com.ioextendedgr.web.data.Conference;
-import com.ioextendedgr.web.data.Location;
+import com.ioextendedgr.web.data.ConferenceSession;
 import com.ioextendedgr.web.repository.ConferenceRepository;
 import com.ioextendedgr.web.repository.ConferenceSessionRepository;
 import com.ioextendedgr.web.repository.LocationRepository;
