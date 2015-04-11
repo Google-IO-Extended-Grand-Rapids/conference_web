@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.springframework</groupId>
 	<artifactId>conference-web</artifactId>
-	<version>0.1.0</version>
+	<version>0.0.4</version>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -82,8 +82,8 @@
 		<jdbc.url>jdbc:postgresql://postgres:5432/postgres</jdbc.url>
 	</properties>
 	<build>
-		<!-- This resources block was taken from the Spring parent project. The 
-			only change that wanted to make was to include the liquibase.properties file. 
+		<!-- This resources block was taken from the Spring parent project. The
+			only change that wanted to make was to include the liquibase.properties file.
 			I carried the others forward just in case I ran into issues. -->
 		<resources>
 			<resource>
@@ -138,7 +138,7 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
+				<!--This plugin's configuration is used to store Eclipse m2e settings
 					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
@@ -186,13 +186,13 @@
 
 	<profiles>
 		<profile>
-			<!-- that profile is used only for coveralls.io banner that show coverage 
+			<!-- that profile is used only for coveralls.io banner that show coverage
 				at ReadMe.md -->
 			<id>travis</id>
 			<build>
 				<plugins>
 
-					<!-- Used to set custom properties by means of ${argLine}, that is required 
+					<!-- Used to set custom properties by means of ${argLine}, that is required
 						for jacoco -->
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
