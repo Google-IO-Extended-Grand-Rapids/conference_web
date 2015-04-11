@@ -23,9 +23,9 @@ import static java.lang.String.format;
 @Component
 public class StubFactory {
 	
-	Map<Long, ConferenceView> conferenceViewsByIdMap = new HashMap<Long, ConferenceView>();
-	Map<Long, PresenterView> presenterViewsByIdMap = new HashMap<Long, PresenterView>();
-	Map<Long, ConferenceSessionView> conferenceSessionByIdMap = new HashMap<Long, ConferenceSessionView>();
+	Map<Integer, ConferenceView> conferenceViewsByIdMap = new HashMap<Integer, ConferenceView>();
+	Map<Integer, PresenterView> presenterViewsByIdMap = new HashMap<Integer, PresenterView>();
+	Map<Integer, ConferenceSessionView> conferenceSessionByIdMap = new HashMap<Integer, ConferenceSessionView>();
 	
 	public StubFactory() {
 		init();
@@ -84,7 +84,7 @@ public class StubFactory {
 	private void initializePresenterViews() {
 		List<PresenterView> presenterViews = createPresenterViews();
 		for (PresenterView currPresenterView : presenterViews) {
-			presenterViewsByIdMap.put(currPresenterView.getId(), currPresenterView);
+			presenterViewsByIdMap.put(currPresenterView.getId().intValue(), currPresenterView);
 		}
 		
 	}
@@ -92,7 +92,7 @@ public class StubFactory {
 	private void initializeConferenceViews() {
 		List<ConferenceView> createConferenceViews = createConferenceViews();
 		for (ConferenceView currConferenceView : createConferenceViews) {
-			conferenceViewsByIdMap.put(currConferenceView.getId(), currConferenceView);
+			conferenceViewsByIdMap.put(currConferenceView.getId().intValue(), currConferenceView);
 		}
 	}
 
@@ -121,45 +121,45 @@ public class StubFactory {
 
 	private ConferenceSessionView toConferenceSessionView(int index) {
 		ConferenceSessionView dto = new ConferenceSessionView();
-		
-		List<Long> conferenceIds = new ArrayList<Long>(conferenceViewsByIdMap.keySet());
-		List<Long> presenterIds = new ArrayList<Long>(presenterViewsByIdMap.keySet());
-		
+
+		List<Integer> conferenceIds = new ArrayList<Integer>(conferenceViewsByIdMap.keySet());
+		List<Integer> presenterIds = new ArrayList<Integer>(presenterViewsByIdMap.keySet());
+
 		Random random = new Random();
-		
-		dto.setId(Long.valueOf(50 + index));
+
+		dto.setId(50 + index);
 		dto.setConferenceId(conferenceIds.get(random.nextInt(conferenceIds.size())));
 		dto.setCreateDttm(new Date());
 		dto.setDurationMinutes((index % 2 == 0) ? 30 : 60);
 		dto.setFullDesc(format("Full description of the session talk for session: %d", dto.getId()));
 		dto.setLastUpdateDttm(new Date());
 		dto.setName(format("Name of Session for %d", dto.getId()));
-		
-		List<Long> selectedPresenterIds = null;
+
+		List<Integer> selectedPresenterIds = null;
 		if (index % 2 == 0) {
 			selectedPresenterIds = toSinglePresenterIdList(random, presenterIds);
 		} else {
 			selectedPresenterIds = toMultiplePresenterIdsList(random, presenterIds);
 		}
 		dto.setPresenterIds(selectedPresenterIds);
-		dto.setRoomId(-1L);
+		dto.setRoomId(-1);
 		dto.setShortDesc(format("Short Description Session: %d", dto.getId()));
 		dto.setStartDttm(new Date());
-		
+
 		return dto;
 	}
 
-	private List<Long> toMultiplePresenterIdsList(Random random, List<Long> presenterIds) {
-		Set<Long> presenterIdSet = new HashSet<Long>();
+	private List<Integer> toMultiplePresenterIdsList(Random random, List<Integer> presenterIds) {
+		Set<Integer> presenterIdSet = new HashSet<Integer>();
 		presenterIdSet.add(presenterIds.get(random.nextInt(presenterIds.size())));
 		presenterIdSet.add(presenterIds.get(random.nextInt(presenterIds.size())));
 		presenterIdSet.add(presenterIds.get(random.nextInt(presenterIds.size())));
 		presenterIdSet.add(presenterIds.get(random.nextInt(presenterIds.size())));
-		return new ArrayList<Long>(presenterIdSet);
+		return new ArrayList<Integer>(presenterIdSet);
 	}
 
-	private List<Long> toSinglePresenterIdList(Random random, List<Long> presenterIds) {
-		List<Long> presenterIdList = new ArrayList<Long>();
+	private List<Integer> toSinglePresenterIdList(Random random, List<Integer> presenterIds) {
+		List<Integer> presenterIdList = new ArrayList<Integer>();
 		presenterIdList.add(presenterIds.get(random.nextInt(presenterIds.size())));
 		return presenterIdList;
 	}
@@ -167,17 +167,17 @@ public class StubFactory {
 	private PresenterView toPresenterView(int index) {
 		PresenterView presenterView = new PresenterView();
 		presenterView.setCompanyView(toCompanyView(index));
-		presenterView.setId(Long.valueOf(index + 100));
+		presenterView.setId(index + 100);
 		presenterView.setJobTitle(format("Job Title: %d", presenterView.getId()));
 		presenterView.setShortBio(format("This is the short bio for Presenter: %d", presenterView.getId()));
-		presenterView.setUserId(format("userId_%d", presenterView.getId()));
+		presenterView.setUserId(presenterView.getId());
 		
 		return presenterView;
 	}
 
 	private CompanyView toCompanyView(int index) {
 		CompanyView companyView = new CompanyView();
-		companyView.setId(Long.valueOf(index + 50));
+		companyView.setId(index + 50);
 		companyView.setFullDesc(format("Company full description of blah,blah,blah: %d", companyView.getId()));
 		companyView.setLogoPath("http://some.url.logo.");
 		companyView.setName(format("Company #%d", companyView.getId()));
@@ -218,7 +218,7 @@ public class StubFactory {
 		
 		dto.setCreateDttm(new Date());
 		dto.setFullDesc(String.format("Full Description Location: %d", index));
-		dto.setId(Long.valueOf(index));
+		dto.setId(index);
 		dto.setLastUpdateDttm(new Date());
 		dto.setName(String.format("Location %d", index));
 		dto.setParkingInfo(String.format("The parking information for Location: %d is the following....", index));

@@ -5,23 +5,24 @@ import java.util.List;
 
 public class ConferenceSessionView {
 
-	private Long id;
+	private Integer id;
 	private String name;
 	private String shortDesc;
 	private String fullDesc;
-	private Long conferenceId;
-	private List<Long> presenterIds;
-	private Long roomId;
+	private Integer conferenceId;
+	private List<Integer> presenterIds;
+	private Integer roomId;
 	private Date startDttm;
 	private Integer durationMinutes;
+	private ConferenceSessionTypeView conferenceSessionType;
 	private Date createDttm;
 	private Date lastUpdateDttm;
 	
 	
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -42,22 +43,22 @@ public class ConferenceSessionView {
 	public void setFullDesc(String fullDesc) {
 		this.fullDesc = fullDesc;
 	}
-	public Long getConferenceId() {
+	public Integer getConferenceId() {
 		return conferenceId;
 	}
-	public void setConferenceId(Long conferenceId) {
+	public void setConferenceId(Integer conferenceId) {
 		this.conferenceId = conferenceId;
 	}
-	public List<Long> getPresenterIds() {
+	public List<Integer> getPresenterIds() {
 		return presenterIds;
 	}
-	public void setPresenterIds(List<Long> presenterIds) {
+	public void setPresenterIds(List<Integer> presenterIds) {
 		this.presenterIds = presenterIds;
 	}
-	public Long getRoomId() {
+	public Integer getRoomId() {
 		return roomId;
 	}
-	public void setRoomId(Long roomId) {
+	public void setRoomId(Integer roomId) {
 		this.roomId = roomId;
 	}
 	public Date getStartDttm() {
@@ -83,6 +84,12 @@ public class ConferenceSessionView {
 	}
 	public void setLastUpdateDttm(Date lastUpdateDttm) {
 		this.lastUpdateDttm = lastUpdateDttm;
+	}
+	public ConferenceSessionTypeView getConferenceSessionType() {
+		return conferenceSessionType;
+	}
+	public void setConferenceSessionType(ConferenceSessionTypeView conferenceSessionType) {
+		this.conferenceSessionType = conferenceSessionType;
 	}
 	
 	

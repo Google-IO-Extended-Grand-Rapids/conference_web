@@ -1,0 +1,89 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+
+    <changeSet id="006_default_data_location" author="Carlus">
+        <comment>Load default location</comment>
+        
+        <sql>insert into conf_admin.location (id, name, short_desc, full_desc) values (-100, 'UNKNOWN', 'UNKNOWN', 'UNKNOWN')</sql>
+        <rollback>
+        	<sql>delete from conf_admin.location where id = -100</sql>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="006_default_data_company" author="Scott">
+        <comment>Load default company</comment>
+
+        <sql>insert into conf_admin.company (id, name, short_desc, full_desc) values (-100, 'UNKNOWN', 'UNKNOWN', 'UNKNOWN')</sql>
+        <rollback>
+            <sql>delete from conf_admin.company where id = -100</sql>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="006_default_data_conference_session_type" author="Scott">
+        <comment>Load default conference session type</comment>
+        <sql>insert into conf_admin.conference_session_type (id, name, "desc") values (-100, 'UNKNOWN', 'UNKNOWN')</sql>
+        <rollback>
+            <sql>delete from conf_admin.conference_session_type where id = -100</sql>
+        </rollback>
+        <sql>insert into conf_admin.conference_session_type (name, "desc") values ('CodeLab', 'CodeLab desc')</sql>
+        <rollback>
+            <sql>delete from conf_admin.conference_session_type where name = 'CodeLab'</sql>
+        </rollback>
+        <sql>insert into conf_admin.conference_session_type (name, "desc") values ('Streaming', 'Streaming desc')</sql>
+        <rollback>
+            <sql>delete from conf_admin.conference_session_type where name = 'Streaming'</sql>
+        </rollback>
+        <sql>insert into conf_admin.conference_session_type (name, "desc") values ('OnSite', 'OnSite desc')</sql>
+        <rollback>
+            <sql>delete from conf_admin.conference_session_type where name = 'OnSite'</sql>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="006_default_data_location_address" author="Scott">
+        <comment>Load default location address</comment>
+        <sql>INSERT INTO conf_admin.location_address(
+            id, location_id, address_1, address_2, city, state, zip_code,
+            latitude, longitude, create_dttm, last_update_dttm)
+            VALUES (-100, -100, 'UNKNOWN', 'UNKNOWN', 'UNKNOWN', 'UNKNOWN', 'UNKNOWN',
+            'UNKNOWN', 'UNKNOWN', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+        </sql>
+        <rollback>
+            <sql>delete from conf_admin.location_address where id = -100</sql>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="006_default_data_presenter" author="Scott">
+        <comment>Load default presenter</comment>
+        <sql>INSERT INTO conf_admin.presenter(
+            id, user_id, short_bio, job_title, company_affiliation_id)
+            VALUES (-100, null, 'UNKNOWN', 'UNKNOWN', -100)</sql>
+        <rollback>
+            <sql>delete from conf_admin.presenter where id = -100</sql>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="006_default_data_room" author="Scott">
+        <comment>Load default room</comment>
+        <sql>insert into conf_admin.room (id, short_desc, full_desc) values (-100, 'UNKNOWN', 'UNKNOWN')</sql>
+        <rollback>
+            <sql>delete from conf_admin.room where id = -100</sql>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="006_default_data_sponsor_level" author="Scott">
+        <comment>Load default sponsor level</comment>
+        <sql>insert into conf_admin.sponsor_level (id, full_desc) values (-100, 'UNKNOWN')</sql>
+        <rollback>
+            <sql>delete from conf_admin.sponsor_level where id = -100</sql>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="006_tagging_database" author="Carlus">
+	<tagDatabase tag="version_1.1"/>
+    </changeSet>
+
+</databaseChangeLog>

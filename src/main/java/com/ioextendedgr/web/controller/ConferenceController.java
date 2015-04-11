@@ -1,12 +1,15 @@
 package com.ioextendedgr.web.controller;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ioextendedgr.web.builder.ConferenceViewBuilder;
+import com.ioextendedgr.web.data.Conference;
 import com.ioextendedgr.web.service.ConferenceService;
 import com.ioextendedgr.web.viewDto.ConferenceSessionView;
 import com.ioextendedgr.web.viewDto.ConferenceView;
@@ -24,14 +27,12 @@ public class ConferenceController {
     }
 
     @RequestMapping("/conference/{id}")
-    public ConferenceView findConferenceById(@PathVariable("id") Long id) {
+    public ConferenceView findConferenceById(@PathVariable("id") Integer id) {
     	return conferenceService.findConferenceById(id);
     }
 
     @RequestMapping("/conference/{id}/conferenceSessions")
-    public Collection<ConferenceSessionView> findConferenceSessionsByConferenceId(@PathVariable("id") Long id) {
+    public Collection<ConferenceSessionView> findConferenceSessionsByConferenceId(@PathVariable("id") Integer id) {
     	return conferenceService.findConferenceSessionsByConferenceId(id);
     }
-
-	
 }

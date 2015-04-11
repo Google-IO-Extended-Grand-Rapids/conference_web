@@ -35,8 +35,9 @@ Here is a list of database commands that can be ran as maven
 ## Rollback
 
 ```
-$ mvn liquibase:rollback -Dliquibase.rollbackCount=1
+$ mvn liquibase:rollback -Dliquibase.rollbackTag=version_1.1
 ```
+Please be sure to always add to the end of the liquibase scripts.
 
 # Command to do a maven build of the webapp after vagrant/docker is setup
 By default, install is being used by our DockerFile during build.  Right now it's rigged to point at a specific IP address in the vagrant machine, which isn't ideal.  But hey, it works for now.

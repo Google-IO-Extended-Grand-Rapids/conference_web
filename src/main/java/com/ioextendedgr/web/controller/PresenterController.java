@@ -23,7 +23,7 @@ public class PresenterController {
     }
 
     @RequestMapping("/presenter/{id}")
-    public PresenterView findPresenterById(@PathVariable("id") Long id) {
+    public PresenterView findPresenterById(@PathVariable("id") Integer id) {
     	return conferenceService.findPresenterById(id);
     }
 }
