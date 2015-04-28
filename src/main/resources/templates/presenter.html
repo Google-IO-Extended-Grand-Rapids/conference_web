@@ -23,17 +23,14 @@
         <th>User ID</th>
         <th>Short Bio</th>
         <th>Job Title</th>
-
+        <th>Company Name</th>
         <th>DELETE</th>
-
     </tr>
     <tr th:each="presenter : ${presenters}">
         <td th:text="${presenter.id}"></td>
         <td th:text="${presenter.userId}"></td>
         <td th:text="${presenter.shortBio}"></td>
-        <td th:text="${presenter.jobTitle}"></td>
-
-        <td th:text="${conference.locationView.id} + ' - ' + ${conference.locationView.shortDesc}"></td>
+        <td th:text="${presenter.companyView.name}"></td>
         <td>  <form th:action="@{/admin/presenter}" th:method="delete"><input type="hidden" name="id"  th:value="${presenter.id}" /><input type="submit" value="Delete" /></form></td>
     </tr>
 </table>
@@ -42,17 +39,22 @@
 
 <form th:action="@{/admin/presenter}" th:method="post">
     User ID:
-    <select name="userId">
+    <input type="number" name="userId" />
+<!--    <select name="userId">
         <option th:each="user : ${users}"
                 th:value="${user.id}"
                 th:text="${user.firstName} + ' ' + ${user.lastName}"></option>
-    </select>
+    </select>-->
     <br/>
 
     Short Bio:<input type="text" name="shortBio" /><br/>
     Job Title:<input type="text" name="jobTitle" /><br/>
-
     <br/>
+    <select name="company.id">
+        <option th:each="company : ${companies}"
+                th:value="${company.id}"
+                th:text="${company.name}"></option>
+    </select><br/>
     <input type="submit" value="Add" /><br/>
 </form>
 
@@ -64,20 +66,14 @@
                 th:value="${presenter.id}"
                 th:text="${presenter.id}"></option>
     </select>
-    <br/>
-    Name:<input type="text" name="name" /><br/>
-    Short Desc:<input type="text" name="shortDesc" /><br/>
-    Full Desc:<input type="text" name="fullDesc" /><br/>
-    Start Date (mm-dd-yyyy):<input type="date" name="startDate"/><br/>
-    End Date (mm-dd-yyyy):<input type="date" name="endDate"/><br/>
-    Location:
-    <select name="location.id">
-        <option value="">NO CHANGE</option>
-        <option th:each="location : ${locations}"
-                th:value="${location.id}"
-                th:text="${location.shortDesc}"></option>
-    </select>
-    <br/>
+    <input type="number" name="userId" /><br/>
+    Short Bio:<input type="text" name="shortBio" /><br/>
+    Job Title:<input type="text" name="jobTitle" /><br/>
+    <select name="company.id">
+        <option th:each="company : ${companies}"
+                th:value="${company.id}"
+                th:text="${company.name}"></option>
+    </select><br/>
     <input type="submit" value="Edit" /><br/>
 </form>
 
