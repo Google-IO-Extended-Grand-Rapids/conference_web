@@ -2,15 +2,16 @@ package com.ioextendedgr.web.service;
 
 import java.util.Collection;
 
+
+import com.ioextendedgr.web.builder.*;
+import com.ioextendedgr.web.data.ConferenceSession;
+import com.ioextendedgr.web.data.Presenter;
+import com.ioextendedgr.web.repository.*;
+import com.ioextendedgr.web.viewDto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.google.common.base.Strings;
-import com.ioextendedgr.web.builder.ConferenceSessionBuilder;
-import com.ioextendedgr.web.builder.ConferenceViewBuilder;
-import com.ioextendedgr.web.builder.LocationBuilder;
-import com.ioextendedgr.web.builder.PresenterBuilder;
-import com.ioextendedgr.web.builder.RoomViewBuilder;
 import com.ioextendedgr.web.data.Conference;
 import com.ioextendedgr.web.data.ConferenceSession;
 import com.ioextendedgr.web.repository.ConferenceRepository;
@@ -18,12 +19,8 @@ import com.ioextendedgr.web.repository.ConferenceSessionRepository;
 import com.ioextendedgr.web.repository.LocationRepository;
 import com.ioextendedgr.web.repository.PresenterRepository;
 import com.ioextendedgr.web.repository.RoomRepository;
+import com.ioextendedgr.web.data.Location;
 import com.ioextendedgr.web.util.StubFactory;
-import com.ioextendedgr.web.viewDto.ConferenceSessionView;
-import com.ioextendedgr.web.viewDto.ConferenceView;
-import com.ioextendedgr.web.viewDto.LocationView;
-import com.ioextendedgr.web.viewDto.PresenterView;
-import com.ioextendedgr.web.viewDto.RoomView;
 
 @Component
 public class ConferenceService {
@@ -46,6 +43,13 @@ public class ConferenceService {
     @Autowired
     private PresenterRepository presenterRepository;
 
+    @Autowired
+    private CompanyRepository companyRepository;
+
+    public Collection<CompanyView> findAllCompanies(){
+        return CompanyBuilder.build(companyRepository.findAll());
+    }
+
 	public Collection<ConferenceView> findAllConferences() {
 		return ConferenceViewBuilder.build(conferenceRepository.findAll());
 	}
@@ -61,6 +65,31 @@ public class ConferenceService {
 	public PresenterView findPresenterById(Integer id) {
 		return PresenterBuilder.build(presenterRepository.findOne(id));
 	}
+
+    public void deletePresenter(Integer id){
+        presenterRepository.delete(id);
+    }
+
+    public void addPresenter(Presenter presenter){
+        presenterRepository.save(presenter);
+    }
+
+    public void updatePresenter(Presenter inputPresenter){
+        Presenter managedPresenter = presenterRepository.findOne(inputPresenter.getId());
+        if(inputPresenter.getCompany() != null){
+            managedPresenter.setCompany(inputPresenter.getCompany());
+        }
+        if(inputPresenter.getUserId() != null){
+            managedPresenter.setUserId(inputPresenter.getUserId());
+        }
+        if(!Strings.isNullOrEmpty(inputPresenter.getJobTitle())){
+            managedPresenter.setJobTitle(inputPresenter.getJobTitle());
+        }
+        if(!Strings.isNullOrEmpty(inputPresenter.getShortBio())){
+            managedPresenter.setShortBio(inputPresenter.getShortBio());
+        }
+        presenterRepository.save(managedPresenter);
+    }
 
 	public Collection<ConferenceSessionView> findAllConferenceSessions() {
 		return ConferenceSessionBuilder.build(conferenceSessionRepository

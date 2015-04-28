@@ -24,7 +24,7 @@ public class PresenterBuilder {
 	public static PresenterView build(Presenter dto) {
 		PresenterView presenter = new PresenterView();
 		
-		presenter.setCompanyView(toCompanyView(dto.getCompany()));
+		presenter.setCompanyView(CompanyBuilder.build(dto.getCompany()));
 		presenter.setId(dto.getId());
 		presenter.setJobTitle(dto.getJobTitle());
 		presenter.setShortBio(dto.getShortBio());
@@ -33,21 +33,4 @@ public class PresenterBuilder {
 		return presenter;
 	}
 
-	private static CompanyView toCompanyView(Company dto) {
-		
-		if (null == dto) {
-			return null;
-		}
-		
-		CompanyView companyView = new CompanyView();
-		
-		companyView.setFullDesc(dto.getFullDesc());
-		companyView.setId(dto.getId());
-		companyView.setLogoPath(dto.getLogoPath());
-		companyView.setName(dto.getName());
-		companyView.setShortDesc(dto.getShortDesc());
-		
-		return companyView;
-	}
-	
 }
