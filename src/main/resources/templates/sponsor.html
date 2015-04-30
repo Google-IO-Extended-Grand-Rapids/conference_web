@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Sponsor</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+
+<div th:include="fragments/navbar" th:remove="tag"></div>
+
+<h1>Admin Sponsor</h1>
+
+<h3>All Sponsors</h3>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Home Page URL</th>
+        <th>Logo Path</th>
+        <th>Sponsor Level</th>
+        <th>DELETE</th>
+    </tr>
+    <tr th:each="sponsor : ${sponsors}">
+        <td th:text="${sponsor.id}"></td>
+        <td th:text="${sponsor.name}"></td>
+        <td><a th:text="${sponsor.homePageUrl}"></a></td>
+        <td th:text="${sponsor.logoPath}"></td>
+        <td th:text="${sponsor.sponsorLevelDesc}"></td>
+        <td>  <form th:action="@{/admin/sponsor}" th:method="delete"><input type="hidden" name="id"  th:value="${sponsor.id}" /><input type="submit" value="Delete" /></form></td>
+    </tr>
+</table>
+
+<h3>Add a New Sponsor</h3>
+
+<form th:action="@{/admin/sponsor}" th:method="post">
+    Name:<input type="text" name="name" /><br/>
+    Home Page URL:<input type="text" name="homePageUrl" /><br/>
+    Logo Path:<input type="text" name="logoPath" /><br/>
+    Sponsor:
+    <select name="sponsorLevel.id">
+        <option th:each="sponsorLevel : ${sponsorLevels}"
+                th:value="${sponsorLevel.id}"
+                th:text="${sponsorLevel.fullDesc}"></option>
+    </select><br/>
+    <input type="submit" value="Add" /><br/>
+</form>
+
+<h3>Edit an Existing Sponsor</h3>
+
+<form th:action="@{/admin/sponsor}" th:method="put">
+    ID:
+    <select name="id">
+        <option th:each="sponsor : ${sponsors}"
+                th:value="${sponsor.id}"
+                th:text="${sponsor.name}"></option>
+    </select>
+        <br/>
+    Name:<input type="text" name="name" /><br/>
+    Home Page URL:<input type="text" name="homePageUrl" /><br/>
+    Logo Path:<input type="text" name="logoPath" /><br/>
+    Sponsor:
+    <select name="sponsorLevel.id">
+            <option th:each="sponsorLevel : ${sponsorLevels}"
+                    th:value="${sponsorLevel.id}"
+                    th:text="${sponsorLevel.fullDesc}"></option>
+        </select><br/>
+    <input type="submit" value="Edit" /><br/>
+</form>
+
+
+
+</body>
+</html>
