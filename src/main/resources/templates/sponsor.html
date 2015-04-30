@@ -29,7 +29,7 @@
     <tr th:each="sponsor : ${sponsors}">
         <td th:text="${sponsor.id}"></td>
         <td th:text="${sponsor.name}"></td>
-        <td><a th:text="${sponsor.homePageUrl}"></a></td>
+        <td>  <a th:href="@{${sponsor.homePageUrl}}" th:text="${sponsor.homePageUrl}"/></td>
         <td th:text="${sponsor.logoPath}"></td>
         <td th:text="${sponsor.sponsorLevelDesc}"></td>
         <td>  <form th:action="@{/admin/sponsor}" th:method="delete"><input type="hidden" name="id"  th:value="${sponsor.id}" /><input type="submit" value="Delete" /></form></td>
