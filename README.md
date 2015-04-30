@@ -28,7 +28,7 @@ After making these modifications, when you perform the vagrant commands (up, hal
 - Copy the vagrant_config.yml.template to vagrant_config.yml
 - adjust the "start-web" to be false
 - Run the application with the following and it will connect to postgres using the local information
--- mvn clean install -PlocalDB && java -jar target/*.jar
+-- mvn clean install -PlocalDB && java -DconfAdminPassword=nimda -jar target/*.jar
 
 # Database commands
 Here is a list of database commands that can be ran as maven
