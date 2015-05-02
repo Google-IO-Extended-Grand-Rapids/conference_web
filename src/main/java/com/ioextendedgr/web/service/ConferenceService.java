@@ -107,7 +107,7 @@ public class ConferenceService {
 
     public void updatePresenter(Presenter inputPresenter){
         Presenter managedPresenter = presenterRepository.findOne(inputPresenter.getId());
-        if(inputPresenter.getCompany() != null){
+        if(inputPresenter.getCompany() != null && inputPresenter.getCompany().getId() != null){
             managedPresenter.setCompany(inputPresenter.getCompany());
         }
         if(inputPresenter.getUserId() != null){
@@ -267,4 +267,30 @@ public class ConferenceService {
     public Collection<SponsorLevelView> findAllSponsorLevels(){
         return SponsorLevelBuilder.build(sponsorLevelRepository.findAll());
     }
+    public void addRoom(Room room){
+        roomRepository.save(room);
+    }
+
+    public void deleteRoom(Integer id){
+        roomRepository.delete(id);
+    }
+
+    public void updateRoom(Room inputRoom){
+        Room managedRoom = roomRepository.findOne(inputRoom.getId());
+
+        if(!Strings.isNullOrEmpty(inputRoom.getShortDesc())){
+            managedRoom.setShortDesc(inputRoom.getShortDesc());
+        }
+        if(!Strings.isNullOrEmpty(inputRoom.getFullDesc())){
+            managedRoom.setFullDesc(inputRoom.getFullDesc());
+        }
+        if(inputRoom.getConference() != null && inputRoom.getConference().getId() != null){
+            Conference conference = new Conference();
+            conference.setId(inputRoom.getConference().getId());
+            managedRoom.setConference(conference);
+        }
+
+        roomRepository.save(managedRoom);
+    }
+    
 }
