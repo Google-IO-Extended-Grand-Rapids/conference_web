@@ -35,6 +35,7 @@ public class AdminConferenceController {
     @Autowired
     private ConferenceService conferenceService;
 
+
     @RequestMapping(method = RequestMethod.GET)
     public String getConferenceView(ModelMap model) {
         model.addAttribute("conferences", conferenceService.findAllConferences());
@@ -63,4 +64,19 @@ public class AdminConferenceController {
         return "redirect:" + CONFERENCE_VIEW;
     }
 
+
+    @InitBinder
+    public void binder(WebDataBinder binder) {
+        binder.registerCustomEditor(Timestamp.class,
+            new PropertyEditorSupport() {
+                public void setAsText(String value) {
+                    try {
+                        Date parsedDate = new SimpleDateFormat("yyyy-MM-dd").parse(value);
+                        setValue(new Timestamp(parsedDate.getTime()));
+                    } catch (ParseException e) {
+                        setValue(null);
+                    }
+                }
+            });
+    }
 }
