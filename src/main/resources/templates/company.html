@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Company</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+
+<div th:include="fragments/navbar" th:remove="tag"></div>
+
+<h1>Admin Company</h1>
+
+<h3>All Companies</h3>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Short Description</th>
+        <th>Full Description</th>
+        <th>Logo Path</th>
+        <th>DELETE</th>
+    </tr>
+    <tr th:each="company : ${companies}">
+        <td th:text="${company.id}"></td>
+        <td th:text="${company.name}"></td>
+        <td th:text="${company.shortDesc}"></td>
+        <td th:text="${company.fullDesc}"></td>
+        <td th:text="${company.logoPath}"></td>
+        <td>  <form th:action="@{/admin/company}" th:method="delete"><input type="hidden" name="id"  th:value="${company.id}" /><input type="submit" value="Delete" /></form></td>
+    </tr>
+</table>
+
+<h3>Add a New Company</h3>
+
+<form th:action="@{/admin/company}" th:method="post">
+    Name:<input type="text" name="name" /><br/>
+    Short Description:<input type="text" name="shortDesc" /><br/>
+    Full Description:<input type="text" name="fullDesc" /><br/>
+    Logo Path:<input type="text" name="logoPath" /><br/>
+    <input type="submit" value="Add" /><br/>
+</form>
+
+<h3>Edit an Existing Company</h3>
+
+<form th:action="@{/admin/company}" th:method="put">
+    ID:
+    <select name="id">
+        <option th:each="company : ${companies}"
+                th:value="${company.id}"
+                th:text="${company.id}"></option>
+    </select><br/>
+    Name:<input type="text" name="name" /><br/>
+    Short Description:<input type="text" name="shortDesc" /><br/>
+    Full Description:<input type="text" name="fullDesc" /><br/>
+    Logo Path:<input type="text" name="logoPath" /><br/>
+    <input type="submit" value="Edit" /><br/>
+</form>
+
+</body>
+</html>
