@@ -4,22 +4,19 @@ import java.util.Collection;
 
 
 import com.ioextendedgr.web.builder.*;
-import com.ioextendedgr.web.data.ConferenceSession;
-import com.ioextendedgr.web.data.Presenter;
+import com.ioextendedgr.web.data.*;
 import com.ioextendedgr.web.repository.*;
 import com.ioextendedgr.web.viewDto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.google.common.base.Strings;
-import com.ioextendedgr.web.data.Conference;
 import com.ioextendedgr.web.data.ConferenceSession;
 import com.ioextendedgr.web.repository.ConferenceRepository;
 import com.ioextendedgr.web.repository.ConferenceSessionRepository;
 import com.ioextendedgr.web.repository.LocationRepository;
 import com.ioextendedgr.web.repository.PresenterRepository;
 import com.ioextendedgr.web.repository.RoomRepository;
-import com.ioextendedgr.web.data.Location;
 import com.ioextendedgr.web.util.StubFactory;
 
 @Component
@@ -48,6 +45,36 @@ public class ConferenceService {
 
     public Collection<CompanyView> findAllCompanies(){
         return CompanyBuilder.build(companyRepository.findAll());
+    }
+
+    public CompanyView findCompanyById(Integer id){
+        return CompanyBuilder.build(companyRepository.findOne(id));
+    }
+    
+    public void deleteCompany(Integer id){
+        companyRepository.delete(id);
+    }
+
+    public void updateCompany(Company inputCompany){
+        Company managedCompany = companyRepository.findOne(inputCompany.getId());
+
+        if(!Strings.isNullOrEmpty(inputCompany.getName())){
+            managedCompany.setName(inputCompany.getName());
+        }
+        if(!Strings.isNullOrEmpty(inputCompany.getShortDesc())){
+            managedCompany.setShortDesc(inputCompany.getShortDesc());
+        }
+        if(!Strings.isNullOrEmpty(inputCompany.getFullDesc())){
+            managedCompany.setFullDesc(inputCompany.getFullDesc());
+        }
+        if(!Strings.isNullOrEmpty(inputCompany.getLogoPath())){
+            managedCompany.setLogoPath(inputCompany.getLogoPath());
+        }
+        companyRepository.save(managedCompany);
+    }
+
+    public void addCompany(Company company){
+        companyRepository.save(company);
     }
 
 	public Collection<ConferenceView> findAllConferences() {
