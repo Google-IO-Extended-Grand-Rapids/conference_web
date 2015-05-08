@@ -50,13 +50,13 @@
 
     Short Bio:<input type="text" name="shortBio" /><br/>
     Job Title:<input type="text" name="jobTitle" /><br/>
-    <br/>
+    Company:
     <select name="company.id">
         <option th:each="company : ${companies}"
                 th:value="${company.id}"
                 th:text="${company.name}"></option>
     </select><br/>
-    Company:
+
     <input type="submit" value="Add" /><br/>
 </form>
 
@@ -74,6 +74,7 @@
     Job Title:<input type="text" name="jobTitle" /><br/>
     Company:
     <select name="company.id">
+        <option value="">NO CHANGE</option>
         <option th:each="company : ${companies}"
                 th:value="${company.id}"
                 th:text="${company.name}"></option>
