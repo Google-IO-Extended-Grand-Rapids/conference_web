@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Presenter</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+
+<div th:include="fragments/navbar" th:remove="tag"></div>
+
+<h1>Admin Conference</h1>
+
+<h3>All Presenters</h3>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>User ID</th>
+        <th>Short Bio</th>
+        <th>Job Title</th>
+        <th>Company Name</th>
+        <th>DELETE</th>
+    </tr>
+    <tr th:each="presenter : ${presenters}">
+        <td th:text="${presenter.id}"></td>
+        <td th:text="${presenter.userId}"></td>
+        <td th:text="${presenter.shortBio}"></td>
+        <td th:text="${presenter.jobTitle}"></td>
+        <td th:text="${presenter.companyView.name}"></td>
+        <td>  <form th:action="@{/admin/presenter}" th:method="delete"><input type="hidden" name="id"  th:value="${presenter.id}" /><input type="submit" value="Delete" /></form></td>
+    </tr>
+</table>
+
+<h3>Add a New Presenter</h3>
+
+<form th:action="@{/admin/presenter}" th:method="post">
+    User ID:
+    <input type="number" name="userId" />
+<!--    <select name="userId">
+        <option th:each="user : ${users}"
+                th:value="${user.id}"
+                th:text="${user.firstName} + ' ' + ${user.lastName}"></option>
+    </select>-->
+    <br/>
+
+    Short Bio:<input type="text" name="shortBio" /><br/>
+    Job Title:<input type="text" name="jobTitle" /><br/>
+    Company:
+    <select name="company.id">
+        <option th:each="company : ${companies}"
+                th:value="${company.id}"
+                th:text="${company.name}"></option>
+    </select><br/>
+
+    <input type="submit" value="Add" /><br/>
+</form>
+
+<h3>Edit an Existing Presenter</h3>
+
+<form th:action="@{/admin/presenter}" th:method="put">
+    ID:
+    <select name="id">
+        <option th:each="presenter : ${presenters}"
+                th:value="${presenter.id}"
+                th:text="${presenter.id}"></option>
+    </select><br/>
+    User ID: <input type="number" name="userId" /><br/>
+    Short Bio:<input type="text" name="shortBio" /><br/>
+    Job Title:<input type="text" name="jobTitle" /><br/>
+    Company:
+    <select name="company.id">
+        <option value="">NO CHANGE</option>
+        <option th:each="company : ${companies}"
+                th:value="${company.id}"
+                th:text="${company.name}"></option>
+    </select><br/>
+    <input type="submit" value="Edit" /><br/>
+</form>
+
+
+
+</body>
+</html>

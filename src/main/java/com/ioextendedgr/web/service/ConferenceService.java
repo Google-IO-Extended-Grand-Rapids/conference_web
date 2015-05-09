@@ -1,29 +1,21 @@
 package com.ioextendedgr.web.service;
 
-import java.util.Collection;
-
+import com.google.common.base.Strings;
+import com.ioextendedgr.web.builder.*;
+import com.ioextendedgr.web.data.*;
+import com.ioextendedgr.web.repository.*;
+import com.ioextendedgr.web.util.StubFactory;
+import com.ioextendedgr.web.viewDto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.google.common.base.Strings;
-import com.ioextendedgr.web.builder.ConferenceSessionBuilder;
-import com.ioextendedgr.web.builder.ConferenceViewBuilder;
-import com.ioextendedgr.web.builder.LocationBuilder;
-import com.ioextendedgr.web.builder.PresenterBuilder;
-import com.ioextendedgr.web.builder.RoomViewBuilder;
-import com.ioextendedgr.web.data.Conference;
 import com.ioextendedgr.web.data.ConferenceSession;
 import com.ioextendedgr.web.repository.ConferenceRepository;
 import com.ioextendedgr.web.repository.ConferenceSessionRepository;
 import com.ioextendedgr.web.repository.LocationRepository;
 import com.ioextendedgr.web.repository.PresenterRepository;
 import com.ioextendedgr.web.repository.RoomRepository;
-import com.ioextendedgr.web.util.StubFactory;
-import com.ioextendedgr.web.viewDto.ConferenceSessionView;
-import com.ioextendedgr.web.viewDto.ConferenceView;
-import com.ioextendedgr.web.viewDto.LocationView;
-import com.ioextendedgr.web.viewDto.PresenterView;
-import com.ioextendedgr.web.viewDto.RoomView;
+import java.util.Collection;
 
 @Component
 public class ConferenceService {
@@ -46,6 +38,49 @@ public class ConferenceService {
     @Autowired
     private PresenterRepository presenterRepository;
 
+    @Autowired
+    private CompanyRepository companyRepository;
+
+    @Autowired
+    private SponsorRepository sponsorRepository;
+
+    @Autowired
+    private SponsorLevelRepository sponsorLevelRepository;
+
+    public Collection<CompanyView> findAllCompanies(){
+        return CompanyBuilder.build(companyRepository.findAll());
+    }
+
+    public CompanyView findCompanyById(Integer id){
+        return CompanyBuilder.build(companyRepository.findOne(id));
+    }
+    
+    public void deleteCompany(Integer id){
+        companyRepository.delete(id);
+    }
+
+    public void updateCompany(Company inputCompany){
+        Company managedCompany = companyRepository.findOne(inputCompany.getId());
+
+        if(!Strings.isNullOrEmpty(inputCompany.getName())){
+            managedCompany.setName(inputCompany.getName());
+        }
+        if(!Strings.isNullOrEmpty(inputCompany.getShortDesc())){
+            managedCompany.setShortDesc(inputCompany.getShortDesc());
+        }
+        if(!Strings.isNullOrEmpty(inputCompany.getFullDesc())){
+            managedCompany.setFullDesc(inputCompany.getFullDesc());
+        }
+        if(!Strings.isNullOrEmpty(inputCompany.getLogoPath())){
+            managedCompany.setLogoPath(inputCompany.getLogoPath());
+        }
+        companyRepository.save(managedCompany);
+    }
+
+    public void addCompany(Company company){
+        companyRepository.save(company);
+    }
+
 	public Collection<ConferenceView> findAllConferences() {
 		return ConferenceViewBuilder.build(conferenceRepository.findAll());
 	}
@@ -61,6 +96,31 @@ public class ConferenceService {
 	public PresenterView findPresenterById(Integer id) {
 		return PresenterBuilder.build(presenterRepository.findOne(id));
 	}
+
+    public void deletePresenter(Integer id){
+        presenterRepository.delete(id);
+    }
+
+    public void addPresenter(Presenter presenter){
+        presenterRepository.save(presenter);
+    }
+
+    public void updatePresenter(Presenter inputPresenter){
+        Presenter managedPresenter = presenterRepository.findOne(inputPresenter.getId());
+        if(inputPresenter.getCompany() != null && inputPresenter.getCompany().getId() != null){
+            managedPresenter.setCompany(inputPresenter.getCompany());
+        }
+        if(inputPresenter.getUserId() != null){
+            managedPresenter.setUserId(inputPresenter.getUserId());
+        }
+        if(!Strings.isNullOrEmpty(inputPresenter.getJobTitle())){
+            managedPresenter.setJobTitle(inputPresenter.getJobTitle());
+        }
+        if(!Strings.isNullOrEmpty(inputPresenter.getShortBio())){
+            managedPresenter.setShortBio(inputPresenter.getShortBio());
+        }
+        presenterRepository.save(managedPresenter);
+    }
 
 	public Collection<ConferenceSessionView> findAllConferenceSessions() {
 		return ConferenceSessionBuilder.build(conferenceSessionRepository
@@ -168,4 +228,69 @@ public class ConferenceService {
 	public RoomView findRoomById(Integer id) {
 		return RoomViewBuilder.build(roomRepository.findOne(id));
 	}
+
+    public Collection<SponsorView> findAllSponsors() {
+        return SponsorBuilder.build(sponsorRepository.findAll());
+    }
+
+    public SponsorView findSponsorById(Integer id) {
+        return SponsorBuilder.build(sponsorRepository.findOne(id));
+    }
+
+    public void deleteSponsor(Integer id){
+        sponsorRepository.delete(id);
+    }
+
+    public void addSponsor(Sponsor sponsor){
+        sponsorRepository.save(sponsor);
+    }
+
+    public void updateSponsor(Sponsor inputSponsor){
+        Sponsor managedSponsor = sponsorRepository.findOne(inputSponsor.getId());
+        if(!Strings.isNullOrEmpty(inputSponsor.getHomePageUrl())){
+            managedSponsor.setHomePageUrl(inputSponsor.getHomePageUrl());
+        }
+        if(!Strings.isNullOrEmpty(inputSponsor.getLogoPath())){
+            managedSponsor.setLogoPath(inputSponsor.getLogoPath());
+        }
+        if(!Strings.isNullOrEmpty(inputSponsor.getName())){
+            managedSponsor.setName(inputSponsor.getName());
+        }
+        if(inputSponsor.getSponsorLevelBean() != null && inputSponsor.getSponsorLevelBean().getId() != null){
+            SponsorLevel sponsorLevel = new SponsorLevel();
+            sponsorLevel.setId(inputSponsor.getSponsorLevelBean().getId());
+            managedSponsor.setSponsorLevelBean(sponsorLevel);
+        }
+        sponsorRepository.save(managedSponsor);
+    }
+
+    public Collection<SponsorLevelView> findAllSponsorLevels(){
+        return SponsorLevelBuilder.build(sponsorLevelRepository.findAll());
+    }
+    public void addRoom(Room room){
+        roomRepository.save(room);
+    }
+
+    public void deleteRoom(Integer id){
+        roomRepository.delete(id);
+    }
+
+    public void updateRoom(Room inputRoom){
+        Room managedRoom = roomRepository.findOne(inputRoom.getId());
+
+        if(!Strings.isNullOrEmpty(inputRoom.getShortDesc())){
+            managedRoom.setShortDesc(inputRoom.getShortDesc());
+        }
+        if(!Strings.isNullOrEmpty(inputRoom.getFullDesc())){
+            managedRoom.setFullDesc(inputRoom.getFullDesc());
+        }
+        if(inputRoom.getConference() != null && inputRoom.getConference().getId() != null){
+            Conference conference = new Conference();
+            conference.setId(inputRoom.getConference().getId());
+            managedRoom.setConference(conference);
+        }
+
+        roomRepository.save(managedRoom);
+    }
+    
 }

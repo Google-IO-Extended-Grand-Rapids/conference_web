@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Room</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+
+<div th:include="fragments/navbar" th:remove="tag"></div>
+
+<h1>Admin Room</h1>
+
+<h3>All Rooms</h3>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Full Description</th>
+        <th>Short Description</th>
+        <th>Conference</th>
+        <th>DELETE</th>
+    </tr>
+    <tr th:each="room : ${rooms}">
+        <td th:text="${room.id}"></td>
+        <td th:text="${room.fullDesc}"></td>
+        <td th:text="${room.shortDesc}"></td>
+        <td th:text="${room.conferenceId}"></td>
+        <td>  <form th:action="@{/admin/room}" th:method="delete"><input type="hidden" name="id"  th:value="${room.id}" /><input type="submit" value="Delete" /></form></td>
+    </tr>
+</table>
+
+<h3>Add a New Room</h3>
+
+<form th:action="@{/admin/room}" th:method="post">
+
+    Full Description:<input type="text" name="fullDesc" /><br/>
+    Short Description:<input type="text" name="shortDesc" /><br/>
+    Conference
+    <select name="conference.id">
+        <option th:each="conference : ${conferences}"
+                th:value="${conference.id}"
+                th:text="${conference.id} + ' - ' + ${conference.name}"></option>
+    </select><br/>
+    <input type="submit" value="Add" /><br/>
+</form>
+
+<h3>Edit an Existing Room</h3>
+
+<form th:action="@{/admin/room}" th:method="put">
+    ID:
+    <select name="id">
+        <option th:each="room : ${rooms}"
+                th:value="${room.id}"
+                th:text="${room.id}"></option>
+    </select><br/>
+    Full Description:<input type="text" name="fullDesc" /><br/>
+    Short Description:<input type="text" name="shortDesc" /><br/>
+    Conference
+    <select name="conference.id">
+        <option value="">NO CHANGE</option>
+        <option th:each="conference : ${conferences}"
+                th:value="${conference.id}"
+                th:text="${conference.id} + ' - ' + ${conference.name}"></option>
+    </select><br/>
+    <input type="submit" value="Edit" /><br/>
+</form>
+
+</body>
+</html>
