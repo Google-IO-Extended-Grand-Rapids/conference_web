@@ -4,7 +4,17 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the conference_session database table.
@@ -44,11 +54,6 @@ public class ConferenceSession implements Serializable {
 	@JoinColumn(name = "conference_id")
 	private Conference conference;
 
-	// bi-directional many-to-one association to ConferenceSessionPresenter
-	@ManyToOne
-	@JoinColumn(name = "conference_session_presenter_id")
-	private ConferenceSessionPresenter conferenceSessionPresenter;
-
 	// bi-directional many-to-one association to ConferenceSessionType
 	@ManyToOne
 	@JoinColumn(name = "conference_session_type_id")
@@ -86,13 +91,13 @@ public class ConferenceSession implements Serializable {
 		this.createDttm = createDttm;
 	}
 
-	 public Integer getDuration() {
-	 return this.duration;
-	 }
-		
-	 public void setDuration(Integer duration) {
-	 this.duration = duration;
-	 }
+	public Integer getDuration() {
+		return this.duration;
+	}
+
+	public void setDuration(Integer duration) {
+		this.duration = duration;
+	}
 
 	public String getFullDesc() {
 		return this.fullDesc;
@@ -140,15 +145,6 @@ public class ConferenceSession implements Serializable {
 
 	public void setConference(Conference conference) {
 		this.conference = conference;
-	}
-
-	public ConferenceSessionPresenter getConferenceSessionPresenter() {
-		return this.conferenceSessionPresenter;
-	}
-
-	public void setConferenceSessionPresenter(
-			ConferenceSessionPresenter conferenceSessionPresenter) {
-		this.conferenceSessionPresenter = conferenceSessionPresenter;
 	}
 
 	public ConferenceSessionType getConferenceSessionType() {
@@ -219,15 +215,15 @@ public class ConferenceSession implements Serializable {
 		return conferenceSessionRegistration;
 	}
 
-    @PreUpdate
-    public void onPreUpdate(){
-        this.lastUpdateDttm = new Timestamp(System.currentTimeMillis());
-    }
+	@PreUpdate
+	public void onPreUpdate() {
+		this.lastUpdateDttm = new Timestamp(System.currentTimeMillis());
+	}
 
-    @PrePersist
-    public void onPrePersist(){
-        this.createDttm = new Timestamp(System.currentTimeMillis());
-        this.lastUpdateDttm = new Timestamp(System.currentTimeMillis());
-    }
+	@PrePersist
+	public void onPrePersist() {
+		this.createDttm = new Timestamp(System.currentTimeMillis());
+		this.lastUpdateDttm = new Timestamp(System.currentTimeMillis());
+	}
 
 }
