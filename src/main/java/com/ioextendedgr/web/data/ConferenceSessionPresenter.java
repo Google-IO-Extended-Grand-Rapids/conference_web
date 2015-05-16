@@ -1,7 +1,6 @@
 package com.ioextendedgr.web.data;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -24,10 +22,6 @@ public class ConferenceSessionPresenter implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-
-	// bi-directional many-to-one association to ConferenceSession
-	@OneToMany(mappedBy = "conferenceSessionPresenter")
-	private List<ConferenceSession> conferenceSessions;
 
 	// bi-directional many-to-one association to ConferenceSession
 	@ManyToOne
@@ -47,14 +41,6 @@ public class ConferenceSessionPresenter implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public List<ConferenceSession> getConferenceSessions() {
-		return this.conferenceSessions;
-	}
-
-	public void setConferenceSessions(List<ConferenceSession> conferenceSessions) {
-		this.conferenceSessions = conferenceSessions;
 	}
 
 	public ConferenceSession getConferenceSession() {
