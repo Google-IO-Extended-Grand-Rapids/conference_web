@@ -173,22 +173,6 @@ public class ConferenceSession implements Serializable {
 		this.conferenceSessionPresenters = conferenceSessionPresenters;
 	}
 
-	public ConferenceSessionPresenter addConferenceSessionPresenter(
-			ConferenceSessionPresenter conferenceSessionPresenter) {
-		getConferenceSessionPresenters().add(conferenceSessionPresenter);
-		conferenceSessionPresenter.setConferenceSession(this);
-
-		return conferenceSessionPresenter;
-	}
-
-	public ConferenceSessionPresenter removeConferenceSessionPresenter(
-			ConferenceSessionPresenter conferenceSessionPresenter) {
-		getConferenceSessionPresenters().remove(conferenceSessionPresenter);
-		conferenceSessionPresenter.setConferenceSession(null);
-
-		return conferenceSessionPresenter;
-	}
-
 	public List<ConferenceSessionRegistration> getConferenceSessionRegistrations() {
 		return this.conferenceSessionRegistrations;
 	}
