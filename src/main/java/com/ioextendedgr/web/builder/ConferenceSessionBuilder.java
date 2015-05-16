@@ -19,72 +19,71 @@ import com.ioextendedgr.web.viewDto.ConferenceSessionView;
  */
 public class ConferenceSessionBuilder {
 
-    public static List<ConferenceSessionView> build(Collection<ConferenceSession> datas) {
-        if (CollectionUtils.isEmpty(datas)) {
-            return new ArrayList<>();
-        }
+	public static List<ConferenceSessionView> build(
+			Collection<ConferenceSession> datas) {
+		if (CollectionUtils.isEmpty(datas)) {
+			return new ArrayList<>();
+		}
 
-        List<ConferenceSessionView> views = new ArrayList<>();
-        for (ConferenceSession data : datas) {
-            views.add(build(data));
-        }
-        return views;
-    }
+		List<ConferenceSessionView> views = new ArrayList<>();
+		for (ConferenceSession data : datas) {
+			views.add(build(data));
+		}
+		return views;
+	}
 
+	public static ConferenceSessionView build(ConferenceSession data) {
+		if (data == null)
+			return null;
 
-    public static ConferenceSessionView build(ConferenceSession data) {
-        if (data == null)
-            return null;
+		ConferenceSessionView view = new ConferenceSessionView();
 
-        ConferenceSessionView view = new ConferenceSessionView();
+		view.setId(data.getId());
+		view.setName(data.getName());
+		view.setConferenceId(data.getConference().getId());
+		view.setDurationMinutes(data.getDuration());
+		view.setShortDesc(data.getShortDesc());
+		view.setFullDesc(data.getFullDesc());
+		view.setCreateDttm(data.getCreateDttm());
+		view.setLastUpdateDttm(data.getLastUpdateDttm());
+		Set<Integer> cspIds = new HashSet<>();
+		for (ConferenceSessionPresenter csp : data
+				.getConferenceSessionPresenters()) {
+			cspIds.add(csp.getPresenter().getId());
+		}
 
-        view.setId(data.getId());
-        view.setName(data.getName());
-        view.setConferenceId(data.getConference().getId());
-        view.setDurationMinutes(data.getDuration());
-        view.setShortDesc(data.getShortDesc());
-        view.setFullDesc(data.getFullDesc());
-        view.setCreateDttm(data.getCreateDttm());
-        view.setLastUpdateDttm(data.getLastUpdateDttm());
-        Set<Integer> cspIds = new HashSet<>();
-        for(ConferenceSessionPresenter csp: data.getConferenceSessionPresenters()){
-            cspIds.add(csp.getId());
-        }
-        
-        view.setConferenceSessionType(toConferenceSessionTypeView(data.getConferenceSessionType()));
-        
-        view.setPresenterIds(new ArrayList<>(cspIds));
-        view.setRoomId(data.getRoom().getId());
-        view.setStartDttm(data.getStartDttm());
+		view.setConferenceSessionType(toConferenceSessionTypeView(data
+				.getConferenceSessionType()));
 
-        return view;
-    }
+		view.setPresenterIds(new ArrayList<>(cspIds));
+		view.setRoomId(data.getRoom().getId());
+		view.setStartDttm(data.getStartDttm());
 
+		return view;
+	}
 
-	private static ConferenceSessionTypeView toConferenceSessionTypeView(ConferenceSessionType conferenceSessionType) {
-		
+	private static ConferenceSessionTypeView toConferenceSessionTypeView(
+			ConferenceSessionType conferenceSessionType) {
+
 		if (conferenceSessionType == null) {
 			return toDefaultConferenceSessionTypeView();
 		}
 		ConferenceSessionTypeView confSessionTypeView = new ConferenceSessionTypeView();
-		
+
 		confSessionTypeView.setId(conferenceSessionType.getId());
 		confSessionTypeView.setName(conferenceSessionType.getName());
 		confSessionTypeView.setDescription(conferenceSessionType.getDesc());
 		return confSessionTypeView;
 	}
 
-
 	private static ConferenceSessionTypeView toDefaultConferenceSessionTypeView() {
 		ConferenceSessionTypeView confSessionTypeView = new ConferenceSessionTypeView();
-		
+
 		confSessionTypeView.setId(6);
 		confSessionTypeView.setName("Onsite");
 		confSessionTypeView.setDescription("Onsite");
-		
+
 		return confSessionTypeView;
 	}
 
-
-
-    }
+}
