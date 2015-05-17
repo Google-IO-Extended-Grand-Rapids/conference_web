@@ -31,7 +31,7 @@
         <td th:text="${presenter.userId}"></td>
         <td th:text="${presenter.shortBio}"></td>
         <td th:text="${presenter.jobTitle}"></td>
-        <td th:text="${presenter.companyView.name}"></td>
+        <td th:text="${presenter.companyView != null} ? presenter.companyView.name"></td>
         <td>  <form th:action="@{/admin/presenter}" th:method="delete"><input type="hidden" name="id"  th:value="${presenter.id}" /><input type="submit" value="Delete" /></form></td>
     </tr>
 </table>

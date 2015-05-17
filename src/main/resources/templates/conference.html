@@ -40,7 +40,7 @@
         <td th:text="${conference.startDate}"></td>
         <td th:text="${conference.endDate}"></td>
         <td th:text="${conference.lastUpdateDttm}"></td>
-        <td th:text="${conference.locationView.id} + ' - ' + ${conference.locationView.shortDesc}"></td>
+        <td th:text="${conference.locationView != null} ? ${conference.locationView.id} + ' - ' + ${conference.locationView.shortDesc}"></td>
         <td>  <form th:action="@{/admin/conference}" th:method="delete"><input type="hidden" name="id"  th:value="${conference.id}" /><input type="submit" value="Delete" /></form></td>
     </tr>
 </table>
